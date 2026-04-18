@@ -362,6 +362,31 @@ p {
   margin: 1.25rem 0;
 }
 
+.inspiration-band {
+  margin: 1.25rem 0;
+  padding: 1.35rem;
+  border: 1px solid rgba(255, 255, 255, .24);
+  border-left: 5px solid var(--accent);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(112, 215, 199, .18), rgba(255, 207, 90, .12)),
+    rgba(8, 17, 24, .78);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.inspiration-band h2 {
+  max-width: 820px;
+  font-size: 1.6rem;
+}
+
+.inspiration-band p:last-child {
+  max-width: 840px;
+  margin-bottom: 0;
+  color: #edf7fb;
+  font-weight: 650;
+}
+
 .charter-kicker {
   width: fit-content;
   margin: 0 0 .55rem;
@@ -776,6 +801,7 @@ body.high-contrast .role-grid > article,
 body.high-contrast .formula-strip li,
 body.high-contrast .metric-grid li,
 body.high-contrast .compact-grid li,
+body.high-contrast .inspiration-band,
 body.high-contrast .simple-form {
   background: #000;
 }
