@@ -259,6 +259,20 @@ p {
   padding: 2rem 0;
 }
 
+.manifesto-hero {
+  position: relative;
+}
+
+.manifesto-hero::after {
+  content: "";
+  display: block;
+  width: min(30rem, 72vw);
+  height: 4px;
+  margin-top: 1.55rem;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--action), var(--accent), rgba(255, 255, 255, 0));
+}
+
 .eyebrow {
   display: inline-flex;
   width: fit-content;
@@ -277,6 +291,19 @@ p {
   margin: 0;
   color: var(--muted);
   font-size: 1.22rem;
+}
+
+.manifesto-hero .lede {
+  color: #edf7fb;
+}
+
+.manifesto-line {
+  max-width: 760px;
+  margin: 1rem 0 0;
+  padding-left: 1rem;
+  border-left: 5px solid var(--action);
+  color: #ffffff;
+  font-weight: 850;
 }
 
 .actions {
@@ -307,7 +334,18 @@ p {
 }
 
 .content {
+  position: relative;
   padding: 0 0 3.5rem;
+}
+
+.content::before {
+  content: "";
+  display: block;
+  width: min(100%, 18rem);
+  height: 4px;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--warm), var(--action), var(--accent));
 }
 
 .wide-content {
@@ -347,6 +385,11 @@ p {
 .definition-list > div,
 .commitment-band {
   padding: 1.15rem;
+}
+
+.two-column > article,
+.commitment-band {
+  border-left: 5px solid var(--action);
 }
 
 .card {

@@ -2,7 +2,7 @@
   const translations = {
     en: {
       site_name: "OneTomorrow",
-      tagline: "Many cultures. One human future.",
+      tagline: "Not left or right. Upward.",
       skip_to_content: "Skip to main content",
       language_label: "Choose language",
       larger_text: "Larger text",
@@ -16,7 +16,7 @@
       accessibility_text: "Choose a language, enlarge text, increase contrast, or reduce motion."
     },
     es: {
-      tagline: "Muchas culturas. Un futuro humano.",
+      tagline: "Ni izquierda ni derecha. Hacia arriba.",
       skip_to_content: "Saltar al contenido principal",
       language_label: "Elegir idioma",
       larger_text: "Texto mas grande",
@@ -30,7 +30,7 @@
       accessibility_text: "Elige idioma, aumenta texto, sube contraste o reduce movimiento."
     },
     fr: {
-      tagline: "Plusieurs cultures. Un avenir humain.",
+      tagline: "Ni gauche ni droite. Vers le haut.",
       skip_to_content: "Aller au contenu principal",
       language_label: "Choisir la langue",
       larger_text: "Texte plus grand",
@@ -44,7 +44,7 @@
       accessibility_text: "Choisissez une langue, agrandissez le texte, augmentez le contraste ou reduisez le mouvement."
     },
     pt: {
-      tagline: "Muitas culturas. Um futuro humano.",
+      tagline: "Nem esquerda nem direita. Para cima.",
       skip_to_content: "Ir para o conteudo principal",
       language_label: "Escolher idioma",
       larger_text: "Texto maior",
@@ -58,7 +58,7 @@
       accessibility_text: "Escolha idioma, aumente texto, eleve contraste ou reduza movimento."
     },
     ar: {
-      tagline: "ثقافات كثيرة. مستقبل إنساني واحد.",
+      tagline: "لا يسار ولا يمين. إلى الأعلى.",
       skip_to_content: "انتقل إلى المحتوى الرئيسي",
       language_label: "اختر اللغة",
       larger_text: "نص أكبر",
@@ -72,7 +72,7 @@
       accessibility_text: "اختر اللغة، كبّر النص، ارفع التباين، أو قلل الحركة."
     },
     hi: {
-      tagline: "कई संस्कृतियां। एक मानवीय भविष्य।",
+      tagline: "न बाएं, न दाएं। ऊपर की ओर।",
       skip_to_content: "मुख्य सामग्री पर जाएं",
       language_label: "भाषा चुनें",
       larger_text: "बड़ा पाठ",
@@ -86,7 +86,7 @@
       accessibility_text: "भाषा चुनें, पाठ बढ़ाएं, कंट्रास्ट बढ़ाएं, या गति घटाएं."
     },
     sw: {
-      tagline: "Tamaduni nyingi. Kesho moja ya binadamu.",
+      tagline: "Si kushoto wala kulia. Juu.",
       skip_to_content: "Ruka hadi maudhui makuu",
       language_label: "Chagua lugha",
       larger_text: "Maandishi makubwa",
@@ -100,7 +100,7 @@
       accessibility_text: "Chagua lugha, ongeza maandishi, ongeza utofautishaji, au punguza mwendo."
     },
     "zh-CN": {
-      tagline: "多种文化。一个人类未来。",
+      tagline: "不左不右，向上。",
       skip_to_content: "跳到主要内容",
       language_label: "选择语言",
       larger_text: "放大文字",
@@ -114,7 +114,7 @@
       accessibility_text: "选择语言、放大文字、提高对比度或减少动态。"
     },
     de: {
-      tagline: "Viele Kulturen. Eine menschliche Zukunft.",
+      tagline: "Nicht links oder rechts. Aufwaerts.",
       skip_to_content: "Zum Hauptinhalt springen",
       language_label: "Sprache wahlen",
       larger_text: "Grosserer Text",
