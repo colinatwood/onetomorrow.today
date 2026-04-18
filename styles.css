@@ -269,6 +269,11 @@ p {
   position: relative;
 }
 
+.centered-hero {
+  justify-items: center;
+  text-align: center;
+}
+
 .manifesto-hero::after {
   content: "";
   display: block;
@@ -277,6 +282,11 @@ p {
   margin-top: 1.55rem;
   border-radius: 8px;
   background: linear-gradient(90deg, var(--action), var(--accent), rgba(255, 255, 255, 0));
+}
+
+.centered-hero::after {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .eyebrow {
@@ -303,6 +313,13 @@ p {
   color: #edf7fb;
 }
 
+.hero-statement {
+  max-width: 980px;
+  font-size: 1.34rem;
+  font-weight: 650;
+  line-height: 1.72;
+}
+
 .manifesto-line {
   max-width: 760px;
   margin: 1rem 0 0;
@@ -317,6 +334,10 @@ p {
   flex-wrap: wrap;
   gap: .75rem;
   margin-top: 1.35rem;
+}
+
+.centered-hero .actions {
+  justify-content: center;
 }
 
 .button {
@@ -918,6 +939,11 @@ body[dir="rtl"] .numbered-steps li::before {
     font-size: 1.08rem;
   }
 
+  .hero-statement {
+    font-size: 1.04rem;
+    line-height: 1.58;
+  }
+
   .two-column,
   .card-grid,
   .definition-list {
@@ -1020,5 +1046,9 @@ body[dir="rtl"] .numbered-steps li::before {
 
   h1 {
     font-size: 2rem;
+  }
+
+  .hero-statement {
+    font-size: 1rem;
   }
 }
