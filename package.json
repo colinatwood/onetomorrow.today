@@ -1,0 +1,9 @@
+{
+  "name": "onetomorrow-site",
+  "private": true,
+  "version": "4.0.1",
+  "scripts": {
+    "start": "npx serve .",
+    "test": "echo \"Static site\""
+  }
+}

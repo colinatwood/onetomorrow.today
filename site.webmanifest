@@ -1,0 +1,15 @@
+{
+  "name": "OneTomorrow",
+  "short_name": "OneTomorrow",
+  "start_url": "about.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f6b5f",
+  "icons": [
+    {
+      "src": "assets/main-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
