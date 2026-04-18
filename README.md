@@ -31,6 +31,8 @@ Cloudflare does not allow an existing Direct Uploads project to be converted int
 - page-specific Earth-from-space backgrounds
 - floating accessibility footer
 - keyboard-friendly navigation and skip link
+- charter framework for freedom, justice, innovation, equality, and responsible prosperity
+- article map, harm prevention tests, implementation phases, and accountability dashboard
 - language selector with clear fallback behavior
 - larger text, high contrast, and reduced motion toggles
 - concise plain-language definitions for global civic commitment

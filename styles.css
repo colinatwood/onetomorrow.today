@@ -112,6 +112,12 @@ h2 {
   line-height: 1.24;
 }
 
+h3 {
+  margin: 0 0 .4rem;
+  font-size: 1.02rem;
+  line-height: 1.25;
+}
+
 p {
   margin-top: 0;
 }
@@ -352,9 +358,33 @@ p {
   max-width: 1120px;
 }
 
+.charter-panel {
+  margin: 1.25rem 0;
+}
+
+.charter-kicker {
+  width: fit-content;
+  margin: 0 0 .55rem;
+  padding: .24rem .58rem;
+  border-radius: 8px;
+  background: rgba(255, 207, 90, .14);
+  color: var(--action);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.charter-panel > h2,
+.charter-panel > p {
+  max-width: 850px;
+}
+
 .two-column,
 .card-grid,
-.definition-list {
+.definition-list,
+.article-map,
+.test-grid,
+.phase-grid,
+.role-grid {
   display: grid;
   gap: 1rem;
 }
@@ -365,14 +395,22 @@ p {
 }
 
 .card-grid,
-.definition-list {
+.definition-list,
+.article-map,
+.test-grid,
+.phase-grid,
+.role-grid {
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
 }
 
 .two-column > article,
 .card,
 .definition-list > div,
-.commitment-band {
+.commitment-band,
+.article-map > article,
+.test-grid > article,
+.phase-grid > article,
+.role-grid > article {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--paper);
@@ -383,13 +421,106 @@ p {
 .two-column > article,
 .card,
 .definition-list > div,
-.commitment-band {
+.commitment-band,
+.article-map > article,
+.test-grid > article,
+.phase-grid > article,
+.role-grid > article {
   padding: 1.15rem;
 }
 
 .two-column > article,
-.commitment-band {
+.commitment-band,
+.phase-grid > article {
   border-left: 5px solid var(--action);
+}
+
+.article-map {
+  margin-top: 1rem;
+}
+
+.article-map > article {
+  position: relative;
+  padding-top: 3.25rem;
+}
+
+.article-map span {
+  position: absolute;
+  left: 1.15rem;
+  top: 1rem;
+  display: inline-flex;
+  min-width: 2.1rem;
+  height: 1.7rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--action);
+  color: #061018;
+  font-weight: 900;
+}
+
+.formula-strip,
+.metric-grid,
+.compact-grid {
+  display: grid;
+  gap: .65rem;
+  padding: 0;
+  list-style: none;
+}
+
+.formula-strip {
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  margin: 1rem 0;
+}
+
+.formula-strip li,
+.metric-grid li,
+.compact-grid li {
+  padding: .82rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  font-weight: 850;
+  text-align: center;
+}
+
+.metric-grid,
+.compact-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin: 1rem 0 0;
+}
+
+.test-grid {
+  margin: 1rem 0;
+}
+
+.test-grid > article {
+  border-top: 4px solid var(--action);
+}
+
+.test-grid > article:nth-child(2n),
+.role-grid > article:nth-child(2n) {
+  border-top: 4px solid var(--accent);
+}
+
+.test-grid > article:nth-child(3n),
+.role-grid > article:nth-child(3n) {
+  border-top: 4px solid var(--warm);
+}
+
+.phase-grid {
+  margin: 1.25rem 0;
+}
+
+.role-grid {
+  margin-top: 1rem;
+}
+
+.note-line {
+  margin: .75rem 0 0;
+  color: var(--muted);
+  font-weight: 750;
 }
 
 .card {
@@ -638,6 +769,13 @@ body.high-contrast .two-column > article,
 body.high-contrast .card,
 body.high-contrast .definition-list > div,
 body.high-contrast .commitment-band,
+body.high-contrast .article-map > article,
+body.high-contrast .test-grid > article,
+body.high-contrast .phase-grid > article,
+body.high-contrast .role-grid > article,
+body.high-contrast .formula-strip li,
+body.high-contrast .metric-grid li,
+body.high-contrast .compact-grid li,
 body.high-contrast .simple-form {
   background: #000;
 }
