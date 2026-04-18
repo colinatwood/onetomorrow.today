@@ -825,7 +825,7 @@ body[dir="rtl"] .numbered-steps li::before {
 
 @media (max-width: 800px) {
   body {
-    padding-bottom: 9rem;
+    padding-bottom: 4.25rem;
   }
 
   .site-header {
@@ -904,24 +904,37 @@ body[dir="rtl"] .numbered-steps li::before {
   }
 
   .site-footer {
-    bottom: .5rem;
+    bottom: .35rem;
     width: calc(100vw - .75rem);
     max-width: calc(100vw - .75rem);
     min-width: 0;
-    max-height: 40vh;
-    overflow: auto;
+    max-height: none;
+    overflow: visible;
   }
 
   .footer-accessibility {
-    display: grid;
-    justify-items: center;
-    text-align: center;
+    display: block;
+    padding: .28rem;
     min-width: 0;
+    text-align: center;
+  }
+
+  .footer-accessibility h2 {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .top-tools {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(7rem, 1.4fr) repeat(3, minmax(2.45rem, .6fr));
+    gap: .25rem;
     width: 100%;
     min-width: 0;
   }
@@ -931,21 +944,52 @@ body[dir="rtl"] .numbered-steps li::before {
   }
 
   .top-tools select {
+    min-height: 34px;
+    height: 34px;
+    padding: .2rem .45rem;
     max-width: none;
-    grid-column: 1 / -1;
+    grid-column: auto;
+    font-size: .78rem;
   }
 
   .site-footer .top-tools select,
   .site-footer .toggle {
     min-width: 0;
     width: 100%;
-    white-space: normal;
+    white-space: nowrap;
+  }
+
+  .site-footer .toggle {
+    display: inline-flex;
+    height: 34px;
+    min-height: 34px;
+    align-items: center;
+    justify-content: center;
+    padding: .2rem .3rem;
+    font-size: 0;
+  }
+
+  .site-footer .toggle::after {
+    font-size: .68rem;
+    line-height: 1;
+  }
+
+  .site-footer .toggle[data-toggle="large-text"]::after {
+    content: "A+";
+  }
+
+  .site-footer .toggle[data-toggle="high-contrast"]::after {
+    content: "Contrast";
+  }
+
+  .site-footer .toggle[data-toggle="reduced-motion"]::after {
+    content: "Motion";
   }
 }
 
 @media (max-width: 520px) {
   body {
-    padding-bottom: 9rem;
+    padding-bottom: 4.25rem;
   }
 
   h1 {
