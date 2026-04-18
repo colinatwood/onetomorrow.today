@@ -16,7 +16,15 @@ Production domain: https://onetomorrow.today
 Source repository: https://github.com/colinatwood/onetomorrow.today.git
 
 ## Deployment
-The current site is a static Cloudflare Pages deployment. Publish the project root as the output directory with no build command.
+The current live site is a static Cloudflare Pages Direct Uploads deployment under the Cloudflare Pages project `onetomorrow`.
+
+To redeploy from a local clone:
+
+```sh
+npx wrangler pages deploy . --project-name onetomorrow --branch main
+```
+
+Cloudflare does not allow an existing Direct Uploads project to be converted into a GitHub-connected Pages project. For automatic deployments from GitHub, create a new Cloudflare Pages project from this repository in the Cloudflare dashboard, or recreate the existing Pages project from the GitHub source.
 
 ## Features
 - accessible static layout
