@@ -58,7 +58,7 @@
       accessibility_text: "Escolha idioma, aumente texto, eleve contraste ou reduza movimento."
     },
     ar: {
-      tagline: "نبني الغد إلى الأعلى.",
+      tagline: "النزاهة تبني الغد.",
       skip_to_content: "انتقل إلى المحتوى الرئيسي",
       language_label: "اختر اللغة",
       larger_text: "نص أكبر",
@@ -72,7 +72,7 @@
       accessibility_text: "اختر اللغة، كبّر النص، ارفع التباين، أو قلل الحركة."
     },
     hi: {
-      tagline: "कल को ऊपर उठाकर बनाएं.",
+      tagline: "ईमानदारी कल बनाती है.",
       skip_to_content: "मुख्य सामग्री पर जाएं",
       language_label: "भाषा चुनें",
       larger_text: "बड़ा पाठ",
@@ -100,7 +100,7 @@
       accessibility_text: "Chagua lugha, ongeza maandishi, ongeza utofautishaji, au punguza mwendo."
     },
     "zh-CN": {
-      tagline: "向上建设明天。",
+      tagline: "廉洁建设明天。",
       skip_to_content: "跳到主要内容",
       language_label: "选择语言",
       larger_text: "放大文字",
