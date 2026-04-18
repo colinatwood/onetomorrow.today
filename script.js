@@ -2,7 +2,7 @@
   const translations = {
     en: {
       site_name: "OneTomorrow",
-      tagline: "Build tomorrow upward.",
+      tagline: "Integrity builds tomorrow.",
       skip_to_content: "Skip to main content",
       language_label: "Choose language",
       larger_text: "Larger text",
@@ -16,7 +16,7 @@
       accessibility_text: "Choose a language, enlarge text, increase contrast, or reduce motion."
     },
     es: {
-      tagline: "Construir el manana hacia arriba.",
+      tagline: "La integridad construye manana.",
       skip_to_content: "Saltar al contenido principal",
       language_label: "Elegir idioma",
       larger_text: "Texto mas grande",
@@ -30,7 +30,7 @@
       accessibility_text: "Elige idioma, aumenta texto, sube contraste o reduce movimiento."
     },
     fr: {
-      tagline: "Construire demain vers le haut.",
+      tagline: "L'integrite construit demain.",
       skip_to_content: "Aller au contenu principal",
       language_label: "Choisir la langue",
       larger_text: "Texte plus grand",
@@ -44,7 +44,7 @@
       accessibility_text: "Choisissez une langue, agrandissez le texte, augmentez le contraste ou reduisez le mouvement."
     },
     pt: {
-      tagline: "Construir o amanha para cima.",
+      tagline: "A integridade constroi o amanha.",
       skip_to_content: "Ir para o conteudo principal",
       language_label: "Escolher idioma",
       larger_text: "Texto maior",
@@ -86,7 +86,7 @@
       accessibility_text: "भाषा चुनें, पाठ बढ़ाएं, कंट्रास्ट बढ़ाएं, या गति घटाएं."
     },
     sw: {
-      tagline: "Jenga kesho juu.",
+      tagline: "Uadilifu hujenga kesho.",
       skip_to_content: "Ruka hadi maudhui makuu",
       language_label: "Chagua lugha",
       larger_text: "Maandishi makubwa",
@@ -114,7 +114,7 @@
       accessibility_text: "选择语言、放大文字、提高对比度或减少动态。"
     },
     de: {
-      tagline: "Morgen nach oben bauen.",
+      tagline: "Integritat baut morgen.",
       skip_to_content: "Zum Hauptinhalt springen",
       language_label: "Sprache wahlen",
       larger_text: "Grosserer Text",
