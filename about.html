@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title data-title-key="about_title">OneTomorrow</title>
+  <title>OneTomorrow | About</title>
   <meta name="description" content="About the OneTomorrow global civic commitment.">
-  <meta name="theme-color" content="#0f6b5f">
+  <meta name="theme-color" content="#071018">
   <link rel="icon" href="assets/main-logo.png">
   <link rel="apple-touch-icon" href="assets/main-logo.png">
   <link rel="manifest" href="site.webmanifest">
   <link rel="canonical" href="https://onetomorrow.today/about.html">
-  <meta property="og:title" content="OneTomorrow">
+  <meta property="og:title" content="OneTomorrow | About">
   <meta property="og:description" content="About the OneTomorrow global civic commitment.">
   <meta property="og:image" content="assets/main-logo.png">
   <meta property="og:url" content="https://onetomorrow.today/about.html">
@@ -18,16 +18,16 @@
   <link rel="stylesheet" href="styles.css">
   <script defer src="script.js"></script>
 </head>
-<body>
+<body class="space-page page-about">
   <a class="skip-link" href="#main" data-i18n="skip_to_content">Skip to main content</a>
-  <header class="site-header">
-    <div class="brand">
-      <img src="assets/main-logo.png" alt="" width="76" height="76">
-      <div>
-        <div class="brand-name" data-i18n="site_name">OneTomorrow</div>
-        <p class="brand-tagline" data-i18n="tagline">Many cultures. One human future.</p>
-      </div>
-    </div>
+  <header class="site-header" aria-label="Site">
+    <a class="brand" href="about.html" aria-label="OneTomorrow home">
+      <img src="assets/main-logo.png" alt="" width="60" height="60">
+      <span>
+        <span class="brand-name" data-i18n="site_name">OneTomorrow</span>
+        <span class="brand-tagline" data-i18n="tagline">Many cultures. One human future.</span>
+      </span>
+    </a>
     <nav class="site-nav" aria-label="Main">
       <a href="about.html" aria-current="page" data-i18n="nav_about">About</a>
       <a href="why.html" data-i18n="nav_why">Why</a>
@@ -37,65 +37,63 @@
   </header>
   <main id="main" class="main-content">
     <section class="hero page-hero">
-      <img class="logo" src="assets/main-logo.png" alt="" width="180" height="180">
-      <p class="eyebrow" data-i18n="about_eyebrow">About</p>
-      <h1 data-i18n="about_title">A global civic home for people who believe dignity should guide public life.</h1>
-      <p class="lede" data-i18n="about_lede">OneTomorrow invites people of every age, culture, faith, language, and background to commit to honest public service, peaceful cooperation, and care for the world we share.</p>
+      <p class="eyebrow">About</p>
+      <h1>One tomorrow asks people everywhere to protect the future we share.</h1>
+      <p class="lede">OneTomorrow is a public commitment to dignity, truth, shared responsibility, and peaceful action. It is simple enough for a child to understand and serious enough for communities, institutions, and nations to practice.</p>
       <div class="actions">
-        <a class="button" href="why.html" data-i18n="about_primary_action">Why it matters</a>
-        <a class="button button-secondary" href="join.html" data-i18n="about_secondary_action">Make the commitment</a>
+        <a class="button" href="why.html">Why it matters</a>
+        <a class="button button-secondary" href="join.html">Make the commitment</a>
       </div>
     </section>
     <section class="content wide-content">
       <div class="two-column">
         <article>
-          <h2 data-i18n="about_definition_title">Definition: OneTomorrow</h2>
-          <p data-i18n="about_definition_text">OneTomorrow is the shared future we choose to protect today. It means safe communities, trustworthy institutions, fair opportunity, clean air and water, and the quiet confidence that public power exists to serve people.</p>
-          <p data-i18n="about_movement_text">OneTomorrow is not built around one nation, party, generation, or culture. It is a commitment to the idea that every community can become more honest, humane, and accountable when people choose responsibility over cynicism.</p>
+          <h2>What OneTomorrow means</h2>
+          <p>OneTomorrow means the future is not owned by one country, party, class, religion, or generation. Every community has a role in protecting public trust, human dignity, and the living world we all depend on.</p>
         </article>
         <article>
-          <h2 data-i18n="about_for_title">Who belongs here</h2>
-          <p data-i18n="about_for_text">Young people looking for a future, elders carrying memory, parents and caregivers, workers, builders, teachers, artists, business owners, migrants, people of faith, people of no faith, and anyone willing to treat others with dignity can belong here.</p>
-          <p data-i18n="about_culture_text">Cultures may express respect differently. Some lead through family, some through neighborhood, some through service, some through spiritual duty, and some through democratic debate. OneTomorrow honors those differences while asking for the same basic standard: do no harm, tell the truth, share responsibility.</p>
+          <h2>Who belongs</h2>
+          <p>Young people, elders, parents, workers, teachers, builders, caregivers, artists, people of faith, people of no faith, migrants, neighbors, and leaders can all belong here when they choose responsibility over cynicism.</p>
         </article>
       </div>
-      <div class="definition-list" aria-label="Core definitions">
-        <div><dt data-i18n="about_def_dignity_term">Dignity</dt><dd data-i18n="about_def_dignity_text">The belief that no person is disposable, invisible, or beneath public concern.</dd></div>
-        <div><dt data-i18n="about_def_trust_term">Public trust</dt><dd data-i18n="about_def_trust_text">The promise that power, money, and decisions can be questioned without fear.</dd></div>
-        <div><dt data-i18n="about_def_commitment_term">Commitment</dt><dd data-i18n="about_def_commitment_text">A steady choice to act with integrity even when progress is slow.</dd></div>
-      </div>
-      <p class="notice" data-i18n="about_notice">The goal is simple: help people move from frustration to shared commitment, and from shared commitment to visible action.</p>
+      <dl class="definition-list" aria-label="Core definitions">
+        <div>
+          <dt>Dignity</dt>
+          <dd>No person is disposable, invisible, or beneath public concern.</dd>
+        </div>
+        <div>
+          <dt>Public trust</dt>
+          <dd>Power, money, and decisions can be questioned without fear.</dd>
+        </div>
+        <div>
+          <dt>Commitment</dt>
+          <dd>A steady choice to act with integrity, especially when progress is slow.</dd>
+        </div>
+      </dl>
     </section>
   </main>
-  <footer class="site-footer">
-    <p data-i18n="footer_text">A global civic commitment to dignity, honesty, shared responsibility, and peaceful action.</p>
+  <footer class="site-footer" aria-label="Accessibility tools">
     <section class="footer-accessibility" aria-labelledby="footerAccessTitle">
       <h2 id="footerAccessTitle" data-i18n="accessibility_title">Accessibility</h2>
-      <p data-i18n="accessibility_text">Choose a language, make text larger, increase contrast, or reduce motion.</p>
+      <p data-i18n="accessibility_text">Choose a language, enlarge text, increase contrast, or reduce motion.</p>
       <div class="top-tools footer-tools">
         <label for="languageSelect" class="sr-only" data-i18n="language_label">Choose language</label>
         <select id="languageSelect" aria-label="Choose language">
-        <option value="en">English</option>
-        <option value="es">Spanish</option>
-        <option value="fr">French</option>
-        <option value="pt">Portuguese</option>
-        <option value="ar">Arabic</option>
-        <option value="hi">Hindi</option>
-        <option value="sw">Swahili</option>
-        <option value="zh-CN">Chinese</option>
-        <option value="de">German</option>
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="pt">Portuguese</option>
+          <option value="ar">Arabic</option>
+          <option value="hi">Hindi</option>
+          <option value="sw">Swahili</option>
+          <option value="zh-CN">Chinese</option>
+          <option value="de">German</option>
         </select>
         <button class="toggle" data-toggle="large-text" type="button" data-i18n="larger_text">Larger text</button>
         <button class="toggle" data-toggle="high-contrast" type="button" data-i18n="high_contrast">High contrast</button>
         <button class="toggle" data-toggle="reduced-motion" type="button" data-i18n="reduced_motion">Less motion</button>
       </div>
     </section>
-    <p class="footer-links">
-      <a href="about.html" aria-current="page" data-i18n="nav_about">About</a>
-      <a href="why.html" data-i18n="nav_why">Why</a>
-      <a href="plan.html" data-i18n="nav_plan">Plan</a>
-      <a href="join.html" data-i18n="nav_join">Join</a>
-    </p>
   </footer>
 </body>
 </html>

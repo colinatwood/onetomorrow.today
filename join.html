@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title data-title-key="join_title">OneTomorrow</title>
+  <title>OneTomorrow | Join</title>
   <meta name="description" content="Join the OneTomorrow commitment.">
-  <meta name="theme-color" content="#0f6b5f">
+  <meta name="theme-color" content="#071018">
   <link rel="icon" href="assets/main-logo.png">
   <link rel="apple-touch-icon" href="assets/main-logo.png">
   <link rel="manifest" href="site.webmanifest">
   <link rel="canonical" href="https://onetomorrow.today/join.html">
-  <meta property="og:title" content="OneTomorrow">
+  <meta property="og:title" content="OneTomorrow | Join">
   <meta property="og:description" content="Join the OneTomorrow commitment.">
   <meta property="og:image" content="assets/main-logo.png">
   <meta property="og:url" content="https://onetomorrow.today/join.html">
@@ -18,16 +18,16 @@
   <link rel="stylesheet" href="styles.css">
   <script defer src="script.js"></script>
 </head>
-<body>
+<body class="space-page page-join">
   <a class="skip-link" href="#main" data-i18n="skip_to_content">Skip to main content</a>
-  <header class="site-header">
-    <div class="brand">
-      <img src="assets/main-logo.png" alt="" width="76" height="76">
-      <div>
-        <div class="brand-name" data-i18n="site_name">OneTomorrow</div>
-        <p class="brand-tagline" data-i18n="tagline">Many cultures. One human future.</p>
-      </div>
-    </div>
+  <header class="site-header" aria-label="Site">
+    <a class="brand" href="about.html" aria-label="OneTomorrow home">
+      <img src="assets/main-logo.png" alt="" width="60" height="60">
+      <span>
+        <span class="brand-name" data-i18n="site_name">OneTomorrow</span>
+        <span class="brand-tagline" data-i18n="tagline">Many cultures. One human future.</span>
+      </span>
+    </a>
     <nav class="site-nav" aria-label="Main">
       <a href="about.html" data-i18n="nav_about">About</a>
       <a href="why.html" data-i18n="nav_why">Why</a>
@@ -37,66 +37,64 @@
   </header>
   <main id="main" class="main-content">
     <section class="hero page-hero">
-      <p class="eyebrow" data-i18n="join_eyebrow">Join</p>
-      <h1 data-i18n="join_title">Make the commitment in your own language, place, and way of service.</h1>
-      <p class="lede" data-i18n="join_lede">Joining means choosing to practice dignity, honesty, accountability, and shared responsibility where you already are. You can begin quietly, locally, and at a pace that fits your life.</p>
+      <p class="eyebrow">Join</p>
+      <h1>Make the commitment where you already are.</h1>
+      <p class="lede">Joining means practicing dignity, honesty, accountability, and shared responsibility in your own language, place, culture, and form of service.</p>
     </section>
     <section class="content wide-content">
       <div class="two-column join-layout">
         <article>
-          <h2 data-i18n="join_commitment_title">The commitment</h2>
-          <ul class="principles commitment-list">
-            <li data-i18n="join_commitment_1">I will treat every person as worthy of dignity, even during disagreement.</li>
-            <li data-i18n="join_commitment_2">I will seek truth, share information responsibly, and correct mistakes openly.</li>
-            <li data-i18n="join_commitment_3">I will oppose corruption, cruelty, and abuse without becoming cruel myself.</li>
-            <li data-i18n="join_commitment_4">I will connect local service to global responsibility for people and the planet.</li>
+          <h2>The commitment</h2>
+          <ul class="steps commitment-list">
+            <li>I will treat every person as worthy of dignity, even during disagreement.</li>
+            <li>I will seek truth, share information responsibly, and correct mistakes openly.</li>
+            <li>I will oppose corruption, cruelty, and abuse without becoming cruel myself.</li>
+            <li>I will connect local service to global responsibility for people and the planet.</li>
           </ul>
-          <p class="notice" id="commitment-sent" data-i18n="join_note">This form is ready for a website host or organizing tool. Until it is connected, use it as the public commitment language for your launch.</p>
         </article>
-        <form class="simple-form" name="join" method="post" data-netlify="true" action="join.html#commitment-sent">
-          <input type="hidden" name="form-name" value="join">
-          <label for="name" data-i18n="form_name">Name</label>
-          <input id="name" name="name" type="text" autocomplete="name" required>
-          <label for="email" data-i18n="form_email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" required>
-          <label for="region" data-i18n="form_region">Country, region, or community</label>
-          <input id="region" name="region" type="text" autocomplete="country-name">
-          <label for="role" data-i18n="form_role">How would you like to help?</label>
-          <textarea id="role" name="role" rows="5"></textarea>
-          <button class="button" type="submit" data-i18n="send_form">Send commitment</button>
-        </form>
+        <article>
+          <h2>Begin now</h2>
+          <form class="simple-form" action="join.html#commitment-sent" method="get">
+            <label for="name">Name</label>
+            <input id="name" name="name" autocomplete="name">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email">
+            <label for="region">Country, region, or community</label>
+            <input id="region" name="region" autocomplete="address-level1">
+            <label for="role">How would you like to help?</label>
+            <textarea id="role" name="role" rows="4"></textarea>
+            <button class="button" type="submit">Send commitment</button>
+          </form>
+        </article>
+      </div>
+      <div id="commitment-sent" class="commitment-band">
+        <h2>After you join</h2>
+        <p>Choose one helpful local action, invite one person from a different background, and keep the work honest enough for anyone to question.</p>
       </div>
     </section>
   </main>
-  <footer class="site-footer">
-    <p data-i18n="footer_text">A global civic commitment to dignity, honesty, shared responsibility, and peaceful action.</p>
+  <footer class="site-footer" aria-label="Accessibility tools">
     <section class="footer-accessibility" aria-labelledby="footerAccessTitle">
       <h2 id="footerAccessTitle" data-i18n="accessibility_title">Accessibility</h2>
-      <p data-i18n="accessibility_text">Choose a language, make text larger, increase contrast, or reduce motion.</p>
+      <p data-i18n="accessibility_text">Choose a language, enlarge text, increase contrast, or reduce motion.</p>
       <div class="top-tools footer-tools">
         <label for="languageSelect" class="sr-only" data-i18n="language_label">Choose language</label>
         <select id="languageSelect" aria-label="Choose language">
-        <option value="en">English</option>
-        <option value="es">Spanish</option>
-        <option value="fr">French</option>
-        <option value="pt">Portuguese</option>
-        <option value="ar">Arabic</option>
-        <option value="hi">Hindi</option>
-        <option value="sw">Swahili</option>
-        <option value="zh-CN">Chinese</option>
-        <option value="de">German</option>
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="pt">Portuguese</option>
+          <option value="ar">Arabic</option>
+          <option value="hi">Hindi</option>
+          <option value="sw">Swahili</option>
+          <option value="zh-CN">Chinese</option>
+          <option value="de">German</option>
         </select>
         <button class="toggle" data-toggle="large-text" type="button" data-i18n="larger_text">Larger text</button>
         <button class="toggle" data-toggle="high-contrast" type="button" data-i18n="high_contrast">High contrast</button>
         <button class="toggle" data-toggle="reduced-motion" type="button" data-i18n="reduced_motion">Less motion</button>
       </div>
     </section>
-    <p class="footer-links">
-      <a href="about.html" data-i18n="nav_about">About</a>
-      <a href="why.html" data-i18n="nav_why">Why</a>
-      <a href="plan.html" data-i18n="nav_plan">Plan</a>
-      <a href="join.html" aria-current="page" data-i18n="nav_join">Join</a>
-    </p>
   </footer>
 </body>
 </html>
