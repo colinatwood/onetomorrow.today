@@ -45,12 +45,15 @@ body.space-page {
   --earth-position: center center;
   background-color: #071018;
   background-image:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 74px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .025) 0 1px, transparent 1px 74px),
+    linear-gradient(115deg, transparent 0 28%, rgba(39, 111, 159, .07) 28% 28.55%, transparent 28.55% 100%),
     linear-gradient(180deg, rgba(3, 10, 17, .7), rgba(3, 10, 17, .38) 42%, rgba(3, 10, 17, .86)),
     linear-gradient(90deg, rgba(6, 15, 23, .76), rgba(6, 15, 23, .3) 45%, rgba(6, 15, 23, .7)),
     var(--earth-bg);
-  background-position: center center, center center, var(--earth-position);
-  background-repeat: no-repeat;
-  background-size: cover, cover, cover;
+  background-position: center center, center center, center center, center center, center center, var(--earth-position);
+  background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 74px 74px, 74px 74px, cover, cover, cover, cover;
   background-attachment: fixed;
 }
 
@@ -179,8 +182,15 @@ p {
 
 .brand img {
   width: 48px;
+  height: 48px;
   min-width: 48px;
-  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, .35));
+  padding: .2rem;
+  border: 1px solid rgba(22, 91, 128, .18);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #fff, #f2f7fa);
+  box-shadow: 0 10px 24px rgba(4, 18, 28, .16);
+  filter: none;
+  object-fit: contain;
 }
 
 .brand-name {
@@ -308,6 +318,31 @@ p {
 
 .manifesto-hero {
   position: relative;
+}
+
+.manifesto-hero::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  z-index: 0;
+  width: min(22rem, 38vw);
+  height: min(22rem, 38vw);
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 50%;
+  background:
+    linear-gradient(90deg, transparent calc(50% - 1px), rgba(255, 255, 255, .16) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
+    linear-gradient(0deg, transparent calc(50% - 1px), rgba(255, 255, 255, .16) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
+    repeating-linear-gradient(0deg, transparent 0 1.15rem, rgba(255, 255, 255, .055) 1.15rem calc(1.15rem + 1px)),
+    repeating-linear-gradient(90deg, transparent 0 1.15rem, rgba(255, 255, 255, .055) 1.15rem calc(1.15rem + 1px));
+  box-shadow: inset 0 0 0 2.25rem rgba(39, 111, 159, .05);
+  opacity: .62;
+  pointer-events: none;
+}
+
+.manifesto-hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .centered-hero {
@@ -514,6 +549,18 @@ p {
   backdrop-filter: blur(14px);
 }
 
+.card,
+.article-map > article,
+.test-grid > article,
+.role-grid > article,
+.formula-strip li,
+.metric-grid li,
+.compact-grid li,
+.time-phase {
+  position: relative;
+  overflow: hidden;
+}
+
 .two-column > article,
 .card,
 .definition-list > div,
@@ -537,6 +584,30 @@ p {
   margin-top: 1rem;
 }
 
+.card::before,
+.test-grid > article::before,
+.role-grid > article::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 1px solid rgba(39, 111, 159, .22);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, transparent 0 48%, rgba(39, 111, 159, .5) 48% 52%, transparent 52% 100%),
+    linear-gradient(45deg, transparent 0 48%, rgba(217, 169, 39, .45) 48% 52%, transparent 52% 100%),
+    rgba(39, 111, 159, .06);
+}
+
+.card > *,
+.test-grid > article > *,
+.role-grid > article > * {
+  position: relative;
+  z-index: 1;
+}
+
 .integrity-panel {
   position: relative;
   overflow: hidden;
@@ -548,6 +619,29 @@ p {
   inset: 0 auto 0 0;
   width: .45rem;
   background: linear-gradient(180deg, var(--institution), var(--accent), var(--action));
+}
+
+.integrity-panel::after {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 0;
+  width: min(18rem, 38%);
+  height: 7.5rem;
+  border: 1px solid rgba(39, 111, 159, .18);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, transparent 0 46%, rgba(39, 111, 159, .14) 46% 48%, transparent 48% 100%),
+    repeating-linear-gradient(90deg, rgba(39, 111, 159, .1) 0 1px, transparent 1px 2.1rem),
+    repeating-linear-gradient(0deg, rgba(39, 111, 159, .08) 0 1px, transparent 1px 1.45rem);
+  opacity: .9;
+  pointer-events: none;
+}
+
+.integrity-panel > * {
+  position: relative;
+  z-index: 1;
 }
 
 .integrity-panel h2 {
@@ -597,6 +691,31 @@ p {
   padding-top: 3.25rem;
 }
 
+.article-map > article::after,
+.time-phase::after {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  z-index: 0;
+  width: 5.5rem;
+  height: 3.2rem;
+  border-top: 1px solid rgba(39, 111, 159, .2);
+  border-right: 1px solid rgba(39, 111, 159, .2);
+  background:
+    linear-gradient(90deg, rgba(39, 111, 159, .18) 0 1px, transparent 1px 100%),
+    linear-gradient(0deg, rgba(217, 169, 39, .16) 0 1px, transparent 1px 100%);
+  background-size: 1.3rem 1.3rem;
+  opacity: .82;
+  pointer-events: none;
+}
+
+.article-map > article > *,
+.time-phase > * {
+  position: relative;
+  z-index: 1;
+}
+
 .article-map span {
   position: absolute;
   left: 1.15rem;
@@ -637,6 +756,18 @@ p {
   font-weight: 850;
   text-align: center;
   box-shadow: 0 8px 24px rgba(4, 18, 28, .12);
+}
+
+.formula-strip li::before,
+.metric-grid li::before,
+.compact-grid li::before {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: .22rem;
+  margin: 0 auto .5rem;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--institution), var(--accent), var(--action));
 }
 
 .metric-grid,
@@ -1053,6 +1184,19 @@ body.high-contrast .toggle[aria-pressed="true"] {
   color: #000;
 }
 
+body.high-contrast .manifesto-hero::before,
+body.high-contrast .integrity-panel::after,
+body.high-contrast .card::before,
+body.high-contrast .test-grid > article::before,
+body.high-contrast .role-grid > article::before,
+body.high-contrast .article-map > article::after,
+body.high-contrast .time-phase::after,
+body.high-contrast .formula-strip li::before,
+body.high-contrast .metric-grid li::before,
+body.high-contrast .compact-grid li::before {
+  display: none;
+}
+
 body.reduced-motion *,
 body.reduced-motion *::before,
 body.reduced-motion *::after {
@@ -1093,6 +1237,16 @@ body[dir="rtl"] .numbered-steps li::before {
 @media (max-width: 800px) {
   body {
     padding-bottom: 4.25rem;
+  }
+
+  body.space-page {
+    background-image:
+      linear-gradient(180deg, rgba(3, 10, 17, .72), rgba(3, 10, 17, .4) 42%, rgba(3, 10, 17, .88)),
+      linear-gradient(90deg, rgba(6, 15, 23, .78), rgba(6, 15, 23, .32) 45%, rgba(6, 15, 23, .72)),
+      var(--earth-bg);
+    background-position: center center, center center, var(--earth-position);
+    background-repeat: no-repeat;
+    background-size: cover, cover, cover;
   }
 
   .site-header {
@@ -1158,6 +1312,11 @@ body[dir="rtl"] .numbered-steps li::before {
   .hero {
     min-height: auto;
     padding: 2.5rem 0 2rem;
+  }
+
+  .manifesto-hero::before,
+  .integrity-panel::after {
+    display: none;
   }
 
   h1 {
