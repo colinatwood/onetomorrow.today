@@ -270,12 +270,65 @@
     });
   }
 
+  function cleanFormValue(form, name){
+    const field = form.elements[name];
+    return field && typeof field.value === "string" ? field.value.trim() : "";
+  }
+
+  function buildJoinMessage(form){
+    const name = cleanFormValue(form, "name");
+    const email = cleanFormValue(form, "email");
+    const region = cleanFormValue(form, "region");
+    const role = cleanFormValue(form, "role");
+    return [
+      "OneTomorrow join request",
+      "",
+      "Name: " + name,
+      "Email: " + email,
+      "Country, region, or community: " + region,
+      "",
+      "What I will help build:",
+      role,
+      "",
+      "Submitted from: " + getShareUrl()
+    ].join("\n");
+  }
+
+  function initJoinForm(){
+    const form = document.querySelector("[data-join-form]");
+    if(!form) return;
+    const status = form.querySelector("[data-form-status]");
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      if(!form.reportValidity()) return;
+      const name = cleanFormValue(form, "name");
+      const message = buildJoinMessage(form);
+      const subject = "OneTomorrow join request" + (name ? " - " + name : "");
+      const mailto = "mailto:join@onetomorrow.today?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(message);
+      if(status) {
+        status.textContent = "Opening your email app. The message was also copied so you can paste it if needed.";
+      }
+      writeClipboard(message).catch(() => {
+        if(status) {
+          status.textContent = "Opening your email app. If it does not open, email join@onetomorrow.today directly.";
+        }
+      });
+      window.setTimeout(() => {
+        window.location.href = mailto;
+      }, 80);
+      window.setTimeout(() => {
+        window.location.hash = "commitment-sent";
+      }, 400);
+    });
+  }
+
   ["large-text", "high-contrast", "reduced-motion"].forEach(name => {
     if(getStored(name) === "1") document.body.classList.add(name);
     syncToggle(name);
   });
 
   initShareButton();
+  initJoinForm();
 
   document.querySelectorAll(".toggle").forEach(button => {
     const toggleName = button.dataset.toggle;

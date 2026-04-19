@@ -70,16 +70,18 @@
         </article>
         <article>
           <h2>Begin now</h2>
-          <form class="simple-form" action="join.html#commitment-sent" method="get">
+          <form class="simple-form" action="mailto:join@onetomorrow.today" method="post" enctype="text/plain" data-join-form>
             <label for="name">Name</label>
-            <input id="name" name="name" autocomplete="name">
+            <input id="name" name="name" autocomplete="name" required>
             <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email">
+            <input id="email" name="email" type="email" autocomplete="email" required>
             <label for="region">Country, region, or community</label>
-            <input id="region" name="region" autocomplete="address-level1">
+            <input id="region" name="region" autocomplete="address-level1" required>
             <label for="role">What will you help build?</label>
-            <textarea id="role" name="role" rows="4"></textarea>
+            <textarea id="role" name="role" rows="4" maxlength="900" required></textarea>
             <button class="button" type="submit">Join the renewal</button>
+            <p class="form-note">Submitting opens a prepared email to <a href="mailto:join@onetomorrow.today">join@onetomorrow.today</a>. If your email app does not open, the message is copied so you can paste it into your inbox.</p>
+            <p class="form-status" data-form-status aria-live="polite"></p>
           </form>
         </article>
       </div>

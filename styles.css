@@ -1007,6 +1007,20 @@ body[dir="rtl"] .commitment-list li {
   font-weight: 850;
 }
 
+.form-note,
+.form-status {
+  margin: .25rem 0 0;
+  color: var(--ink-muted);
+  font-size: .92rem;
+  line-height: 1.45;
+}
+
+.form-status {
+  min-height: 1.45em;
+  color: var(--institution);
+  font-weight: 800;
+}
+
 input,
 textarea,
 select,
