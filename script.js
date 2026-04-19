@@ -13,6 +13,7 @@
       nav_plan: "Plan",
       nav_join: "Join",
       share_page: "Share",
+      share_shared: "Shared",
       share_copied: "Copied",
       share_failed: "Copy failed",
       accessibility_title: "Accessibility",
@@ -210,6 +211,19 @@
     return title + "\n" + getShareUrl();
   }
 
+  function sharePage(){
+    const title = document.title.replace(/\s+\|\s+/g, " - ");
+    const url = getShareUrl();
+    const text = "OneTomorrow: public integrity for freedom, transparency, equality, and innovation.";
+    if(navigator.share) {
+      return navigator.share({ title, text, url }).then(() => "share_shared").catch(error => {
+        if(error && error.name === "AbortError") return Promise.resolve();
+        return writeClipboard(title + "\n" + url).then(() => "share_copied");
+      });
+    }
+    return writeClipboard(title + "\n" + url).then(() => "share_copied");
+  }
+
   function writeClipboard(text){
     if(navigator.clipboard && window.isSecureContext) {
       return navigator.clipboard.writeText(text);
@@ -264,8 +278,8 @@
     header.appendChild(button);
     header.appendChild(status);
     button.addEventListener("click", () => {
-      writeClipboard(getShareText())
-        .then(() => showShareResult(button, status, "share_copied"))
+      sharePage()
+        .then(key => showShareResult(button, status, key || "share_page"))
         .catch(() => showShareResult(button, status, "share_failed"));
     });
   }
