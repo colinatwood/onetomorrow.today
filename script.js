@@ -12,6 +12,9 @@
       nav_why: "Why",
       nav_plan: "Plan",
       nav_join: "Join",
+      share_page: "Share",
+      share_copied: "Copied",
+      share_failed: "Copy failed",
       accessibility_title: "Accessibility",
       accessibility_text: "Choose a language, enlarge text, increase contrast, or reduce motion."
     },
@@ -156,6 +159,11 @@
     return "en";
   }
 
+  function getDict(lang){
+    const chosen = normalizeLang(lang);
+    return Object.assign({}, fallback, translations[chosen] || {});
+  }
+
   function setDir(lang){
     const short = lang.split("-")[0];
     const dir = rtlLangs.includes(short) ? "rtl" : "ltr";
@@ -166,7 +174,7 @@
 
   function applyTranslations(lang){
     const chosen = normalizeLang(lang);
-    const dict = Object.assign({}, fallback, translations[chosen] || {});
+    const dict = getDict(chosen);
     document.querySelectorAll("[data-i18n]").forEach(element => {
       const key = element.getAttribute("data-i18n");
       if(Object.prototype.hasOwnProperty.call(dict, key)) {
@@ -191,10 +199,83 @@
     syncToggle(name);
   }
 
+  function getShareUrl(){
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if(canonical && canonical.href) return canonical.href;
+    return window.location.href.split("#")[0];
+  }
+
+  function getShareText(){
+    const title = document.title.replace(/\s+\|\s+/g, " - ");
+    return title + "\n" + getShareUrl();
+  }
+
+  function writeClipboard(text){
+    if(navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise((resolve, reject) => {
+      const field = document.createElement("textarea");
+      field.value = text;
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.top = "-9999px";
+      document.body.appendChild(field);
+      field.select();
+      try {
+        if(document.execCommand("copy")) {
+          resolve();
+        } else {
+          reject(new Error("Copy command failed."));
+        }
+      } catch (error) {
+        reject(error);
+      } finally {
+        field.remove();
+      }
+    });
+  }
+
+  function showShareResult(button, status, key){
+    const dict = getDict(document.documentElement.lang || getStored("siteLanguage") || "en");
+    const defaultText = dict.share_page || fallback.share_page;
+    const resultText = dict[key] || fallback[key] || defaultText;
+    status.textContent = resultText;
+    button.textContent = resultText;
+    window.setTimeout(() => {
+      button.textContent = defaultText;
+      status.textContent = "";
+    }, 1800);
+  }
+
+  function initShareButton(){
+    const header = document.querySelector(".site-header");
+    if(!header || header.querySelector("[data-share-page]")) return;
+    const button = document.createElement("button");
+    const status = document.createElement("span");
+    button.type = "button";
+    button.className = "share-button";
+    button.setAttribute("data-share-page", "");
+    button.setAttribute("data-i18n", "share_page");
+    button.setAttribute("aria-label", fallback.share_page);
+    button.textContent = fallback.share_page;
+    status.className = "share-status sr-only";
+    status.setAttribute("aria-live", "polite");
+    header.appendChild(button);
+    header.appendChild(status);
+    button.addEventListener("click", () => {
+      writeClipboard(getShareText())
+        .then(() => showShareResult(button, status, "share_copied"))
+        .catch(() => showShareResult(button, status, "share_failed"));
+    });
+  }
+
   ["large-text", "high-contrast", "reduced-motion"].forEach(name => {
     if(getStored(name) === "1") document.body.classList.add(name);
     syncToggle(name);
   });
+
+  initShareButton();
 
   document.querySelectorAll(".toggle").forEach(button => {
     const toggleName = button.dataset.toggle;
@@ -202,7 +283,7 @@
     button.addEventListener("click", () => toggleClass(toggleName));
   });
 
-  document.querySelectorAll(".site-nav a, .button, .toggle").forEach(control => {
+  document.querySelectorAll(".site-nav a, .button, .toggle, .share-button").forEach(control => {
     control.addEventListener("pointerenter", () => control.classList.add("is-hovered"));
     control.addEventListener("pointerleave", () => {
       control.classList.remove("is-hovered");

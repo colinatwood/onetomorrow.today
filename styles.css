@@ -206,7 +206,8 @@ p {
 
 .site-nav a,
 .button,
-.toggle {
+.toggle,
+.share-button {
   min-height: 44px;
   border-radius: 8px;
   transition: background-color .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease, transform .18s ease;
@@ -231,6 +232,25 @@ p {
   box-shadow: 0 12px 26px rgba(39, 111, 159, .22);
 }
 
+.share-button {
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.8rem;
+  padding: .5rem .72rem;
+  border: 1px solid rgba(22, 91, 128, .22);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .82);
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: .92rem;
+  font-weight: 900;
+}
+
 .site-nav a:hover,
 .site-nav a:focus-visible,
 .site-nav a.is-hovered,
@@ -239,7 +259,10 @@ p {
 .button.is-hovered,
 .toggle:hover,
 .toggle:focus-visible,
-.toggle.is-hovered {
+.toggle.is-hovered,
+.share-button:hover,
+.share-button:focus-visible,
+.share-button.is-hovered {
   transform: translateY(-1px);
   border-color: var(--action);
   box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
@@ -247,7 +270,10 @@ p {
 
 .site-nav a:hover,
 .site-nav a:focus-visible,
-.site-nav a.is-hovered {
+.site-nav a.is-hovered,
+.share-button:hover,
+.share-button:focus-visible,
+.share-button.is-hovered {
   background: var(--action);
   color: var(--ink);
 }
@@ -257,7 +283,9 @@ p {
 .site-nav a.is-clicked,
 .site-nav a:active,
 .toggle.is-clicked,
-.toggle:active {
+.toggle:active,
+.share-button.is-clicked,
+.share-button:active {
   transform: translateY(1px);
   background: var(--warm);
   border-color: var(--warm);
@@ -1019,6 +1047,7 @@ body.high-contrast .simple-form {
 }
 
 body.high-contrast .button,
+body.high-contrast .share-button,
 body.high-contrast .site-nav a[aria-current="page"],
 body.high-contrast .toggle[aria-pressed="true"] {
   color: #000;
@@ -1073,6 +1102,15 @@ body[dir="rtl"] .numbered-steps li::before {
     min-width: 0;
     gap: .5rem;
     padding: .6rem;
+  }
+
+  .share-button {
+    top: .6rem;
+    right: .6rem;
+    min-height: 38px;
+    min-width: 4.25rem;
+    padding: .35rem .52rem;
+    font-size: .82rem;
   }
 
   .site-header > * {
