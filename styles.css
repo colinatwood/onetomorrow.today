@@ -72,6 +72,11 @@ body.page-plan {
   --earth-position: center 42%;
 }
 
+body.page-learn {
+  --earth-bg: url("assets/earth-plan.png");
+  --earth-position: center 30%;
+}
+
 body.page-join {
   --earth-bg: url("assets/earth-join.jpg");
   --earth-position: center center;

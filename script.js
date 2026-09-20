@@ -11,6 +11,7 @@
       nav_about: "About",
       nav_why: "Why",
       nav_plan: "Plan",
+      nav_learn: "Learn",
       nav_join: "Join",
       share_page: "Share",
       share_shared: "Shared",
@@ -29,6 +30,7 @@
       nav_about: "Acerca",
       nav_why: "Por que",
       nav_plan: "Plan",
+      nav_learn: "Aprender",
       nav_join: "Unirse",
       accessibility_title: "Accesibilidad",
       accessibility_text: "Elige idioma, aumenta texto, sube contraste o reduce movimiento."
@@ -43,6 +45,7 @@
       nav_about: "A propos",
       nav_why: "Pourquoi",
       nav_plan: "Plan",
+      nav_learn: "Apprendre",
       nav_join: "Rejoindre",
       accessibility_title: "Accessibilite",
       accessibility_text: "Choisissez une langue, agrandissez le texte, augmentez le contraste ou reduisez le mouvement."
@@ -57,6 +60,7 @@
       nav_about: "Sobre",
       nav_why: "Por que",
       nav_plan: "Plano",
+      nav_learn: "Aprender",
       nav_join: "Participar",
       accessibility_title: "Acessibilidade",
       accessibility_text: "Escolha idioma, aumente texto, eleve contraste ou reduza movimento."
@@ -71,6 +75,7 @@
       nav_about: "حول",
       nav_why: "لماذا",
       nav_plan: "الخطة",
+      nav_learn: "تعلّم",
       nav_join: "انضم",
       accessibility_title: "إتاحة الوصول",
       accessibility_text: "اختر اللغة، كبّر النص، ارفع التباين، أو قلل الحركة."
@@ -85,6 +90,7 @@
       nav_about: "परिचय",
       nav_why: "क्यों",
       nav_plan: "योजना",
+      nav_learn: "सीखें",
       nav_join: "जुड़ें",
       accessibility_title: "पहुंच",
       accessibility_text: "भाषा चुनें, पाठ बढ़ाएं, कंट्रास्ट बढ़ाएं, या गति घटाएं."
@@ -99,6 +105,7 @@
       nav_about: "Kuhusu",
       nav_why: "Kwa nini",
       nav_plan: "Mpango",
+      nav_learn: "Jifunze",
       nav_join: "Jiunge",
       accessibility_title: "Ufikiaji",
       accessibility_text: "Chagua lugha, ongeza maandishi, ongeza utofautishaji, au punguza mwendo."
@@ -113,6 +120,7 @@
       nav_about: "关于",
       nav_why: "原因",
       nav_plan: "计划",
+      nav_learn: "学习",
       nav_join: "加入",
       accessibility_title: "无障碍",
       accessibility_text: "选择语言、放大文字、提高对比度或减少动态。"
@@ -127,6 +135,7 @@
       nav_about: "Uber",
       nav_why: "Warum",
       nav_plan: "Plan",
+      nav_learn: "Lernen",
       nav_join: "Mitmachen",
       accessibility_title: "Barrierefreiheit",
       accessibility_text: "Sprache wahlen, Text vergrossern, Kontrast erhohen oder Bewegung reduzieren."
