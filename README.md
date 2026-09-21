@@ -149,8 +149,12 @@ NASA sources:
 ## Before launch
 
 1. Set `RESEND_API_KEY` and `JOIN_FROM` in Cloudflare and send a test signup.
-2. Have a lawyer in your jurisdiction review `/privacy` and `/terms`, and
-   confirm the governing-law paragraph in `terms.html`.
+2. Have a Maine-licensed lawyer review `/privacy` and `/terms`. They state
+   that OneTomorrow is an unincorporated project run by one individual, that
+   Maine law governs, that join requests are deleted within one month, and
+   that submissions pass through Cloudflare, Resend, AWS and Google. Those
+   claims are accurate as built — a reviewer's job is whether they are
+   sufficient, not whether they are true.
 3. Review final public language with trusted people from different ages,
    cultures, and regions.
 4. Add verified translations for any language you plan to promote, and extend
