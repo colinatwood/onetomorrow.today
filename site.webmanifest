@@ -2,17 +2,29 @@
   "name": "OneTomorrow",
   "short_name": "OneTomorrow",
   "id": "https://onetomorrow.today/",
-  "start_url": "/about",
+  "start_url": "/",
   "scope": "/",
   "description": "OneTomorrow is a civic movement for public integrity, anti-corruption, transparent governance, equal freedom, open innovation, and shared prosperity.",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#071018",
   "theme_color": "#071018",
   "icons": [
     {
-      "src": "assets/main-logo.png",
-      "sizes": "512x512",
+      "src": "/assets/logo-120.png",
+      "sizes": "120x120",
       "type": "image/png"
+    },
+    {
+      "src": "/assets/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/logo-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

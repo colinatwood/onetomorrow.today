@@ -21,44 +21,44 @@
       accessibility_text: "Choose a language, enlarge text, increase contrast, or reduce motion."
     },
     es: {
-      tagline: "La integridad construye manana.",
+      tagline: "La integridad construye mañana.",
       skip_to_content: "Saltar al contenido principal",
       language_label: "Elegir idioma",
-      larger_text: "Texto mas grande",
+      larger_text: "Texto más grande",
       high_contrast: "Alto contraste",
       reduced_motion: "Menos movimiento",
-      nav_about: "Acerca",
-      nav_why: "Por que",
+      nav_about: "Acerca de",
+      nav_why: "Por qué",
       nav_plan: "Plan",
       nav_learn: "Aprender",
       nav_join: "Unirse",
       accessibility_title: "Accesibilidad",
-      accessibility_text: "Elige idioma, aumenta texto, sube contraste o reduce movimiento."
+      accessibility_text: "Elige idioma, aumenta el texto, sube el contraste o reduce el movimiento."
     },
     fr: {
-      tagline: "L'integrite construit demain.",
+      tagline: "L'intégrité construit demain.",
       skip_to_content: "Aller au contenu principal",
       language_label: "Choisir la langue",
       larger_text: "Texte plus grand",
-      high_contrast: "Contraste eleve",
+      high_contrast: "Contraste élevé",
       reduced_motion: "Moins de mouvement",
-      nav_about: "A propos",
+      nav_about: "À propos",
       nav_why: "Pourquoi",
       nav_plan: "Plan",
       nav_learn: "Apprendre",
       nav_join: "Rejoindre",
-      accessibility_title: "Accessibilite",
-      accessibility_text: "Choisissez une langue, agrandissez le texte, augmentez le contraste ou reduisez le mouvement."
+      accessibility_title: "Accessibilité",
+      accessibility_text: "Choisissez une langue, agrandissez le texte, augmentez le contraste ou réduisez le mouvement."
     },
     pt: {
-      tagline: "A integridade constroi o amanha.",
+      tagline: "A integridade constrói o amanhã.",
       skip_to_content: "Ir para o conteudo principal",
       language_label: "Escolher idioma",
       larger_text: "Texto maior",
       high_contrast: "Alto contraste",
       reduced_motion: "Menos movimento",
       nav_about: "Sobre",
-      nav_why: "Por que",
+      nav_why: "Por quê",
       nav_plan: "Plano",
       nav_learn: "Aprender",
       nav_join: "Participar",
@@ -126,19 +126,19 @@
       accessibility_text: "选择语言、放大文字、提高对比度或减少动态。"
     },
     de: {
-      tagline: "Integritat baut morgen.",
+      tagline: "Integrität baut morgen.",
       skip_to_content: "Zum Hauptinhalt springen",
-      language_label: "Sprache wahlen",
-      larger_text: "Grosserer Text",
+      language_label: "Sprache wählen",
+      larger_text: "Größerer Text",
       high_contrast: "Hoher Kontrast",
       reduced_motion: "Weniger Bewegung",
-      nav_about: "Uber",
+      nav_about: "Über uns",
       nav_why: "Warum",
       nav_plan: "Plan",
       nav_learn: "Lernen",
       nav_join: "Mitmachen",
       accessibility_title: "Barrierefreiheit",
-      accessibility_text: "Sprache wahlen, Text vergrossern, Kontrast erhohen oder Bewegung reduzieren."
+      accessibility_text: "Sprache wählen, Text vergrößern, Kontrast erhöhen oder Bewegung reduzieren."
     }
   };
 
@@ -174,24 +174,31 @@
     return Object.assign({}, fallback, translations[chosen] || {});
   }
 
-  function setDir(lang){
-    const short = lang.split("-")[0];
-    const dir = rtlLangs.includes(short) ? "rtl" : "ltr";
-    document.documentElement.lang = lang;
-    document.documentElement.setAttribute("dir", dir);
-    document.body.setAttribute("dir", dir);
+  // The translations cover navigation and the accessibility controls only --
+  // page content stays in English. So lang/dir are tagged on the translated
+  // elements themselves; tagging <html> would tell a screen reader to read
+  // English prose with, say, an Arabic voice, and would flip the whole layout
+  // to RTL around left-to-right content.
+  function tagElement(element, lang, dir){
+    element.setAttribute("lang", lang);
+    if(dir === "rtl") {
+      element.setAttribute("dir", "rtl");
+    } else {
+      element.removeAttribute("dir");
+    }
   }
 
   function applyTranslations(lang){
     const chosen = normalizeLang(lang);
     const dict = getDict(chosen);
+    const dir = rtlLangs.includes(chosen.split("-")[0]) ? "rtl" : "ltr";
     document.querySelectorAll("[data-i18n]").forEach(element => {
       const key = element.getAttribute("data-i18n");
       if(Object.prototype.hasOwnProperty.call(dict, key)) {
         element.textContent = dict[key];
+        tagElement(element, chosen, dir);
       }
     });
-    setDir(chosen);
     setStored("siteLanguage", chosen);
     if(langSelect) langSelect.value = chosen;
   }
@@ -317,32 +324,79 @@
     ].join("\n");
   }
 
+  function setStatus(status, message){
+    if(status) status.textContent = message;
+  }
+
+  // Only used when the request could not be delivered, so the visitor still
+  // has their text. Writing it on every submit put their name, email and
+  // message on the system clipboard even when nothing had gone wrong.
+  function offerMailtoFallback(form, status){
+    const message = buildJoinMessage(form);
+    const subject = "OneTomorrow join request" + (cleanFormValue(form, "name") ? " - " + cleanFormValue(form, "name") : "");
+    writeClipboard(message).then(() => {
+      setStatus(status, "We could not send that automatically. Your message was copied \u2014 please paste it into an email to join@onetomorrow.today.");
+    }).catch(() => {
+      setStatus(status, "We could not send that automatically. Please email join@onetomorrow.today.");
+    });
+    window.setTimeout(() => {
+      window.location.href = "mailto:join@onetomorrow.today?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(message);
+    }, 120);
+  }
+
   function initJoinForm(){
     const form = document.querySelector("[data-join-form]");
     if(!form) return;
     const status = form.querySelector("[data-form-status]");
+    const submit = form.querySelector('button[type="submit"]');
+
+    // Without JS the form posts natively to the same endpoint, which replies
+    // with a 303 back to this page.
     form.addEventListener("submit", event => {
       event.preventDefault();
       if(!form.reportValidity()) return;
-      const name = cleanFormValue(form, "name");
-      const message = buildJoinMessage(form);
-      const subject = "OneTomorrow join request" + (name ? " - " + name : "");
-      const mailto = "mailto:join@onetomorrow.today?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(message);
-      if(status) {
-        status.textContent = "Opening your email app. The message was also copied so you can paste it if needed.";
-      }
-      writeClipboard(message).catch(() => {
-        if(status) {
-          status.textContent = "Opening your email app. If it does not open, email join@onetomorrow.today directly.";
+
+      const payload = {
+        name: cleanFormValue(form, "name"),
+        email: cleanFormValue(form, "email"),
+        region: cleanFormValue(form, "region"),
+        role: cleanFormValue(form, "role"),
+        website: cleanFormValue(form, "website")
+      };
+
+      if(submit) submit.disabled = true;
+      setStatus(status, "Sending\u2026");
+
+      fetch(form.action, {
+        method: "POST",
+        headers: { "content-type": "application/json", accept: "application/json" },
+        body: JSON.stringify(payload)
+      }).then(response => {
+        return response.json().catch(() => ({})).then(body => ({ ok: response.ok, body }));
+      }).then(result => {
+        if(result.ok && result.body.ok) {
+          form.reset();
+          setStatus(status, "Thank you. Your message is on its way and we will reply by email.");
+          window.location.hash = "commitment-sent";
+        } else if(result.body && result.body.error) {
+          setStatus(status, result.body.error);
+        } else {
+          offerMailtoFallback(form, status);
         }
+      }).catch(() => {
+        offerMailtoFallback(form, status);
+      }).then(() => {
+        if(submit) submit.disabled = false;
       });
-      window.setTimeout(() => {
-        window.location.href = mailto;
-      }, 80);
-      window.setTimeout(() => {
-        window.location.hash = "commitment-sent";
-      }, 400);
     });
+
+    // Surface the no-JS redirect result.
+    const params = new URLSearchParams(window.location.search);
+    if(params.get("sent") === "1") {
+      setStatus(status, "Thank you. Your message is on its way and we will reply by email.");
+    } else if(params.get("error")) {
+      setStatus(status, "We could not send that. Please try again, or email join@onetomorrow.today.");
+    }
   }
 
   ["large-text", "high-contrast", "reduced-motion"].forEach(name => {
@@ -380,5 +434,8 @@
     langSelect.addEventListener("change", event => applyTranslations(event.target.value));
   }
 
-  applyTranslations(getStored("siteLanguage") || navigator.language || "en");
+  // Only a language the visitor actually chose is restored. Guessing from
+  // navigator.language mixed translated chrome into untranslated content for
+  // people who never asked for it.
+  applyTranslations(getStored("siteLanguage") || "en");
 })();

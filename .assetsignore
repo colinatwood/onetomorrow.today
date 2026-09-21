@@ -1,0 +1,10 @@
+# Repository files that should not be served as part of the site.
+README.md
+package.json
+package-lock.json
+netlify.toml
+vercel.json
+tools
+node_modules
+.github
+claude

@@ -9,9 +9,9 @@
   <meta name="author" content="OneTomorrow">
   <meta name="application-name" content="OneTomorrow">
   <meta name="theme-color" content="#071018">
-  <link rel="icon" href="assets/main-logo.png">
-  <link rel="apple-touch-icon" href="assets/main-logo.png">
-  <link rel="manifest" href="site.webmanifest">
+  <link rel="icon" href="/assets/logo-120.png">
+  <link rel="apple-touch-icon" href="/assets/logo-512.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="canonical" href="https://onetomorrow.today/news">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OneTomorrow">
@@ -38,9 +38,9 @@
         "url": "https://onetomorrow.today/",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://onetomorrow.today/assets/main-logo.png",
-          "width": 1024,
-          "height": 1024
+          "url": "https://onetomorrow.today/assets/logo-512.png",
+          "width": 512,
+          "height": 512
         },
         "email": "join@onetomorrow.today",
         "description": "OneTomorrow is a global civic movement for anti-corruption, transparent governance, equal freedom, open innovation, and broadly shared prosperity.",
@@ -84,25 +84,25 @@
     ]
   }
   </script>
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/script.js"></script>
 </head>
 <body class="space-page page-about page-news">
   <a class="skip-link" href="#main" data-i18n="skip_to_content">Skip to main content</a>
   <header class="site-header" aria-label="Site">
-    <a class="brand" href="about.html" aria-label="OneTomorrow home">
-      <img src="assets/main-logo.png" alt="" width="60" height="60">
+    <a class="brand" href="/" aria-label="OneTomorrow home">
+      <img src="/assets/logo-120.png" alt="" width="60" height="60" decoding="async">
       <span>
         <span class="brand-name" data-i18n="site_name">OneTomorrow</span>
         <span class="brand-tagline" data-i18n="tagline">Integrity builds tomorrow.</span>
       </span>
     </a>
     <nav class="site-nav" aria-label="Main">
-      <a href="about.html" aria-current="page" data-i18n="nav_about">About</a>
-      <a href="why.html" data-i18n="nav_why">Why</a>
-      <a href="plan.html" data-i18n="nav_plan">Plan</a>
-      <a href="learn.html" data-i18n="nav_learn">Learn</a>
-      <a href="join.html" data-i18n="nav_join">Join</a>
+      <a href="/" data-i18n="nav_about">About</a>
+      <a href="/why" data-i18n="nav_why">Why</a>
+      <a href="/plan" data-i18n="nav_plan">Plan</a>
+      <a href="/learn" data-i18n="nav_learn">Learn</a>
+      <a href="/join" data-i18n="nav_join">Join</a>
     </nav>
   </header>
   <main id="main" class="main-content">
@@ -112,8 +112,8 @@
       <p class="lede">A continuous loop of source-linked highlights on corruption, improvement, and innovation. The signal is simple: clean power, open knowledge, and public accountability decide whether the future is captured or shared.</p>
       <p class="manifesto-line">Use these highlights as starting points for civic awareness, not as the end of the investigation.</p>
       <div class="actions">
-        <a class="button" href="about.html">Back to About</a>
-        <a class="button button-secondary" href="join.html">Join the renewal</a>
+        <a class="button" href="/">Back to About</a>
+        <a class="button button-secondary" href="/join">Join the renewal</a>
       </div>
     </section>
     <section class="content wide-content">
@@ -153,13 +153,13 @@
               <span>Public integrity</span>
               <h3>Disclosure is becoming a democratic infrastructure issue.</h3>
               <p>Budgets, contracts, lobbying, conflicts, and assets are no longer paperwork. They are the public sensors that help societies detect capture early.</p>
-              <a href="plan.html">See the OneTomorrow plan</a>
+              <a href="/plan">See the OneTomorrow plan</a>
             </article>
             <article class="news-card innovation">
               <span>Civic technology</span>
               <h3>Technology must make power easier to inspect.</h3>
               <p>AI, open standards, public dashboards, and secure reporting channels can strengthen democracy when they remain transparent and accountable.</p>
-              <a href="why.html">Why it matters</a>
+              <a href="/why">Why it matters</a>
             </article>
             <article class="news-card corruption" aria-hidden="true">
               <span>Global corruption</span>
@@ -189,13 +189,13 @@
               <span>Public integrity</span>
               <h3>Disclosure is becoming a democratic infrastructure issue.</h3>
               <p>Budgets, contracts, lobbying, conflicts, and assets are no longer paperwork. They are the public sensors that help societies detect capture early.</p>
-              <a href="plan.html">See the OneTomorrow plan</a>
+              <a href="/plan">See the OneTomorrow plan</a>
             </article>
             <article class="news-card innovation" aria-hidden="true">
               <span>Civic technology</span>
               <h3>Technology must make power easier to inspect.</h3>
               <p>AI, open standards, public dashboards, and secure reporting channels can strengthen democracy when they remain transparent and accountable.</p>
-              <a href="why.html">Why it matters</a>
+              <a href="/why">Why it matters</a>
             </article>
           </div>
         </div>
@@ -234,6 +234,11 @@
         <button class="toggle" data-toggle="reduced-motion" type="button" data-i18n="reduced_motion">Less motion</button>
       </div>
     </section>
+    <nav class="footer-legal" aria-label="Site policies">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/accessibility">Accessibility statement</a>
+    </nav>
   </footer>
 </body>
 </html>

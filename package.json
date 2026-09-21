@@ -1,9 +1,13 @@
 {
   "name": "onetomorrow-site",
   "private": true,
-  "version": "4.0.1",
+  "version": "4.1.0",
   "scripts": {
     "start": "npx serve .",
-    "test": "echo \"Static site\""
+    "test": "node tools/check-site.js",
+    "optimize:images": "node tools/optimize-images.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
   }
 }

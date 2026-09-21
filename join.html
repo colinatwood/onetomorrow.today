@@ -9,9 +9,9 @@
   <meta name="author" content="OneTomorrow">
   <meta name="application-name" content="OneTomorrow">
   <meta name="theme-color" content="#071018">
-  <link rel="icon" href="assets/main-logo.png">
-  <link rel="apple-touch-icon" href="assets/main-logo.png">
-  <link rel="manifest" href="site.webmanifest">
+  <link rel="icon" href="/assets/logo-120.png">
+  <link rel="apple-touch-icon" href="/assets/logo-512.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="canonical" href="https://onetomorrow.today/join">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OneTomorrow">
@@ -38,9 +38,9 @@
         "url": "https://onetomorrow.today/",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://onetomorrow.today/assets/main-logo.png",
-          "width": 1024,
-          "height": 1024
+          "url": "https://onetomorrow.today/assets/logo-512.png",
+          "width": 512,
+          "height": 512
         },
         "email": "join@onetomorrow.today",
         "description": "OneTomorrow is a global civic movement for anti-corruption, transparent governance, equal freedom, open innovation, and broadly shared prosperity.",
@@ -84,25 +84,25 @@
     ]
   }
   </script>
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/script.js"></script>
 </head>
 <body class="space-page page-join">
   <a class="skip-link" href="#main" data-i18n="skip_to_content">Skip to main content</a>
   <header class="site-header" aria-label="Site">
-    <a class="brand" href="about.html" aria-label="OneTomorrow home">
-      <img src="assets/main-logo.png" alt="" width="60" height="60">
+    <a class="brand" href="/" aria-label="OneTomorrow home">
+      <img src="/assets/logo-120.png" alt="" width="60" height="60" decoding="async">
       <span>
         <span class="brand-name" data-i18n="site_name">OneTomorrow</span>
         <span class="brand-tagline" data-i18n="tagline">Integrity builds tomorrow.</span>
       </span>
     </a>
     <nav class="site-nav" aria-label="Main">
-      <a href="about.html" data-i18n="nav_about">About</a>
-      <a href="why.html" data-i18n="nav_why">Why</a>
-      <a href="plan.html" data-i18n="nav_plan">Plan</a>
-      <a href="learn.html" data-i18n="nav_learn">Learn</a>
-      <a href="join.html" aria-current="page" data-i18n="nav_join">Join</a>
+      <a href="/" data-i18n="nav_about">About</a>
+      <a href="/why" data-i18n="nav_why">Why</a>
+      <a href="/plan" data-i18n="nav_plan">Plan</a>
+      <a href="/learn" data-i18n="nav_learn">Learn</a>
+      <a href="/join" aria-current="page" data-i18n="nav_join">Join</a>
     </nav>
   </header>
   <main id="main" class="main-content">
@@ -140,7 +140,11 @@
         </article>
         <article>
           <h2>Begin now</h2>
-          <form class="simple-form" action="mailto:join@onetomorrow.today" method="post" enctype="text/plain" data-join-form>
+          <form class="simple-form" action="/api/join" method="post" data-join-form>
+            <div class="sr-only" aria-hidden="true">
+              <label for="website">Leave this field empty</label>
+              <input id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
             <label for="name">Name</label>
             <input id="name" name="name" autocomplete="name" required>
             <label for="email">Email</label>
@@ -150,7 +154,7 @@
             <label for="role">What will you help build?</label>
             <textarea id="role" name="role" rows="4" maxlength="900" required></textarea>
             <button class="button" type="submit">Join the renewal</button>
-            <p class="form-note">Submitting opens a prepared email to <a href="mailto:join@onetomorrow.today">join@onetomorrow.today</a>. If your email app does not open, the message is copied so you can paste it into your inbox.</p>
+            <p class="form-note">We use your details only to reply about joining the work. Read the <a href="/privacy">privacy notice</a>. You can also email <a href="mailto:join@onetomorrow.today">join@onetomorrow.today</a> directly.</p>
             <p class="form-status" data-form-status aria-live="polite"></p>
           </form>
         </article>
@@ -204,6 +208,11 @@
         <button class="toggle" data-toggle="reduced-motion" type="button" data-i18n="reduced_motion">Less motion</button>
       </div>
     </section>
+    <nav class="footer-legal" aria-label="Site policies">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/accessibility">Accessibility statement</a>
+    </nav>
   </footer>
 </body>
 </html>

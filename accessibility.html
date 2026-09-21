@@ -3,19 +3,115 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>OneTomorrow | Redirecting</title>
-  <meta name="robots" content="noindex, follow">
-  <meta http-equiv="refresh" content="0; url=join.html">
-  <link rel="canonical" href="https://onetomorrow.today/join">
-  <link rel="stylesheet" href="styles.css">
+  <title>OneTomorrow | Accessibility statement</title>
+  <meta name="description" content="OneTomorrow's accessibility commitment, the features the site provides today, its known limitations, and how to report a barrier.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="OneTomorrow">
+  <meta name="theme-color" content="#071018">
+  <link rel="icon" href="/assets/logo-120.png">
+  <link rel="apple-touch-icon" href="/assets/logo-512.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="canonical" href="https://onetomorrow.today/accessibility">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="OneTomorrow">
+  <meta property="og:title" content="OneTomorrow | Accessibility statement">
+  <meta property="og:description" content="OneTomorrow's accessibility commitment, the features the site provides today, its known limitations, and how to report a barrier.">
+  <meta property="og:image" content="https://onetomorrow.today/assets/social-card.png">
+  <meta property="og:url" content="https://onetomorrow.today/accessibility">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/script.js"></script>
 </head>
-<body class="space-page page-join redirect-page">
-  <main class="main-content">
+<body class="space-page page-why">
+  <a class="skip-link" href="#main" data-i18n="skip_to_content">Skip to main content</a>
+  <header class="site-header" aria-label="Site">
+    <a class="brand" href="/" aria-label="OneTomorrow home">
+      <img src="/assets/logo-120.png" alt="" width="60" height="60" decoding="async">
+      <span>
+        <span class="brand-name" data-i18n="site_name">OneTomorrow</span>
+        <span class="brand-tagline" data-i18n="tagline">Integrity builds tomorrow.</span>
+      </span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/" data-i18n="nav_about">About</a>
+      <a href="/why" data-i18n="nav_why">Why</a>
+      <a href="/plan" data-i18n="nav_plan">Plan</a>
+      <a href="/learn" data-i18n="nav_learn">Learn</a>
+      <a href="/join" data-i18n="nav_join">Join</a>
+    </nav>
+  </header>
+  <main id="main" class="main-content">
+    <section class="hero page-hero">
+      <p class="eyebrow">Accessibility</p>
+      <h1>Accessibility statement</h1>
+      <p class="lede">A movement that says talent should rise from anywhere cannot build a site that only some people can use.</p>
+      <p class="form-note">Last updated 21 September 2026.</p>
+    </section>
     <section class="content">
-      <h1>Redirecting to Join.</h1>
-      <p>The current OneTomorrow site uses About, Why, Plan, and Join.</p>
-      <p><a class="button" href="join.html">Go to Join</a></p>
+      <h2>What we are aiming for</h2>
+      <p>We are working to meet <a href="https://www.w3.org/TR/WCAG22/">WCAG 2.2 level AA</a>. We have not yet had an independent audit against it, so treat this as a statement of effort and current state, not a certificate.</p>
+      <h2>What the site does today</h2>
+      <ul class="mandate-list">
+        <li>Every page starts with a skip link straight to the main content.</li>
+        <li>Headings run in order, without skipped levels, so screen reader navigation works.</li>
+        <li>Everything is reachable and operable by keyboard, with a visible focus outline on each control.</li>
+        <li>A larger-text control raises the base size across the site.</li>
+        <li>A high-contrast mode replaces the imagery with solid colour and strengthens every border.</li>
+        <li>A reduce-motion control removes animation and transitions, and the site also honours the reduced-motion setting in your operating system automatically.</li>
+        <li>Your choices are remembered in your browser between visits.</li>
+        <li>Images that carry meaning have text alternatives; decorative images are hidden from screen readers.</li>
+        <li>The layout reflows to narrow screens and to zoom without a horizontal scrollbar.</li>
+      </ul>
+      <h2>Where it falls short</h2>
+      <p>Naming these is more useful than claiming they do not exist.</p>
+      <dl class="definition-list" aria-label="Known limitations">
+        <div>
+          <dt>Translation is partial</dt>
+          <dd>The language selector translates the navigation and the accessibility controls. The body of every page is still English. We would rather say so than pretend otherwise, and full translation is work we still owe you.</dd>
+        </div>
+        <div>
+          <dt>No independent audit yet</dt>
+          <dd>Our conformance claim rests on our own testing. An external review has not happened.</dd>
+        </div>
+        <div>
+          <dt>Long charter pages</dt>
+          <dd>The plan and learn pages are dense and deeply nested. They are navigable, but they demand stamina. We are working on summaries.</dd>
+        </div>
+      </dl>
+      <h2>Tell us what is broken</h2>
+      <p>If any part of this site keeps you out, email <a href="mailto:join@onetomorrow.today">join@onetomorrow.today</a>. Describe the page and what happened, and tell us what you were using if you can. We treat access faults as defects, not requests, and we will tell you what we are doing about it.</p>
+      <p>If our answer does not satisfy you, say so plainly and we will look again.</p>
+      <h2>How this site is built</h2>
+      <p>The markup, styling, and behaviour are public at <a href="https://github.com/colinatwood/onetomorrow.today">github.com/colinatwood/onetomorrow.today</a>. If you want to check a claim on this page, you can read the source that backs it.</p>
     </section>
   </main>
+  <footer class="site-footer" aria-label="Accessibility tools">
+    <section class="footer-accessibility" aria-labelledby="footerAccessTitle">
+      <h2 id="footerAccessTitle" data-i18n="accessibility_title">Accessibility</h2>
+      <p data-i18n="accessibility_text">Choose a language, enlarge text, increase contrast, or reduce motion.</p>
+      <div class="top-tools footer-tools">
+        <label for="languageSelect" class="sr-only" data-i18n="language_label">Choose language</label>
+        <select id="languageSelect" aria-label="Choose language">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="pt">Portuguese</option>
+          <option value="ar">Arabic</option>
+          <option value="hi">Hindi</option>
+          <option value="sw">Swahili</option>
+          <option value="zh-CN">Chinese</option>
+          <option value="de">German</option>
+        </select>
+        <button class="toggle" data-toggle="large-text" type="button" data-i18n="larger_text">Larger text</button>
+        <button class="toggle" data-toggle="high-contrast" type="button" data-i18n="high_contrast">High contrast</button>
+        <button class="toggle" data-toggle="reduced-motion" type="button" data-i18n="reduced_motion">Less motion</button>
+      </div>
+    </section>
+    <nav class="footer-legal" aria-label="Site policies">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/accessibility">Accessibility statement</a>
+    </nav>
+  </footer>
 </body>
 </html>
