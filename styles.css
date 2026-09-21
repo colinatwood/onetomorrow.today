@@ -32,7 +32,7 @@ body {
   width: 100%;
   min-height: 100vh;
   margin: 0;
-  padding-bottom: 5.75rem;
+  padding-bottom: 7.5rem;
   font-family: "Segoe UI", Arial, Helvetica, sans-serif;
   line-height: 1.62;
   color: var(--text);
@@ -43,6 +43,16 @@ body {
 body.space-page {
   --earth-bg: url("assets/earth-about.jpg");
   --earth-position: center center;
+}
+
+/* The hero renders as a viewport-fixed layer instead of
+   background-attachment: fixed, which repainted a multi-megapixel bitmap on
+   every scroll frame and flickers on iOS Safari. */
+body.space-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   background-color: #071018;
   background-image:
     repeating-linear-gradient(0deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 74px),
@@ -54,7 +64,6 @@ body.space-page {
   background-position: center center, center center, center center, center center, center center, var(--earth-position);
   background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat;
   background-size: 74px 74px, 74px 74px, cover, cover, cover, cover;
-  background-attachment: fixed;
 }
 
 body.page-about {
@@ -68,18 +77,41 @@ body.page-why {
 }
 
 body.page-plan {
-  --earth-bg: url("assets/earth-plan.png");
+  --earth-bg: url("assets/earth-plan.jpg");
   --earth-position: center 42%;
 }
 
 body.page-learn {
-  --earth-bg: url("assets/earth-plan.png");
+  --earth-bg: url("assets/earth-plan.jpg");
   --earth-position: center 30%;
 }
 
 body.page-join {
   --earth-bg: url("assets/earth-join.jpg");
   --earth-position: center center;
+}
+
+/* image-set() is guarded by @supports so browsers without it keep the JPEG
+   declared above; a bare second declaration would not fall back, because a
+   custom property accepts any token stream as valid. */
+@supports (background-image: image-set(url("assets/earth-about.webp") type("image/webp"))) {
+  body.space-page,
+  body.page-about {
+    --earth-bg: image-set(url("assets/earth-about.webp") type("image/webp"), url("assets/earth-about.jpg") type("image/jpeg"));
+  }
+
+  body.page-why {
+    --earth-bg: image-set(url("assets/earth-why.webp") type("image/webp"), url("assets/earth-why.jpg") type("image/jpeg"));
+  }
+
+  body.page-plan,
+  body.page-learn {
+    --earth-bg: image-set(url("assets/earth-plan.webp") type("image/webp"), url("assets/earth-plan.jpg") type("image/jpeg"));
+  }
+
+  body.page-join {
+    --earth-bg: image-set(url("assets/earth-join.webp") type("image/webp"), url("assets/earth-join.jpg") type("image/jpeg"));
+  }
 }
 
 img {
@@ -1219,6 +1251,36 @@ a:focus-visible {
   text-align: left;
 }
 
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .15rem .9rem;
+  margin: 0 .55rem;
+  padding: .4rem 0 .5rem;
+  border-top: 1px solid rgba(22, 91, 128, .16);
+  font-size: .78rem;
+}
+
+.footer-legal a {
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+
+.footer-legal a:hover,
+.footer-legal a:focus-visible {
+  color: var(--institution);
+  text-decoration: underline;
+}
+
+body.high-contrast .footer-legal {
+  border-top-color: #fff;
+}
+
+body.high-contrast .footer-legal a {
+  color: #fff;
+}
+
 .footer-accessibility h2 {
   margin: 0;
   color: var(--ink);
@@ -1311,6 +1373,10 @@ body.high-contrast {
   background-image: none;
 }
 
+body.high-contrast.space-page::before {
+  display: none;
+}
+
 body.high-contrast .site-header,
 body.high-contrast .site-footer,
 body.high-contrast .two-column > article,
@@ -1363,6 +1429,23 @@ body.reduced-motion *::after {
   scroll-behavior: auto !important;
   animation: none !important;
   transition: none !important;
+}
+
+/* The "Less motion" button is opt-in; this honours the setting people have
+   already made at the OS level, without waiting for them to find the button. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 body[dir="rtl"] .brand {
@@ -1523,7 +1606,37 @@ body[dir="rtl"] .numbered-steps li::before {
     text-align: center;
   }
 
-  .footer-accessibility h2 {
+  .footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .15rem .9rem;
+  margin: 0 .55rem;
+  padding: .4rem 0 .5rem;
+  border-top: 1px solid rgba(22, 91, 128, .16);
+  font-size: .78rem;
+}
+
+.footer-legal a {
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+
+.footer-legal a:hover,
+.footer-legal a:focus-visible {
+  color: var(--institution);
+  text-decoration: underline;
+}
+
+body.high-contrast .footer-legal {
+  border-top-color: #fff;
+}
+
+body.high-contrast .footer-legal a {
+  color: #fff;
+}
+
+.footer-accessibility h2 {
     position: absolute !important;
     width: 1px;
     height: 1px;
@@ -1593,7 +1706,7 @@ body[dir="rtl"] .numbered-steps li::before {
 
 @media (max-width: 520px) {
   body {
-    padding-bottom: 4.25rem;
+    padding-bottom: 6.5rem;
   }
 
   h1 {
