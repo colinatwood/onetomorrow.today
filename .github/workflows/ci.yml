@@ -1,0 +1,31 @@
+name: Checks
+
+# Deploys are handled by the Cloudflare Pages GitHub integration, so this
+# workflow only validates. It must not publish anything, or it would race the
+# integration to production.
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Site checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # tools/check-site.js is dependency-free on purpose, so there is nothing
+      # to install and no lockfile to keep in step.
+      - name: Run site checks
+        run: node tools/check-site.js

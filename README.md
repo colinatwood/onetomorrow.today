@@ -31,9 +31,11 @@ npm start          # serve the site at http://localhost:3000
 npm test           # structural, link, metadata and asset-budget checks
 ```
 
-`npm test` is a real gate: it fails on broken internal links, missing or
-duplicate IDs, skipped heading levels, images without dimensions, invalid
-JSON-LD, sitemap entries with no page behind them, and assets over budget.
+`npm test` is a real gate, and CI runs it on every pull request: it fails on
+broken internal links, missing or duplicate IDs, skipped heading levels,
+images without dimensions, invalid JSON-LD, sitemap entries with no page
+behind them, and assets over budget. It has no dependencies, so it runs from
+a bare checkout.
 
 ## Deployment
 
@@ -44,9 +46,10 @@ repository root.
 `.assetsignore` keeps repository metadata (`README.md`, `package.json`,
 `tools/`) from being served as part of the site.
 
-> A `wrangler pages deploy` GitHub Actions workflow used to live in
-> `.github/workflows/`. It was removed when the Git integration was connected —
-> running both publishes the same commit twice, out of order.
+`.github/workflows/ci.yml` runs `tools/check-site.js` on every pull request
+and on pushes to `main`. It validates only and never publishes — a second
+publishing path would race the Git integration to production. The previous
+`wrangler pages deploy` workflow was removed for exactly that reason.
 
 ### Environment variables
 
