@@ -114,12 +114,20 @@ function checkAssets() {
   const dir = path.join(ROOT, "assets");
   if (!fs.existsSync(dir)) return;
   let total = 0;
-  for (const f of fs.readdirSync(dir)) {
-    const size = fs.statSync(path.join(dir, f)).size;
-    total += size;
-    const kb = Math.round(size / 1024);
-    if (kb > ASSET_BUDGET_KB) fail(`assets/${f}`, `${kb} KB exceeds the ${ASSET_BUDGET_KB} KB budget`);
-  }
+  const walk = prefix => {
+    for (const entry of fs.readdirSync(path.join(dir, prefix), { withFileTypes: true })) {
+      const rel = prefix ? `${prefix}/${entry.name}` : entry.name;
+      if (entry.isDirectory()) {
+        walk(rel);
+        continue;
+      }
+      const size = fs.statSync(path.join(dir, rel)).size;
+      total += size;
+      const kb = Math.round(size / 1024);
+      if (kb > ASSET_BUDGET_KB) fail(`assets/${rel}`, `${kb} KB exceeds the ${ASSET_BUDGET_KB} KB budget`);
+    }
+  };
+  walk("");
   const totalKb = Math.round(total / 1024);
   if (totalKb > TOTAL_ASSET_BUDGET_KB) {
     fail("assets/", `${totalKb} KB total exceeds the ${TOTAL_ASSET_BUDGET_KB} KB budget`);
