@@ -4,6 +4,7 @@
   "version": "4.1.0",
   "scripts": {
     "start": "npx serve .",
+    "build": "node tools/build.js",
     "test": "node tools/check-site.js",
     "optimize:images": "node tools/optimize-images.js"
   },

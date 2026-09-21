@@ -20,13 +20,3 @@
 
 /platform           /plan             301
 /platform.html      /plan             301
-
-# Repository files that are not part of the site. Cloudflare Pages serves the
-# repository root, and .assetsignore is a Workers Static Assets feature that
-# Pages ignores -- verified: with it in place these paths still returned 200.
-# A _redirects rule does take precedence over an existing file, so these are
-# served as the 404 page instead.
-/README.md          /404.html         404
-/package.json       /404.html         404
-/package-lock.json  /404.html         404
-/tools/*            /404.html         404

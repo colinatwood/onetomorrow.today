@@ -43,23 +43,43 @@ The site deploys to Cloudflare Pages through the GitHub integration — pushes t
 `main` publish automatically. There is no build step; Cloudflare serves the
 repository root.
 
-Repository files that are not part of the site (`README.md`, `package.json`,
-`tools/`) are served as the 404 page via rules at the end of `_redirects`.
+### Keeping repository files off the site
 
-`.assetsignore` does not work here: it is a Workers Static Assets feature, and
-Pages ignores it — with the file in place those paths still returned 200 on a
-preview deployment. A `_redirects` rule, by contrast, does take precedence over
-an existing file.
+Pages serves whatever directory it is pointed at. Pointed at the repository
+root — the current setting — it also serves `README.md`, `package.json` and
+`tools/`. Nothing in them is private (the repository is public), so this is
+untidiness rather than exposure.
 
-The stronger fix is to give Cloudflare a build command that assembles only the
-site files into an output directory, so repository files are never uploaded.
-That needs a build command and output directory set in the Pages dashboard, so
-it is not something the repository can switch on by itself.
+Two things that look like they should fix it do not, both confirmed against a
+preview deployment:
 
-`.github/workflows/ci.yml` runs `tools/check-site.js` on every pull request
-and on pushes to `main`. It validates only and never publishes — a second
-publishing path would race the Git integration to production. The previous
-`wrangler pages deploy` workflow was removed for exactly that reason.
+- **`.assetsignore` is ignored.** It is a Workers Static Assets feature. With
+  the file in place those paths still returned 200, and `.assetsignore` was
+  itself served.
+- **A `_redirects` rule cannot mask an existing file.** A static asset always
+  wins. `/README.md` mapped to a 404 rule still returned 200. (`/index.html`
+  redirecting to `/` is Cloudflare's own built-in behaviour, not a rule in
+  `_redirects` — `/privacy.html` → `/privacy` happens the same way with no
+  rule behind it.)
+
+The mechanism that does work is a build output directory:
+
+```sh
+npm run build   # assembles dist/ with only the site's own files
+```
+
+To switch it on, set these in **Pages → Settings → Builds**:
+
+| Setting | Value |
+| --- | --- |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+
+`functions/` stays at the repository root either way; Pages compiles it from
+there regardless of the output directory. `tools/build.js` fails the build if
+anything that should not ship reaches the output, and CI runs it on every pull
+request. Until the dashboard settings change, deployments continue to serve the
+repository root exactly as they do now.
 
 ### Environment variables
 

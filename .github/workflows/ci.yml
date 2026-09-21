@@ -29,3 +29,8 @@ jobs:
       # to install and no lockfile to keep in step.
       - name: Run site checks
         run: node tools/check-site.js
+
+      # Proves the deployable output can still be assembled, and that nothing
+      # which should not ship reaches it, even while Pages serves the repo root.
+      - name: Build deployable output
+        run: node tools/build.js
