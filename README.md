@@ -43,8 +43,18 @@ The site deploys to Cloudflare Pages through the GitHub integration — pushes t
 `main` publish automatically. There is no build step; Cloudflare serves the
 repository root.
 
-`.assetsignore` keeps repository metadata (`README.md`, `package.json`,
-`tools/`) from being served as part of the site.
+Repository files that are not part of the site (`README.md`, `package.json`,
+`tools/`) are served as the 404 page via rules at the end of `_redirects`.
+
+`.assetsignore` does not work here: it is a Workers Static Assets feature, and
+Pages ignores it — with the file in place those paths still returned 200 on a
+preview deployment. A `_redirects` rule, by contrast, does take precedence over
+an existing file.
+
+The stronger fix is to give Cloudflare a build command that assembles only the
+site files into an output directory, so repository files are never uploaded.
+That needs a build command and output directory set in the Pages dashboard, so
+it is not something the repository can switch on by itself.
 
 `.github/workflows/ci.yml` runs `tools/check-site.js` on every pull request
 and on pushes to `main`. It validates only and never publishes — a second
