@@ -117,9 +117,42 @@ repeated runs do not re-encode and degrade the output. Pass `--force` to
 rebuild anyway. Re-encoding always runs from the committed file, and the
 full-resolution originals remain in git history at commit `524e62a`.
 
+## Design system
+
+`styles.css` is a token-driven system. Change the tokens on `:root`, not the
+component rules.
+
+**Type.** Source Serif 4 for display (headings, brand, definition terms) and
+Inter for body and UI. Both are self-hosted variable fonts in `assets/fonts/`.
+
+Self-hosting is deliberate and should stay that way: the privacy notice
+promises no third-party fonts, and the CSP allows `font-src 'self'` only.
+Linking Google Fonts would make the privacy notice false and be blocked by the
+CSP. The serif is the single-axis (weight only) build — the two-axis version
+with optical sizing was 122 KB against 51 KB for no visible gain.
+
+Both fonts are preloaded in every page head, since they are otherwise
+discovered only after the CSS parses and the headline is the LCP element.
+
+**Colour.** A dark base with one accent. Gold (`--gold`) is the only accent
+that carries meaning: eyebrows, current nav, primary buttons, list markers,
+emphasis rules. Teal and sky are supporting only. Surfaces are translucent
+(`--surface`) so the Earth imagery reads through as atmosphere rather than
+being covered by opaque cards.
+
+**Layout.** `--page` sets the container, `--measure` (68ch) caps prose line
+length. Panel headings are capped tighter at 26ch. The spacing scale runs
+`--s1` to `--s7`; use it rather than ad-hoc margins.
+
+**Chrome.** The header is a sticky full-width glass bar and the footer sits in
+normal flow at the end of the document. Both were previously fixed floating
+pills, which covered content on scroll and required a `padding-bottom` hack on
+`body`. `scroll-padding-top` on `html` keeps anchored headings clear of the
+sticky header.
+
 ## Features
 
-- Floating centred navigation and accessibility footer
+- Sticky navigation and an accessibility footer on every page
 - Page-specific Earth-from-space backgrounds, rendered as a viewport-fixed
   layer rather than `background-attachment: fixed`
 - Keyboard-friendly navigation with a skip link as the first tab stop
