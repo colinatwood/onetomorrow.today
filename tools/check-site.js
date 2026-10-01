@@ -108,6 +108,11 @@ function checkPage(file) {
       if (!/rel="[^"]*noopener/.test(tag)) fail(file, `target="_blank" without rel=noopener: ${tag.slice(0, 60)}`);
     }
   }
+  for (const [, hidden] of html.matchAll(/<[^>]+aria-hidden="true"[^>]*>([\s\S]*?)<\/[^>]+>/g)) {
+    for (const link of hidden.match(/<a\b[^>]*>/g) || []) {
+      if (!/tabindex="-1"/.test(link)) fail(file, `aria-hidden content contains a tabbable link: ${link.slice(0, 60)}`);
+    }
+  }
 }
 
 function checkAssets() {
