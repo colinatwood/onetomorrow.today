@@ -42,29 +42,3 @@ jobs:
 
       - name: Run WCAG accessibility checks
         run: npm run test:a11y
-
-  live-smoke:
-    name: Live deployment smoke test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v6
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Wait for Pages and verify production
-        shell: bash
-        run: |
-          for attempt in {1..24}; do
-            if node tools/smoke-live.js; then
-              exit 0
-            fi
-            echo "Deployment not ready (attempt ${attempt}/24); retrying in 15 seconds."
-            sleep 15
-          done
-          exit 1

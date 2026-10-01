@@ -38,9 +38,11 @@ behind them, and assets over budget. It has no dependencies, so it runs from
 a bare checkout.
 
 CI also builds the deployable directory and runs axe against every public page
-in Chromium. After a push to `main`, a separate job retries the production site
-until the Pages deployment is ready, then verifies every canonical route and
-its security headers. Run the browser checks locally with:
+in Chromium. Production can be verified independently with `npm run test:live`,
+which checks every canonical route and its security headers. It deliberately
+does not run from GitHub-hosted runners because Cloudflare's bot protection can
+challenge those shared IP addresses and create a false deployment failure. Run
+the browser checks locally with:
 
 ```sh
 npx playwright install chromium
