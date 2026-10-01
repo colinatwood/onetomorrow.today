@@ -14,14 +14,19 @@ async function check(path) {
   const html = await response.text();
   if (!/<main\b[^>]*id="main"/.test(html)) throw new Error(`${path}: main landmark missing`);
   if (!/<link rel="canonical"/.test(html)) throw new Error(`${path}: canonical URL missing`);
-  if (process.env.VERIFY_CONTENT === "1") {
-    const file = path === "/" ? "index.html" : `${path.slice(1)}.html`;
-    const expected = fs.readFileSync(require("path").join(ROOT, file), "utf8");
-    if (html !== expected) throw new Error(`${path}: production does not match the checked-out revision yet`);
-  }
 }
 
-Promise.all(paths.map(check))
+async function checkRevision() {
+  if (process.env.VERIFY_CONTENT !== "1") return;
+  // Cloudflare may rewrite HTML to inject challenge and email-protection code,
+  // so compare an unmodified static asset to confirm the new revision landed.
+  const response = await fetch(`${ORIGIN}/script.js`);
+  if (!response.ok) throw new Error(`/script.js: HTTP ${response.status}`);
+  const expected = fs.readFileSync(path.join(ROOT, "script.js"), "utf8");
+  if (await response.text() !== expected) throw new Error("production does not match the checked-out revision yet");
+}
+
+Promise.all([...paths.map(check), checkRevision()])
   .then(() => console.log(`Live smoke test passed for ${paths.length} pages at ${ORIGIN}.`))
   .catch(error => {
     console.error(error.message);
