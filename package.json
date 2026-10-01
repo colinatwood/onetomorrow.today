@@ -6,9 +6,13 @@
     "start": "npx serve .",
     "build": "node tools/build.js",
     "test": "node tools/check-site.js",
+    "test:a11y": "playwright test",
+    "test:live": "node tools/smoke-live.js",
     "optimize:images": "node tools/optimize-images.js"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
     "sharp": "^0.34.5"
   }
 }

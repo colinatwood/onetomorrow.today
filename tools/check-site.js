@@ -173,9 +173,23 @@ function checkConfig() {
   }
 }
 
+function checkNewsGovernance() {
+  const file = path.join(ROOT, "news.html");
+  if (!fs.existsSync(file)) return;
+  const html = fs.readFileSync(file, "utf8");
+  if (!/Last editorial review:[\s\S]*<time datetime="\d{4}-\d{2}-\d{2}">/.test(html)) {
+    fail("news.html", "missing machine-readable editorial review date");
+  }
+  if (!/id="editorialTitle"/.test(html)) fail("news.html", "missing editorial policy");
+  for (const [, card] of html.matchAll(/<article class="news-card[^>]*>([\s\S]*?)<\/article>/g)) {
+    if (!/class="news-meta"/.test(card)) fail("news.html", "news card missing publication/review metadata");
+  }
+}
+
 pages.forEach(checkPage);
 checkAssets();
 checkConfig();
+checkNewsGovernance();
 
 notes.forEach(n => console.log(`  ${n}`));
 console.log(`  ${pages.length} pages checked`);
