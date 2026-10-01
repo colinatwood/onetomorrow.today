@@ -37,6 +37,17 @@ images without dimensions, invalid JSON-LD, sitemap entries with no page
 behind them, and assets over budget. It has no dependencies, so it runs from
 a bare checkout.
 
+CI also builds the deployable directory and runs axe against every public page
+in Chromium. After a push to `main`, a separate job retries the production site
+until the Pages deployment is ready, then verifies every canonical route and
+its security headers. Run the browser checks locally with:
+
+```sh
+npx playwright install chromium
+npm run build
+npm run test:a11y
+```
+
 ## Deployment
 
 The site deploys to Cloudflare Pages through the GitHub integration — pushes to
@@ -100,6 +111,21 @@ The form works without JavaScript: it posts natively and the function replies
 with a 303 back to `/join`. With JavaScript it posts JSON and reports inline.
 If the request cannot be delivered at all, it falls back to a prefilled
 `mailto:` and copies the message to the clipboard — only on that failure.
+
+The function rejects cross-origin and oversized submissions, uses a honeypot,
+bounds the mail-provider request to ten seconds, and logs delivery outcomes
+without form contents. Add a Cloudflare rate-limiting rule for `/api/join`
+before a high-traffic launch; infrastructure rate limiting is stronger than a
+per-isolate JavaScript counter.
+
+## Privacy-conscious measurement
+
+`/api/metrics` records only page paths, outbound destination hostnames,
+successful join submissions, and coarse loading measurements in structured
+Cloudflare logs. It receives no form contents, cookies, full referrers, or
+persistent browser identifier. The client does not send events when Global
+Privacy Control or Do Not Track is enabled. The privacy notice describes the
+same implementation and must be updated with any future measurement change.
 
 ## Images
 
@@ -168,6 +194,12 @@ elements, never on `<html>` — tagging the document would make a screen reader
 read English prose in the selected language's voice and flip the layout to RTL
 around left-to-right content. A stored choice is restored on return visits;
 `navigator.language` is deliberately not used to guess.
+
+The selector is explicitly labelled as an interface-language control. Do not
+describe the site as fully translated until a native speaker has translated
+and reviewed each page. A new language should ship as dedicated static pages
+with `hreflang` links and translated metadata, not as machine-translated text
+silently substituted into the English document.
 
 ## Image sources
 

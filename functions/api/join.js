@@ -17,6 +17,7 @@
 
 const LIMITS = { name: 120, email: 200, region: 160, role: 900 };
 const TO_DEFAULT = "join@onetomorrow.today";
+const MAX_BODY_BYTES = 12 * 1024;
 
 const escapeHtml = value =>
   String(value).replace(/[&<>"']/g, c =>
@@ -31,14 +32,31 @@ function respond(request, status, body, redirectParam) {
   if (wantsJson(request)) {
     return new Response(JSON.stringify(body), {
       status,
-      headers: { "content-type": "application/json; charset=utf-8" }
+      headers: {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "no-store"
+      }
     });
   }
   // No-JS path: 303 so a refresh does not resubmit.
   return new Response(null, {
     status: 303,
-    headers: { location: `/join?${redirectParam}#commitment-sent` }
+    headers: {
+      location: `/join?${redirectParam}#commitment-sent`,
+      "cache-control": "no-store"
+    }
   });
+}
+
+function hasAllowedOrigin(request) {
+  const origin = request.headers.get("origin");
+  if (!origin) return true; // Native form clients may omit Origin.
+  try {
+    const url = new URL(origin);
+    return url.protocol === "https:" && (url.hostname === "onetomorrow.today" || url.hostname.endsWith(".onetomorrow.pages.dev"));
+  } catch {
+    return false;
+  }
 }
 
 async function readFields(request) {
@@ -67,6 +85,15 @@ function validate(fields) {
 }
 
 export async function onRequestPost({ request, env }) {
+  if (!hasAllowedOrigin(request)) {
+    return respond(request, 403, { ok: false, error: "This submission origin is not allowed." }, "error=origin");
+  }
+
+  const declaredLength = Number(request.headers.get("content-length") || 0);
+  if (declaredLength > MAX_BODY_BYTES) {
+    return respond(request, 413, { ok: false, error: "That submission is too large." }, "error=large");
+  }
+
   let fields;
   try {
     fields = await readFields(request);
@@ -104,25 +131,31 @@ export async function onRequestPost({ request, env }) {
     clean.role
   ].join("\n");
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      authorization: `Bearer ${env.RESEND_API_KEY}`,
-      "content-type": "application/json"
-    },
-    body: JSON.stringify({
-      from: env.JOIN_FROM,
-      to: [env.JOIN_TO || TO_DEFAULT],
-      reply_to: clean.email,
-      subject: `OneTomorrow join request - ${clean.name}`,
-      text,
-      html: `<pre style="font:14px/1.5 ui-monospace,monospace">${escapeHtml(text)}</pre>`
-    })
-  });
+  let response;
+  try {
+    response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${env.RESEND_API_KEY}`,
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        from: env.JOIN_FROM,
+        to: [env.JOIN_TO || TO_DEFAULT],
+        reply_to: clean.email,
+        subject: `OneTomorrow join request - ${clean.name}`,
+        text,
+        html: `<pre style="font:14px/1.5 ui-monospace,monospace">${escapeHtml(text)}</pre>`
+      }),
+      signal: AbortSignal.timeout(10_000)
+    });
+  } catch (error) {
+    console.error(JSON.stringify({ event: "join_delivery_error", name: error && error.name }));
+    return respond(request, 502, { ok: false, error: "We could not send that just now. Please try again, or email join@onetomorrow.today." }, "error=send");
+  }
 
   if (!response.ok) {
-    // Body may contain provider detail; keep it out of the user-facing message.
-    console.error("Resend rejected join submission", response.status, await response.text());
+    console.error(JSON.stringify({ event: "join_delivery_rejected", status: response.status }));
     return respond(
       request,
       502,
@@ -131,5 +164,6 @@ export async function onRequestPost({ request, env }) {
     );
   }
 
+  console.log(JSON.stringify({ event: "join_delivery_success" }));
   return respond(request, 200, { ok: true }, "sent=1");
 }

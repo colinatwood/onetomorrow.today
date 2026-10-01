@@ -108,6 +108,11 @@ function checkPage(file) {
       if (!/rel="[^"]*noopener/.test(tag)) fail(file, `target="_blank" without rel=noopener: ${tag.slice(0, 60)}`);
     }
   }
+  for (const [, hidden] of html.matchAll(/<[^>]+aria-hidden="true"[^>]*>([\s\S]*?)<\/[^>]+>/g)) {
+    for (const link of hidden.match(/<a\b[^>]*>/g) || []) {
+      if (!/tabindex="-1"/.test(link)) fail(file, `aria-hidden content contains a tabbable link: ${link.slice(0, 60)}`);
+    }
+  }
 }
 
 function checkAssets() {
@@ -173,9 +178,23 @@ function checkConfig() {
   }
 }
 
+function checkNewsGovernance() {
+  const file = path.join(ROOT, "news.html");
+  if (!fs.existsSync(file)) return;
+  const html = fs.readFileSync(file, "utf8");
+  if (!/Last editorial review:[\s\S]*<time datetime="\d{4}-\d{2}-\d{2}">/.test(html)) {
+    fail("news.html", "missing machine-readable editorial review date");
+  }
+  if (!/id="editorialTitle"/.test(html)) fail("news.html", "missing editorial policy");
+  for (const [, card] of html.matchAll(/<article class="news-card[^>]*>([\s\S]*?)<\/article>/g)) {
+    if (!/class="news-meta"/.test(card)) fail("news.html", "news card missing publication/review metadata");
+  }
+}
+
 pages.forEach(checkPage);
 checkAssets();
 checkConfig();
+checkNewsGovernance();
 
 notes.forEach(n => console.log(`  ${n}`));
 console.log(`  ${pages.length} pages checked`);

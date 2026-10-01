@@ -4,7 +4,7 @@
       site_name: "OneTomorrow",
       tagline: "Integrity builds tomorrow.",
       skip_to_content: "Skip to main content",
-      language_label: "Choose language",
+      language_label: "Choose interface language; page content remains English",
       larger_text: "Larger text",
       high_contrast: "High contrast",
       reduced_motion: "Less motion",
@@ -18,7 +18,7 @@
       share_copied: "Copied",
       share_failed: "Copy failed",
       accessibility_title: "Accessibility",
-      accessibility_text: "Choose a language, enlarge text, increase contrast, or reduce motion."
+      accessibility_text: "Translate the interface, enlarge text, increase contrast, or reduce motion. Page content remains English."
     },
     es: {
       tagline: "La integridad construye mañana.",
@@ -33,7 +33,7 @@
       nav_learn: "Aprender",
       nav_join: "Unirse",
       accessibility_title: "Accesibilidad",
-      accessibility_text: "Elige idioma, aumenta el texto, sube el contraste o reduce el movimiento."
+      accessibility_text: "Traduce la interfaz, aumenta el texto, sube el contraste o reduce el movimiento. El contenido de la página permanece en inglés."
     },
     fr: {
       tagline: "L'intégrité construit demain.",
@@ -48,7 +48,7 @@
       nav_learn: "Apprendre",
       nav_join: "Rejoindre",
       accessibility_title: "Accessibilité",
-      accessibility_text: "Choisissez une langue, agrandissez le texte, augmentez le contraste ou réduisez le mouvement."
+      accessibility_text: "Traduisez l’interface, agrandissez le texte, augmentez le contraste ou réduisez le mouvement. Le contenu de la page reste en anglais."
     },
     pt: {
       tagline: "A integridade constrói o amanhã.",
@@ -63,7 +63,7 @@
       nav_learn: "Aprender",
       nav_join: "Participar",
       accessibility_title: "Acessibilidade",
-      accessibility_text: "Escolha idioma, aumente texto, eleve contraste ou reduza movimento."
+      accessibility_text: "Traduza a interface, aumente o texto, eleve o contraste ou reduza o movimento. O conteúdo da página permanece em inglês."
     },
     ar: {
       tagline: "النزاهة تبني الغد.",
@@ -78,7 +78,7 @@
       nav_learn: "تعلّم",
       nav_join: "انضم",
       accessibility_title: "إتاحة الوصول",
-      accessibility_text: "اختر اللغة، كبّر النص، ارفع التباين، أو قلل الحركة."
+      accessibility_text: "ترجم الواجهة، وكبّر النص، وارفع التباين، أو قلل الحركة. يبقى محتوى الصفحة باللغة الإنجليزية."
     },
     hi: {
       tagline: "ईमानदारी कल बनाती है.",
@@ -93,7 +93,7 @@
       nav_learn: "सीखें",
       nav_join: "जुड़ें",
       accessibility_title: "पहुंच",
-      accessibility_text: "भाषा चुनें, पाठ बढ़ाएं, कंट्रास्ट बढ़ाएं, या गति घटाएं."
+      accessibility_text: "इंटरफ़ेस का अनुवाद करें, पाठ बढ़ाएं, कंट्रास्ट बढ़ाएं या गति घटाएं। पृष्ठ की सामग्री अंग्रेज़ी में रहती है।"
     },
     sw: {
       tagline: "Uadilifu hujenga kesho.",
@@ -108,7 +108,7 @@
       nav_learn: "Jifunze",
       nav_join: "Jiunge",
       accessibility_title: "Ufikiaji",
-      accessibility_text: "Chagua lugha, ongeza maandishi, ongeza utofautishaji, au punguza mwendo."
+      accessibility_text: "Tafsiri kiolesura, ongeza maandishi, ongeza utofautishaji au punguza mwendo. Maudhui ya ukurasa yanabaki kwa Kiingereza."
     },
     "zh-CN": {
       tagline: "廉洁建设明天。",
@@ -123,7 +123,7 @@
       nav_learn: "学习",
       nav_join: "加入",
       accessibility_title: "无障碍",
-      accessibility_text: "选择语言、放大文字、提高对比度或减少动态。"
+      accessibility_text: "翻译界面、放大文字、提高对比度或减少动态。页面正文仍为英语。"
     },
     de: {
       tagline: "Integrität baut morgen.",
@@ -138,7 +138,7 @@
       nav_learn: "Lernen",
       nav_join: "Mitmachen",
       accessibility_title: "Barrierefreiheit",
-      accessibility_text: "Sprache wählen, Text vergrößern, Kontrast erhöhen oder Bewegung reduzieren."
+      accessibility_text: "Oberfläche übersetzen, Text vergrößern, Kontrast erhöhen oder Bewegung reduzieren. Der Seiteninhalt bleibt auf Englisch."
     }
   };
 
@@ -377,6 +377,7 @@
         if(result.ok && result.body.ok) {
           form.reset();
           setStatus(status, "Thank you. Your message is on its way and we will reply by email.");
+          recordMetric({ event: "join_success", path: window.location.pathname });
           window.location.hash = "commitment-sent";
         } else if(result.body && result.body.error) {
           setStatus(status, result.body.error);
@@ -399,6 +400,52 @@
     }
   }
 
+  function metricsAllowed(){
+    return navigator.globalPrivacyControl !== true && navigator.doNotTrack !== "1" && window.doNotTrack !== "1";
+  }
+
+  function recordMetric(payload){
+    if(!metricsAllowed()) return;
+    const body = JSON.stringify(payload);
+    if(navigator.sendBeacon) {
+      navigator.sendBeacon("/api/metrics", new Blob([body], { type: "application/json" }));
+      return;
+    }
+    fetch("/api/metrics", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body,
+      keepalive: true
+    }).catch(() => {});
+  }
+
+  function initPrivacyMetrics(){
+    if(!metricsAllowed()) return;
+    recordMetric({ event: "page_view", path: window.location.pathname });
+
+    document.addEventListener("click", event => {
+      const link = event.target.closest && event.target.closest("a[href]");
+      if(!link) return;
+      try {
+        const target = new URL(link.href, window.location.href);
+        if(target.origin !== window.location.origin && ["http:", "https:"].includes(target.protocol)) {
+          recordMetric({ event: "outbound_click", path: window.location.pathname, targetHost: target.hostname });
+        }
+      } catch (error) {}
+    });
+
+    window.addEventListener("load", () => {
+      window.setTimeout(() => {
+        const navigation = performance.getEntriesByType("navigation")[0];
+        const paints = performance.getEntriesByType("largest-contentful-paint");
+        const lcp = paints.length ? paints[paints.length - 1].startTime : 0;
+        const shifts = performance.getEntriesByType("layout-shift");
+        const cls = shifts.reduce((sum, entry) => entry.hadRecentInput ? sum : sum + entry.value, 0);
+        recordMetric({ event: "performance", path: window.location.pathname, load: navigation ? navigation.loadEventEnd : 0, lcp, cls });
+      }, 0);
+    }, { once: true });
+  }
+
   ["large-text", "high-contrast", "reduced-motion"].forEach(name => {
     if(getStored(name) === "1") document.body.classList.add(name);
     syncToggle(name);
@@ -406,6 +453,7 @@
 
   initShareButton();
   initJoinForm();
+  initPrivacyMetrics();
 
   document.querySelectorAll(".toggle").forEach(button => {
     const toggleName = button.dataset.toggle;
