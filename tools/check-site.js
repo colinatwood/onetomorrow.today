@@ -213,6 +213,9 @@ function checkThreeHorizonArchitecture() {
     if (!/class="change-roadmap"[\s\S]*?Decision gate/i.test(html)) {
       fail(file, "horizon visual model must include a change roadmap and decision gate");
     }
+    if (!/<svg class="mission-graphic"[\s\S]*?<title[^>]*>[\s\S]*?<desc[^>]*>/i.test(html)) {
+      fail(file, "horizon must include a titled and described mission graphic");
+    }
   }
 
   const future = path.join(ROOT, "future.html");
