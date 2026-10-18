@@ -15,7 +15,7 @@
  *   JOIN_TO         destination inbox, defaults to join@onetomorrow.today
  */
 
-const LIMITS = { name: 120, email: 200, region: 160, role: 900 };
+const LIMITS = { name: 120, email: 200, region: 160, branch: 100, role: 900 };
 const TO_DEFAULT = "join@onetomorrow.today";
 const MAX_BODY_BYTES = 12 * 1024;
 
@@ -71,7 +71,7 @@ async function readFields(request) {
 
 function validate(fields) {
   const clean = {};
-  for (const key of ["name", "email", "region", "role"]) {
+  for (const key of ["name", "email", "region", "branch", "role"]) {
     const value = typeof fields[key] === "string" ? fields[key].trim() : "";
     if (!value) return { error: `Please fill in the ${key} field.` };
     if (value.length > LIMITS[key]) return { error: `The ${key} field is too long.` };
@@ -126,6 +126,7 @@ export async function onRequestPost({ request, env }) {
     `Name: ${clean.name}`,
     `Email: ${clean.email}`,
     `Country, region, or community: ${clean.region}`,
+    `Branch: ${clean.branch}`,
     "",
     "What I will help build:",
     clean.role

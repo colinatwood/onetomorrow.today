@@ -1,7 +1,7 @@
 const { test, expect } = require("@playwright/test");
 const AxeBuilder = require("@axe-core/playwright").default;
 
-const pages = ["/", "/why", "/plan", "/learn", "/join", "/news", "/privacy", "/terms", "/accessibility", "/404.html"];
+const pages = ["/", "/today", "/tomorrow", "/future", "/why", "/plan", "/learn", "/join", "/news", "/privacy", "/terms", "/accessibility", "/404.html"];
 
 for (const path of pages) {
   test(`${path} has no serious accessibility violations`, async ({ page }) => {

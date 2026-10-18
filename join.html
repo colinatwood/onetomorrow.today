@@ -100,10 +100,9 @@
       </span>
     </a>
     <nav class="site-nav" aria-label="Main">
-      <a href="/" data-i18n="nav_about">About</a>
-      <a href="/why" data-i18n="nav_why">Why</a>
-      <a href="/plan" data-i18n="nav_plan">Plan</a>
-      <a href="/learn" data-i18n="nav_learn">Learn</a>
+      <a href="/today" data-i18n="nav_today">Today</a>
+      <a href="/tomorrow" data-i18n="nav_tomorrow">Tomorrow</a>
+      <a href="/future" data-i18n="nav_future">Future</a>
       <a href="/join" aria-current="page" data-i18n="nav_join">Join</a>
     </nav>
   </header>
@@ -153,6 +152,14 @@
             <input id="email" name="email" type="email" autocomplete="email" required>
             <label for="region">Country, region, or community</label>
             <input id="region" name="region" autocomplete="address-level1" required>
+            <label for="branch">Which branch interests you most?</label>
+            <select id="branch" name="branch" required>
+              <option value="">Choose one</option>
+              <option value="Today — Global economic shift">Today — Global economic shift</option>
+              <option value="Tomorrow — Entity and cybernetics">Tomorrow — Entity and cybernetics</option>
+              <option value="Future — Ark and space exploration">Future — Ark and space exploration</option>
+              <option value="Shared foundation — All three">Shared foundation — All three</option>
+            </select>
             <label for="role">What will you help build?</label>
             <textarea id="role" name="role" rows="4" maxlength="900" required></textarea>
             <button class="button" type="submit">Join the renewal</button>
@@ -175,11 +182,11 @@
       </section>
       <section class="charter-panel" aria-labelledby="rolesTitle">
         <p class="charter-kicker">Where to begin</p>
-        <h2 id="rolesTitle">Pick one piece of the commonwealth to strengthen.</h2>
+        <h2 id="rolesTitle">Choose a horizon to strengthen.</h2>
         <div class="role-grid">
-          <article><h3>Clean power</h3><p>Expose conflicts, protect whistleblowers, make public money searchable, and help communities recognize capture early.</p></article>
-          <article><h3>Fair opportunity</h3><p>Open paths to enterprise, education, digital identity, food security, water, health, housing stability, and future-ready skills.</p></article>
-          <article><h3>Living planet</h3><p>Protect the commons, price harm honestly, and defend future generations from short-term extraction.</p></article>
+          <article><h3>Today</h3><p>Help design a just economic transition in the age of AGI.</p></article>
+          <article><h3>Tomorrow</h3><p>Develop the Entity framework for agency, cybernetics, and voluntary symbiosis.</p></article>
+          <article><h3>Future</h3><p>Advance Ark spacecraft, habitat, life-support, and exploration systems.</p></article>
         </div>
       </section>
       <div id="commitment-sent" class="commitment-band">

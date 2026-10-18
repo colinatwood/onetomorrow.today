@@ -121,6 +121,9 @@ body.page-why   { --earth-bg: url("assets/earth-why.jpg");   --earth-position: 5
 body.page-plan  { --earth-bg: url("assets/earth-plan.jpg");  --earth-position: center 42%; }
 body.page-learn { --earth-bg: url("assets/earth-plan.jpg");  --earth-position: center 30%; }
 body.page-join  { --earth-bg: url("assets/earth-join.jpg");  --earth-position: center center; }
+body.page-today { --earth-bg: url("assets/earth-about.jpg"); --earth-position: center center; }
+body.page-tomorrow { --earth-bg: url("assets/earth-plan.jpg"); --earth-position: center 35%; }
+body.page-future { --earth-bg: url("assets/earth-why.jpg"); --earth-position: 58% center; }
 
 /* WebP behind @supports so browsers without image-set() keep the JPEG: a bare
    second declaration would not fall back, since a custom property accepts any
@@ -132,6 +135,9 @@ body.page-join  { --earth-bg: url("assets/earth-join.jpg");  --earth-position: c
   body.page-plan,
   body.page-learn { --earth-bg: image-set(url("assets/earth-plan.webp") type("image/webp"), url("assets/earth-plan.jpg") type("image/jpeg")); }
   body.page-join  { --earth-bg: image-set(url("assets/earth-join.webp") type("image/webp"), url("assets/earth-join.jpg") type("image/jpeg")); }
+  body.page-today { --earth-bg: image-set(url("assets/earth-about.webp") type("image/webp"), url("assets/earth-about.jpg") type("image/jpeg")); }
+  body.page-tomorrow { --earth-bg: image-set(url("assets/earth-plan.webp") type("image/webp"), url("assets/earth-plan.jpg") type("image/jpeg")); }
+  body.page-future { --earth-bg: image-set(url("assets/earth-why.webp") type("image/webp"), url("assets/earth-why.jpg") type("image/jpeg")); }
 }
 
 /* --- Base elements ------------------------------------------------------- */
@@ -545,6 +551,77 @@ strong {
 
 .news-invite .button {
   margin-top: var(--s2);
+}
+
+/* --- Three-horizon architecture ----------------------------------------- */
+
+.branch-grid,
+.branch-priority-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s3);
+}
+
+.branch-card,
+.branch-priority-grid > article {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--s4);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(14, 24, 36, .9), rgba(8, 15, 24, .78));
+}
+
+.branch-card.branch-today { border-top-color: var(--gold); }
+.branch-card.branch-tomorrow { border-top-color: var(--teal); }
+.branch-card.branch-future { border-top-color: var(--sky); }
+
+.branch-card h2,
+.branch-priority-grid h2 {
+  font-size: clamp(1.45rem, 2.3vw, 2rem);
+}
+
+.branch-card ul {
+  margin: 0 0 var(--s4);
+  padding-left: 1.2rem;
+  color: var(--muted);
+}
+
+.branch-card .button {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.branch-priority-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.branch-priority-grid > article > span {
+  display: block;
+  margin-bottom: var(--s2);
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 1.5rem;
+}
+
+.branch-priority-grid > article > *:last-child {
+  margin-bottom: 0;
+}
+
+.branch-next {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--line-strong);
+  color: var(--muted);
+}
+
+.branch-next a,
+.branch-next span {
+  max-width: 28ch;
 }
 
 /* --- Lists --------------------------------------------------------------- */
@@ -1124,6 +1201,10 @@ body.reduced-motion *::after {
   .site-nav a {
     white-space: nowrap;
   }
+
+  .branch-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 560px) {
@@ -1148,5 +1229,13 @@ body.reduced-motion *::after {
 
   .actions .button {
     width: 100%;
+  }
+
+  .branch-priority-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .branch-next {
+    flex-direction: column;
   }
 }

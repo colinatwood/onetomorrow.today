@@ -191,10 +191,38 @@ function checkNewsGovernance() {
   }
 }
 
+function checkThreeHorizonArchitecture() {
+  const required = {
+    "today.html": ["Global economic shift in the age of AGI", "economic transition"],
+    "tomorrow.html": ["Entity consideration", "cybernetics", "voluntary"],
+    "future.html": ["Ark creation", "life support", "conventional operator controls"]
+  };
+  for (const [file, phrases] of Object.entries(required)) {
+    const location = path.join(ROOT, file);
+    if (!fs.existsSync(location)) {
+      fail(file, "missing required OneTomorrow horizon");
+      continue;
+    }
+    const html = fs.readFileSync(location, "utf8");
+    for (const phrase of phrases) {
+      if (!html.toLowerCase().includes(phrase.toLowerCase())) fail(file, `missing required program boundary language: ${phrase}`);
+    }
+  }
+
+  const future = path.join(ROOT, "future.html");
+  if (fs.existsSync(future)) {
+    const html = fs.readFileSync(future, "utf8");
+    if (!/cybernetics[\s\S]*belong to Entity/i.test(html)) {
+      fail("future.html", "Ark/Entity ownership boundary is not explicit");
+    }
+  }
+}
+
 pages.forEach(checkPage);
 checkAssets();
 checkConfig();
 checkNewsGovernance();
+checkThreeHorizonArchitecture();
 
 notes.forEach(n => console.log(`  ${n}`));
 console.log(`  ${pages.length} pages checked`);
