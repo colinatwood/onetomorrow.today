@@ -37,6 +37,15 @@ OneTomorrow is the shared umbrella for three distinct programs:
 Keep the boundary explicit: Ark may define optional interfaces with Entity, but
 cybernetics and human augmentation do not enter the Ark engineering backlog.
 
+### Today economic transition
+
+`today.html` explains the proposed transition from existing national economic
+systems toward sustainable services, transparent institutions, and cooperation
+across borders. The [architecture and prioritized delivery backlog](docs/TODAY_ECONOMIC_TRANSITION.md)
+define funding, rights, physical capacity, environmental measures, adoption
+gates, and failure recovery. Pilot partners, funding, and operating services
+remain work to establish; the page distinguishes proposals from delivered results.
+
 ## Domain
 
 Production domain: https://onetomorrow.today
