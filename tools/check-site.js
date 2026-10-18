@@ -210,6 +210,9 @@ function checkThreeHorizonArchitecture() {
     if (!/<figure class="visual-model[^"]*"[\s\S]*?<figcaption/i.test(html)) {
       fail(file, "missing accessible horizon visual model");
     }
+    if (!/class="change-roadmap"[\s\S]*?Decision gate/i.test(html)) {
+      fail(file, "horizon visual model must include a change roadmap and decision gate");
+    }
   }
 
   const future = path.join(ROOT, "future.html");
