@@ -624,6 +624,160 @@ strong {
   max-width: 28ch;
 }
 
+/* --- Detailed plans and topic lookup ----------------------------------- */
+
+.branch-plan-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s3);
+  margin-top: var(--s4);
+}
+
+.branch-plan {
+  padding: var(--s4);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius-sm);
+  background: rgba(5, 9, 15, .45);
+}
+
+.branch-plan-tomorrow { border-top-color: var(--teal); }
+.branch-plan-future { border-top-color: var(--sky); }
+.branch-plan-shared { border-top-color: var(--text); }
+.branch-plan h3 { font-size: clamp(1.3rem, 2vw, 1.7rem); }
+.branch-plan ol { padding-left: 1.25rem; color: var(--muted); }
+.branch-plan li { padding: .4rem 0; }
+.branch-plan > p:last-of-type { padding-top: var(--s2); border-top: 1px solid var(--line); color: var(--muted); }
+
+.topics-invite {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  padding: var(--s4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: linear-gradient(120deg, rgba(124, 188, 235, .09), rgba(92, 191, 177, .06));
+}
+
+.topics-invite h2,
+.topics-invite p { margin-bottom: var(--s1); }
+.topics-invite .button { flex: 0 0 auto; }
+
+.topic-search-panel {
+  position: sticky;
+  z-index: 2;
+  top: calc(var(--header-h) + 1rem);
+  padding: var(--s4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: rgba(7, 16, 24, .96);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, .28);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.topic-search-panel label {
+  display: block;
+  margin-bottom: var(--s2);
+}
+
+.topic-search-panel label strong {
+  display: block;
+  font: 700 clamp(1.35rem, 2.4vw, 1.9rem)/1.2 var(--serif);
+}
+
+.topic-search-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .75rem;
+}
+
+.topic-search-row input {
+  width: 100%;
+  min-height: 3.25rem;
+  padding: .75rem 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--ink-raised);
+  color: var(--text);
+  font: 500 1rem/1.4 var(--sans);
+}
+
+.topic-search-row input::placeholder { color: var(--dim); }
+.topic-search-row input:focus { border-color: var(--focus); outline: 3px solid rgba(143, 200, 245, .24); }
+
+.topic-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: var(--s3);
+}
+
+.topic-filter {
+  padding: .55rem .9rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: 600 .85rem/1 var(--sans);
+  cursor: pointer;
+}
+
+.topic-filter:hover,
+.topic-filter:focus-visible,
+.topic-filter.is-active {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+  color: var(--text);
+}
+
+.topic-count {
+  margin: var(--s2) 0 0;
+  color: var(--muted);
+  font-size: .86rem;
+}
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s3);
+  margin-top: var(--s4);
+}
+
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 16rem;
+  padding: var(--s4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+.topic-card > span {
+  color: var(--gold);
+  font: 700 .72rem/1 var(--sans);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.topic-card[data-branch="tomorrow"] > span { color: var(--teal); }
+.topic-card[data-branch="future"] > span { color: var(--sky); }
+.topic-card[data-branch="shared"] > span { color: var(--text); }
+.topic-card h2 { margin-top: var(--s2); font-size: clamp(1.25rem, 2vw, 1.6rem); }
+.topic-card p { color: var(--muted); }
+.topic-card a { margin-top: auto; }
+.topic-card[hidden] { display: none !important; }
+
+.topic-empty {
+  margin-top: var(--s4);
+  padding: var(--s5);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
 /* Change roadmaps make each horizon's mission executable and scannable. */
 .visual-model {
   --model-accent: var(--gold);
@@ -1358,6 +1512,10 @@ body.reduced-motion *::after {
     grid-template-columns: 1fr;
   }
 
+  .topic-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .change-roadmap {
     grid-template-columns: 1fr;
   }
@@ -1415,6 +1573,24 @@ body.reduced-motion *::after {
   }
 
   .branch-priority-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .branch-plan-grid,
+  .topic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topics-invite {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .topic-search-panel {
+    position: static;
+  }
+
+  .topic-search-row {
     grid-template-columns: 1fr;
   }
 
