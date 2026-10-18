@@ -207,6 +207,9 @@ function checkThreeHorizonArchitecture() {
     for (const phrase of phrases) {
       if (!html.toLowerCase().includes(phrase.toLowerCase())) fail(file, `missing required program boundary language: ${phrase}`);
     }
+    if (!/<figure class="visual-model[^"]*"[\s\S]*?<figcaption/i.test(html)) {
+      fail(file, "missing accessible horizon visual model");
+    }
   }
 
   const future = path.join(ROOT, "future.html");
