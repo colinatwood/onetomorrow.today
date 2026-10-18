@@ -248,12 +248,38 @@ function checkPlainLanguage() {
   }
 }
 
+function checkPlanAndTopics() {
+  const planFile = path.join(ROOT, "plan.html");
+  const plan = fs.readFileSync(planFile, "utf8");
+  const branchPlans = plan.match(/class="branch-plan /g) || [];
+  if (branchPlans.length < 4) fail("plan.html", "must include four detailed 90-day starting plans");
+  for (const phrase of ["Days 1–30", "Days 31–60", "Days 61–90", "Search all topics"]) {
+    if (!plan.includes(phrase)) fail("plan.html", `missing detailed-plan element: ${phrase}`);
+  }
+
+  const topicsFile = path.join(ROOT, "topics.html");
+  if (!fs.existsSync(topicsFile)) {
+    fail("topics.html", "missing searchable topic lookup");
+    return;
+  }
+  const topics = fs.readFileSync(topicsFile, "utf8");
+  const cards = topics.match(/data-topic-card/g) || [];
+  if (cards.length < 20) fail("topics.html", `expected at least 20 indexed topics, found ${cards.length}`);
+  for (const required of ["data-topic-search", "data-topic-filter", "data-topic-count", "data-topic-empty"]) {
+    if (!topics.includes(required)) fail("topics.html", `missing search control: ${required}`);
+  }
+  for (const branch of ["today", "tomorrow", "future", "shared"]) {
+    if (!topics.includes(`data-branch="${branch}"`)) fail("topics.html", `missing ${branch} topic group`);
+  }
+}
+
 pages.forEach(checkPage);
 checkAssets();
 checkConfig();
 checkNewsGovernance();
 checkThreeHorizonArchitecture();
 checkPlainLanguage();
+checkPlanAndTopics();
 
 notes.forEach(n => console.log(`  ${n}`));
 console.log(`  ${pages.length} pages checked`);

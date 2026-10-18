@@ -15,6 +15,7 @@
       nav_today: "Today",
       nav_tomorrow: "Tomorrow",
       nav_future: "Future",
+      nav_topics: "Topics",
       nav_join: "Join",
       share_page: "Share",
       share_shared: "Shared",
@@ -37,6 +38,7 @@
       nav_today: "Hoy",
       nav_tomorrow: "Mañana",
       nav_future: "Futuro",
+      nav_topics: "Temas",
       nav_join: "Unirse",
       accessibility_title: "Accesibilidad",
       accessibility_text: "Traduce la interfaz, aumenta el texto, sube el contraste o reduce el movimiento. El contenido de la página permanece en inglés."
@@ -55,6 +57,7 @@
       nav_today: "Aujourd’hui",
       nav_tomorrow: "Demain",
       nav_future: "Avenir",
+      nav_topics: "Sujets",
       nav_join: "Rejoindre",
       accessibility_title: "Accessibilité",
       accessibility_text: "Traduisez l’interface, agrandissez le texte, augmentez le contraste ou réduisez le mouvement. Le contenu de la page reste en anglais."
@@ -73,6 +76,7 @@
       nav_today: "Hoje",
       nav_tomorrow: "Amanhã",
       nav_future: "Futuro",
+      nav_topics: "Tópicos",
       nav_join: "Participar",
       accessibility_title: "Acessibilidade",
       accessibility_text: "Traduza a interface, aumente o texto, eleve o contraste ou reduza o movimento. O conteúdo da página permanece em inglês."
@@ -91,6 +95,7 @@
       nav_today: "اليوم",
       nav_tomorrow: "غدًا",
       nav_future: "المستقبل",
+      nav_topics: "المواضيع",
       nav_join: "انضم",
       accessibility_title: "إتاحة الوصول",
       accessibility_text: "ترجم الواجهة، وكبّر النص، وارفع التباين، أو قلل الحركة. يبقى محتوى الصفحة باللغة الإنجليزية."
@@ -109,6 +114,7 @@
       nav_today: "आज",
       nav_tomorrow: "कल",
       nav_future: "भविष्य",
+      nav_topics: "विषय",
       nav_join: "जुड़ें",
       accessibility_title: "पहुंच",
       accessibility_text: "इंटरफ़ेस का अनुवाद करें, पाठ बढ़ाएं, कंट्रास्ट बढ़ाएं या गति घटाएं। पृष्ठ की सामग्री अंग्रेज़ी में रहती है।"
@@ -127,6 +133,7 @@
       nav_today: "Leo",
       nav_tomorrow: "Kesho",
       nav_future: "Baadaye",
+      nav_topics: "Mada",
       nav_join: "Jiunge",
       accessibility_title: "Ufikiaji",
       accessibility_text: "Tafsiri kiolesura, ongeza maandishi, ongeza utofautishaji au punguza mwendo. Maudhui ya ukurasa yanabaki kwa Kiingereza."
@@ -145,6 +152,7 @@
       nav_today: "今天",
       nav_tomorrow: "明天",
       nav_future: "未来",
+      nav_topics: "主题",
       nav_join: "加入",
       accessibility_title: "无障碍",
       accessibility_text: "翻译界面、放大文字、提高对比度或减少动态。页面正文仍为英语。"
@@ -163,6 +171,7 @@
       nav_today: "Heute",
       nav_tomorrow: "Morgen",
       nav_future: "Zukunft",
+      nav_topics: "Themen",
       nav_join: "Mitmachen",
       accessibility_title: "Barrierefreiheit",
       accessibility_text: "Oberfläche übersetzen, Text vergrößern, Kontrast erhöhen oder Bewegung reduzieren. Der Seiteninhalt bleibt auf Englisch."
@@ -327,6 +336,17 @@
     });
   }
 
+  function initTopicsNav(){
+    const nav = document.querySelector(".site-nav");
+    if(!nav || nav.querySelector('a[href="/topics"]')) return;
+    const link = document.createElement("a");
+    link.href = "/topics";
+    link.setAttribute("data-i18n", "nav_topics");
+    link.textContent = fallback.nav_topics;
+    const join = nav.querySelector('a[href="/join"]');
+    nav.insertBefore(link, join || null);
+  }
+
   function cleanFormValue(form, name){
     const field = form.elements[name];
     return field && typeof field.value === "string" ? field.value.trim() : "";
@@ -430,6 +450,78 @@
     }
   }
 
+  function initTopicLookup(){
+    const input = document.querySelector("[data-topic-search]");
+    if(!input) return;
+    const cards = Array.from(document.querySelectorAll("[data-topic-card]"));
+    const filters = Array.from(document.querySelectorAll("[data-topic-filter]"));
+    const count = document.querySelector("[data-topic-count]");
+    const empty = document.querySelector("[data-topic-empty]");
+    const clear = document.querySelector("[data-topic-clear]");
+    const params = new URLSearchParams(window.location.search);
+    const allowedBranches = ["all", "today", "tomorrow", "future", "shared"];
+    let activeBranch = params.get("branch") || "all";
+    if(!allowedBranches.includes(activeBranch)) activeBranch = "all";
+
+    function normalized(value){
+      return String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function updateUrl(query){
+      const next = new URLSearchParams();
+      if(query) next.set("q", query);
+      if(activeBranch !== "all") next.set("branch", activeBranch);
+      const suffix = next.toString();
+      window.history.replaceState({}, "", window.location.pathname + (suffix ? "?" + suffix : ""));
+    }
+
+    function applyTopicSearch(){
+      const raw = input.value.trim();
+      const query = normalized(raw);
+      let visible = 0;
+      cards.forEach(card => {
+        const haystack = normalized(card.textContent + " " + (card.dataset.keywords || ""));
+        const branchMatches = activeBranch === "all" || card.dataset.branch === activeBranch;
+        const searchMatches = !query || query.split(/\s+/).every(word => haystack.includes(word));
+        card.hidden = !(branchMatches && searchMatches);
+        if(!card.hidden) visible += 1;
+      });
+      count.textContent = visible + (visible === 1 ? " topic shown" : " topics shown");
+      empty.hidden = visible !== 0;
+      updateUrl(raw);
+    }
+
+    filters.forEach(button => {
+      const selected = button.dataset.topicFilter === activeBranch;
+      button.classList.toggle("is-active", selected);
+      button.setAttribute("aria-pressed", selected ? "true" : "false");
+      button.addEventListener("click", () => {
+        activeBranch = button.dataset.topicFilter;
+        filters.forEach(other => {
+          const active = other === button;
+          other.classList.toggle("is-active", active);
+          other.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+        applyTopicSearch();
+      });
+    });
+
+    input.value = params.get("q") || "";
+    input.addEventListener("input", applyTopicSearch);
+    if(clear) clear.addEventListener("click", () => {
+      input.value = "";
+      activeBranch = "all";
+      filters.forEach(button => {
+        const active = button.dataset.topicFilter === "all";
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+      applyTopicSearch();
+      input.focus();
+    });
+    applyTopicSearch();
+  }
+
   function metricsAllowed(){
     return navigator.globalPrivacyControl !== true && navigator.doNotTrack !== "1" && window.doNotTrack !== "1";
   }
@@ -481,8 +573,10 @@
     syncToggle(name);
   });
 
+  initTopicsNav();
   initShareButton();
   initJoinForm();
+  initTopicLookup();
   initPrivacyMetrics();
 
   document.querySelectorAll(".toggle").forEach(button => {
