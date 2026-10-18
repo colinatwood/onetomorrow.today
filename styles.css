@@ -624,6 +624,118 @@ strong {
   max-width: 28ch;
 }
 
+/* Compact visual models make each horizon's governing logic scannable. */
+.visual-model {
+  --model-accent: var(--gold);
+  margin-inline: 0;
+  padding: var(--s4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(227, 185, 83, .07), rgba(8, 15, 24, .65));
+}
+
+.model-tomorrow {
+  --model-accent: var(--teal);
+  background: linear-gradient(135deg, rgba(92, 191, 177, .08), rgba(8, 15, 24, .65));
+}
+
+.model-future {
+  --model-accent: var(--sky);
+  background: linear-gradient(135deg, rgba(124, 188, 235, .08), rgba(8, 15, 24, .65));
+}
+
+.model-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s3);
+  margin-bottom: var(--s4);
+}
+
+.model-heading > * { margin-bottom: 0; }
+.model-heading h2 { max-width: 28ch; font-size: clamp(1.45rem, 2.4vw, 2rem); }
+
+.model-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: .65rem;
+}
+
+.model-node,
+.model-source,
+.model-bridge,
+.model-outcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 7.5rem;
+  padding: var(--s3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgba(5, 9, 15, .58);
+  text-align: center;
+}
+
+.model-node-pivot { border-color: var(--model-accent); }
+.model-node-outcome { background: color-mix(in srgb, var(--model-accent) 14%, rgba(5, 9, 15, .7)); }
+.model-index { color: var(--model-accent); font: 600 .78rem/1 var(--sans); letter-spacing: .12em; }
+.model-node strong,
+.model-source strong,
+.model-bridge strong,
+.model-outcome strong,
+.model-ladder strong { margin-top: .45rem; font-family: var(--serif); font-size: 1.08rem; }
+.model-node small,
+.model-source small,
+.model-bridge small,
+.model-outcome small,
+.model-ladder small { margin-top: .4rem; color: var(--muted); font-size: .82rem; }
+.model-arrow { align-self: center; color: var(--model-accent); font-size: 1.45rem; }
+
+.model-convergence {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(13rem, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--s3);
+}
+
+.model-source > span { color: var(--model-accent); font: 600 .78rem/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; }
+.model-bridge { border-color: var(--model-accent); }
+.model-bridge > span { color: var(--model-accent); font-size: 1.25rem; line-height: .8; }
+.model-outcome { width: min(24rem, 100%); min-height: auto; margin: var(--s3) auto 0; border-color: var(--model-accent); }
+.model-outcome > span { color: var(--model-accent); font-size: 1.25rem; line-height: .8; }
+
+.model-ladder {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.model-ladder li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 8rem;
+  padding: var(--s3);
+  border-top: 2px solid var(--model-accent);
+  background: rgba(5, 9, 15, .42);
+}
+
+.model-ladder li + li { margin-left: 2px; }
+.model-ladder li::before { content: ""; position: absolute; top: -.42rem; left: 1.25rem; width: .72rem; height: .72rem; border-radius: 50%; background: var(--model-accent); }
+.model-ladder li > span { color: var(--model-accent); font: 600 .78rem/1 var(--sans); letter-spacing: .1em; }
+.model-ladder li:last-child { background: color-mix(in srgb, var(--model-accent) 14%, rgba(5, 9, 15, .7)); }
+
+.visual-model figcaption {
+  margin-top: var(--s3);
+  color: var(--muted);
+  font-size: .92rem;
+  text-align: center;
+}
+
 /* --- Lists --------------------------------------------------------------- */
 
 .mandate-list,
@@ -1233,6 +1345,42 @@ body.reduced-motion *::after {
 
   .branch-priority-grid {
     grid-template-columns: 1fr;
+  }
+
+  .model-heading {
+    display: block;
+  }
+
+  .model-heading .charter-kicker {
+    margin-bottom: var(--s1);
+  }
+
+  .model-flow,
+  .model-convergence,
+  .model-ladder {
+    grid-template-columns: 1fr;
+  }
+
+  .model-node,
+  .model-source,
+  .model-bridge,
+  .model-outcome,
+  .model-ladder li {
+    min-height: auto;
+  }
+
+  .model-arrow {
+    transform: rotate(90deg);
+  }
+
+  .model-ladder li + li {
+    margin-top: .5rem;
+    margin-left: 0;
+  }
+
+  .model-ladder li::before {
+    top: 1.25rem;
+    left: -.4rem;
   }
 
   .branch-next {
