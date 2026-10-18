@@ -224,11 +224,33 @@ function checkThreeHorizonArchitecture() {
   }
 }
 
+function checkPlainLanguage() {
+  const requiredExplanations = {
+    "today.html": ["Artificial general intelligence (AGI)"],
+    "tomorrow.html": ["cybernetics—technology that connects human bodies and machines", "Symbiosis means"],
+    "future.html": ["systems that recycle air and water"]
+  };
+  for (const [file, phrases] of Object.entries(requiredExplanations)) {
+    const html = fs.readFileSync(path.join(ROOT, file), "utf8");
+    for (const phrase of phrases) {
+      if (!html.includes(phrase)) fail(file, `missing plain-language explanation: ${phrase}`);
+    }
+  }
+
+  const opaquePhrases = /computational colonialism|bounded demonstrator|operating architecture|thermodynamic advantage/i;
+  for (const page of pages) {
+    const html = fs.readFileSync(page, "utf8");
+    const body = html.match(/<body[\s\S]*<\/body>/i)?.[0] || "";
+    if (opaquePhrases.test(body)) fail(path.basename(page), "contains unexplained specialist language");
+  }
+}
+
 pages.forEach(checkPage);
 checkAssets();
 checkConfig();
 checkNewsGovernance();
 checkThreeHorizonArchitecture();
+checkPlainLanguage();
 
 notes.forEach(n => console.log(`  ${n}`));
 console.log(`  ${pages.length} pages checked`);
