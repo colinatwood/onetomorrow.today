@@ -12,6 +12,9 @@
       nav_why: "Why",
       nav_plan: "Plan",
       nav_learn: "Learn",
+      nav_today: "Today",
+      nav_tomorrow: "Tomorrow",
+      nav_future: "Future",
       nav_join: "Join",
       share_page: "Share",
       share_shared: "Shared",
@@ -31,6 +34,9 @@
       nav_why: "Por qué",
       nav_plan: "Plan",
       nav_learn: "Aprender",
+      nav_today: "Hoy",
+      nav_tomorrow: "Mañana",
+      nav_future: "Futuro",
       nav_join: "Unirse",
       accessibility_title: "Accesibilidad",
       accessibility_text: "Traduce la interfaz, aumenta el texto, sube el contraste o reduce el movimiento. El contenido de la página permanece en inglés."
@@ -46,6 +52,9 @@
       nav_why: "Pourquoi",
       nav_plan: "Plan",
       nav_learn: "Apprendre",
+      nav_today: "Aujourd’hui",
+      nav_tomorrow: "Demain",
+      nav_future: "Avenir",
       nav_join: "Rejoindre",
       accessibility_title: "Accessibilité",
       accessibility_text: "Traduisez l’interface, agrandissez le texte, augmentez le contraste ou réduisez le mouvement. Le contenu de la page reste en anglais."
@@ -61,6 +70,9 @@
       nav_why: "Por quê",
       nav_plan: "Plano",
       nav_learn: "Aprender",
+      nav_today: "Hoje",
+      nav_tomorrow: "Amanhã",
+      nav_future: "Futuro",
       nav_join: "Participar",
       accessibility_title: "Acessibilidade",
       accessibility_text: "Traduza a interface, aumente o texto, eleve o contraste ou reduza o movimento. O conteúdo da página permanece em inglês."
@@ -76,6 +88,9 @@
       nav_why: "لماذا",
       nav_plan: "الخطة",
       nav_learn: "تعلّم",
+      nav_today: "اليوم",
+      nav_tomorrow: "غدًا",
+      nav_future: "المستقبل",
       nav_join: "انضم",
       accessibility_title: "إتاحة الوصول",
       accessibility_text: "ترجم الواجهة، وكبّر النص، وارفع التباين، أو قلل الحركة. يبقى محتوى الصفحة باللغة الإنجليزية."
@@ -91,6 +106,9 @@
       nav_why: "क्यों",
       nav_plan: "योजना",
       nav_learn: "सीखें",
+      nav_today: "आज",
+      nav_tomorrow: "कल",
+      nav_future: "भविष्य",
       nav_join: "जुड़ें",
       accessibility_title: "पहुंच",
       accessibility_text: "इंटरफ़ेस का अनुवाद करें, पाठ बढ़ाएं, कंट्रास्ट बढ़ाएं या गति घटाएं। पृष्ठ की सामग्री अंग्रेज़ी में रहती है।"
@@ -106,6 +124,9 @@
       nav_why: "Kwa nini",
       nav_plan: "Mpango",
       nav_learn: "Jifunze",
+      nav_today: "Leo",
+      nav_tomorrow: "Kesho",
+      nav_future: "Baadaye",
       nav_join: "Jiunge",
       accessibility_title: "Ufikiaji",
       accessibility_text: "Tafsiri kiolesura, ongeza maandishi, ongeza utofautishaji au punguza mwendo. Maudhui ya ukurasa yanabaki kwa Kiingereza."
@@ -121,6 +142,9 @@
       nav_why: "原因",
       nav_plan: "计划",
       nav_learn: "学习",
+      nav_today: "今天",
+      nav_tomorrow: "明天",
+      nav_future: "未来",
       nav_join: "加入",
       accessibility_title: "无障碍",
       accessibility_text: "翻译界面、放大文字、提高对比度或减少动态。页面正文仍为英语。"
@@ -136,6 +160,9 @@
       nav_why: "Warum",
       nav_plan: "Plan",
       nav_learn: "Lernen",
+      nav_today: "Heute",
+      nav_tomorrow: "Morgen",
+      nav_future: "Zukunft",
       nav_join: "Mitmachen",
       accessibility_title: "Barrierefreiheit",
       accessibility_text: "Oberfläche übersetzen, Text vergrößern, Kontrast erhöhen oder Bewegung reduzieren. Der Seiteninhalt bleibt auf Englisch."
@@ -309,6 +336,7 @@
     const name = cleanFormValue(form, "name");
     const email = cleanFormValue(form, "email");
     const region = cleanFormValue(form, "region");
+    const branch = cleanFormValue(form, "branch");
     const role = cleanFormValue(form, "role");
     return [
       "OneTomorrow join request",
@@ -316,6 +344,7 @@
       "Name: " + name,
       "Email: " + email,
       "Country, region, or community: " + region,
+      "Branch: " + branch,
       "",
       "What I will help build:",
       role,
@@ -360,6 +389,7 @@
         name: cleanFormValue(form, "name"),
         email: cleanFormValue(form, "email"),
         region: cleanFormValue(form, "region"),
+        branch: cleanFormValue(form, "branch"),
         role: cleanFormValue(form, "role"),
         website: cleanFormValue(form, "website")
       };

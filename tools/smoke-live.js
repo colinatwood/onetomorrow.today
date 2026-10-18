@@ -5,7 +5,7 @@ const path = require("path");
 
 const ORIGIN = process.env.SITE_ORIGIN || "https://onetomorrow.today";
 const ROOT = path.join(__dirname, "..");
-const paths = ["/", "/why", "/plan", "/learn", "/join", "/news", "/privacy", "/terms", "/accessibility"];
+const paths = ["/", "/today", "/tomorrow", "/future", "/why", "/plan", "/learn", "/join", "/news", "/privacy", "/terms", "/accessibility"];
 
 async function check(path) {
   const response = await fetch(`${ORIGIN}${path}`, { redirect: "follow" });

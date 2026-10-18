@@ -7,6 +7,9 @@ A static site for the OneTomorrow civic movement.
 | Path | File | Purpose |
 | --- | --- | --- |
 | `/` | `index.html` | Landing page and charter overview |
+| `/today` | `today.html` | Global economic shift in the age of AGI |
+| `/tomorrow` | `tomorrow.html` | Entity consideration, agency, and cybernetics |
+| `/future` | `future.html` | Ark creation and space exploration |
 | `/why` | `why.html` | The case for renewal |
 | `/plan` | `plan.html` | The charter and implementation timetable |
 | `/learn` | `learn.html` | Cognitive sovereignty roadmap |
@@ -19,6 +22,20 @@ A static site for the OneTomorrow civic movement.
 Removed pages redirect via `_redirects` so existing inbound links do not strand
 visitors. Internal links are root-relative and extensionless (`/why`, not
 `why.html`) so no navigation takes a redirect hop.
+
+## Three-horizon architecture
+
+OneTomorrow is the shared umbrella for three distinct programs:
+
+- **Today** owns the economic and institutional transition into the age of AGI.
+- **Tomorrow / Entity** owns artificial agency, cybernetics, biotechnology,
+  neural and wearable interfaces, augmentation, and voluntary human–AI
+  symbiosis.
+- **Future / Ark** owns spacecraft, mission architecture, habitats, protection,
+  closed-loop life support, crew health requirements, and exploration.
+
+Keep the boundary explicit: Ark may define optional interfaces with Entity, but
+cybernetics and human augmentation do not enter the Ark engineering backlog.
 
 ## Domain
 
