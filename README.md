@@ -144,11 +144,20 @@ Both paths return a non-secret reference number visitors can quote in follow-up.
 If the request cannot be delivered at all, it falls back to a prefilled
 `mailto:` and copies the message to the clipboard — only on that failure.
 
-The function rejects cross-origin and oversized submissions, uses a honeypot,
-bounds the mail-provider request to ten seconds, and logs delivery outcomes
-without form contents. Add a Cloudflare rate-limiting rule for `/api/join`
+The function rejects cross-origin, oversized, malformed, and out-of-list
+submissions; strips control characters from mail fields; uses a honeypot;
+bounds the mail-provider request to ten seconds; and logs delivery outcomes
+without form contents. `npm test` verifies the server options stay aligned
+with the visible form. Add a Cloudflare rate-limiting rule for `/api/join`
 before a high-traffic launch; infrastructure rate limiting is stronger than a
 per-isolate JavaScript counter.
+
+## Public contribution workflow
+
+Guided GitHub forms accept practical proposals, corrections, accessibility
+barriers, and evidence for status changes. The public governance page links to
+each form, while private or personal messages stay in the join route. See
+`CONTRIBUTING.md` for the nontechnical entry points and pull request checklist.
 
 ## Topic registry and search visibility
 

@@ -15,7 +15,8 @@
  *   JOIN_TO         destination inbox, defaults to join@onetomorrow.today
  */
 
-const LIMITS = { name: 120, email: 200, region: 160, branch: 100, contribution: 100, availability: 100, role: 900 };
+import { validateJoinFields } from "./join-validation.mjs";
+
 const TO_DEFAULT = "join@onetomorrow.today";
 const MAX_BODY_BYTES = 12 * 1024;
 
@@ -69,22 +70,6 @@ async function readFields(request) {
   return fields;
 }
 
-function validate(fields) {
-  const clean = {};
-  for (const key of ["name", "email", "region", "branch", "contribution", "availability", "role"]) {
-    const value = typeof fields[key] === "string" ? fields[key].trim() : "";
-    if (!value) return { error: `Please fill in the ${key} field.` };
-    if (value.length > LIMITS[key]) return { error: `The ${key} field is too long.` };
-    clean[key] = value;
-  }
-  // Deliberately permissive: the real check is whether the reply lands.
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(clean.email)) {
-    return { error: "Please enter a valid email address." };
-  }
-  if (fields.contactConsent !== "yes") return { error: "Please confirm that we may reply to you." };
-  return { clean };
-}
-
 export async function onRequestPost({ request, env }) {
   if (!hasAllowedOrigin(request)) {
     return respond(request, 403, { ok: false, error: "This submission origin is not allowed." }, "error=origin");
@@ -107,7 +92,7 @@ export async function onRequestPost({ request, env }) {
     return respond(request, 200, { ok: true }, "sent=1");
   }
 
-  const { clean, error } = validate(fields);
+  const { clean, error } = validateJoinFields(fields);
   if (error) {
     return respond(request, 400, { ok: false, error }, "error=invalid");
   }

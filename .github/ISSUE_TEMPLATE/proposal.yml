@@ -1,0 +1,62 @@
+name: Propose a practical step
+description: Suggest a bounded, testable step for Today, Tomorrow, Future, or the shared foundation.
+title: "Proposal: "
+labels: ["proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping make the work concrete. Do not include private or sensitive information; this issue will be public.
+  - type: dropdown
+    id: branch
+    attributes:
+      label: Branch
+      options:
+        - Today — global economic shift
+        - Tomorrow — people, AI, and connected technology
+        - Future — Ark and space exploration
+        - Shared foundation — all three
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this address?
+      description: Describe who is affected and what happens now.
+    validations:
+      required: true
+  - type: textarea
+    id: step
+    attributes:
+      label: What is the smallest useful first step?
+      description: Prefer a step that can be reviewed or reversed within 90 days.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: What supports this proposal?
+      description: Link sources, observations, or relevant lived experience. Say clearly when something is uncertain.
+    validations:
+      required: true
+  - type: textarea
+    id: safeguards
+    attributes:
+      label: Risks, safeguards, and stop conditions
+      description: What could go wrong, how would people be protected, and when should the work stop?
+    validations:
+      required: true
+  - type: textarea
+    id: success
+    attributes:
+      label: What would count as useful progress?
+      description: Give a result that another person could check.
+    validations:
+      required: true
+  - type: textarea
+    id: conflicts
+    attributes:
+      label: Interests to disclose
+      description: List financial, employment, political, or personal interests that could affect the proposal, or write "None."
+    validations:
+      required: true

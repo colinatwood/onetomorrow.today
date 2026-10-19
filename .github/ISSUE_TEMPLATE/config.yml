@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private contribution or personal question
+    url: https://onetomorrow.today/join
+    about: Use the private join form when your message contains personal details or should not be public.
+  - name: Security concern
+    url: mailto:join@onetomorrow.today?subject=OneTomorrow%20security%20concern
+    about: Report a vulnerability privately; do not publish sensitive security details in an issue.
