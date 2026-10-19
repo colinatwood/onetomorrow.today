@@ -271,6 +271,46 @@ function checkPlanAndTopics() {
   for (const branch of ["today", "tomorrow", "future", "shared"]) {
     if (!topics.includes(`data-branch="${branch}"`)) fail("topics.html", `missing ${branch} topic group`);
   }
+
+  const registryFile = path.join(ROOT, "data", "topics.json");
+  if (!fs.existsSync(registryFile)) {
+    fail("data/topics.json", "missing topic source registry");
+  } else {
+    try {
+      const registry = JSON.parse(fs.readFileSync(registryFile, "utf8"));
+      if (!registry.reviewed) fail("data/topics.json", "missing review date");
+      if (!Array.isArray(registry.topics)) fail("data/topics.json", "topics must be an array");
+      else {
+        const ids = registry.topics.map(topic => topic.id);
+        if (new Set(ids).size !== ids.length) fail("data/topics.json", "topic IDs must be unique");
+        if (registry.topics.length !== cards.length) fail("topics.html", `rendered ${cards.length} cards but registry contains ${registry.topics.length}`);
+        for (const topic of registry.topics) {
+          for (const key of ["id", "branch", "status", "title", "summary", "href", "linkText"]) {
+            if (!topic[key]) fail("data/topics.json", `${topic.id || "topic"} missing ${key}`);
+          }
+          if (!Array.isArray(topic.keywords) || !topic.keywords.length) fail("data/topics.json", `${topic.id || "topic"} has no keywords`);
+        }
+      }
+    } catch (error) {
+      fail("data/topics.json", `invalid JSON: ${error.message}`);
+    }
+  }
+}
+
+function checkAccountabilityLayer() {
+  for (const file of ["status.html", "governance.html"]) {
+    if (!fs.existsSync(path.join(ROOT, file))) fail(file, "missing accountability page");
+  }
+  for (const page of pages) {
+    const html = fs.readFileSync(path.join(ROOT, page), "utf8");
+    if (!html.includes('href="/topics"')) fail(page, "main navigation is missing Topics");
+    if (!html.includes('href="/status"')) fail(page, "main navigation is missing Status");
+    if (!html.includes('href="/governance"')) fail(page, "footer is missing Governance");
+  }
+  const plan = fs.readFileSync(path.join(ROOT, "plan.html"), "utf8");
+  for (const phrase of ["Purpose and baseline", "People and authority", "Resources and dependencies", "Safeguards", "Proof", "Exit and learning"]) {
+    if (!plan.includes(phrase)) fail("plan.html", `decision package missing: ${phrase}`);
+  }
 }
 
 pages.forEach(checkPage);
@@ -280,6 +320,7 @@ checkNewsGovernance();
 checkThreeHorizonArchitecture();
 checkPlainLanguage();
 checkPlanAndTopics();
+checkAccountabilityLayer();
 
 notes.forEach(n => console.log(`  ${n}`));
 console.log(`  ${pages.length} pages checked`);

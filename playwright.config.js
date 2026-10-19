@@ -11,7 +11,7 @@ module.exports = defineConfig({
     reducedMotion: "reduce"
   },
   webServer: {
-    command: "npx serve dist --listen 4173 --no-clipboard",
+    command: "node tools/serve-dist.js",
     port: 4173,
     reuseExistingServer: !process.env.CI
   }

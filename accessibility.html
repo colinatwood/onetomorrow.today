@@ -34,19 +34,14 @@
         <span class="brand-tagline" data-i18n="tagline">Integrity builds tomorrow.</span>
       </span>
     </a>
-    <nav class="site-nav" aria-label="Main">
-      <a href="/today" data-i18n="nav_today">Today</a>
-      <a href="/tomorrow" data-i18n="nav_tomorrow">Tomorrow</a>
-      <a href="/future" data-i18n="nav_future">Future</a>
-      <a href="/join" data-i18n="nav_join">Join</a>
-    </nav>
+    <nav class="site-nav" aria-label="Main"><a href="/today" data-i18n="nav_today">Today</a><a href="/tomorrow" data-i18n="nav_tomorrow">Tomorrow</a><a href="/future" data-i18n="nav_future">Future</a><a href="/topics" data-i18n="nav_topics">Topics</a><a href="/status" data-i18n="nav_status">Status</a><a href="/join" data-i18n="nav_join">Join</a></nav>
   </header>
   <main id="main" class="main-content">
     <section class="hero page-hero">
       <p class="eyebrow">Accessibility</p>
       <h1>Accessibility statement</h1>
       <p class="lede">A movement that says talent should rise from anywhere cannot build a site that only some people can use.</p>
-      <p class="form-note">Last updated 1 October 2026.</p>
+      <p class="form-note">Last updated 19 October 2026.</p>
     </section>
     <section class="content">
       <h2>What we are aiming for</h2>
@@ -62,6 +57,8 @@
         <li>Your choices are remembered in your browser between visits.</li>
         <li>Images that carry meaning have text alternatives; decorative images are hidden from screen readers.</li>
         <li>The layout reflows to narrow screens and to zoom without a horizontal scrollbar.</li>
+        <li>Wide mission diagrams include text descriptions, a visible mobile swipe cue, and a complete stacked step list underneath.</li>
+        <li>Topic filtering announces the result count and never removes the full index when JavaScript is unavailable.</li>
         <li>Every proposed change runs automated WCAG 2.2 A and AA checks in Chromium across all public pages.</li>
       </ul>
       <h2>Where it falls short</h2>
@@ -73,7 +70,7 @@
         </div>
         <div>
           <dt>No independent audit yet</dt>
-          <dd>Our conformance claim rests on automated axe checks and our own manual testing. Automated tests cannot replace testing with disabled people, and an external review has not happened.</dd>
+          <dd>Our conformance claim rests on automated axe checks and our own source and keyboard review. VoiceOver on iPhone, 200% and 400% browser zoom, and testing with disabled people still require a documented external or device-based review.</dd>
         </div>
         <div>
           <dt>Long charter pages</dt>
@@ -109,7 +106,7 @@
         <button class="toggle" data-toggle="reduced-motion" type="button" data-i18n="reduced_motion">Less motion</button>
       </div>
     </section>
-    <nav class="footer-legal" aria-label="Site policies">
+    <nav class="footer-legal" aria-label="Site policies"><a href="/governance">Governance</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
       <a href="/accessibility">Accessibility statement</a>

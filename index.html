@@ -70,7 +70,7 @@
           "width": 1200,
           "height": 630
         },
-        "dateModified": "2026-10-18",
+        "dateModified": "2026-10-19",
         "inLanguage": "en"
       },
       {
@@ -98,12 +98,7 @@
         <span class="brand-tagline" data-i18n="tagline">Integrity builds tomorrow.</span>
       </span>
     </a>
-    <nav class="site-nav" aria-label="Main">
-      <a href="/today" data-i18n="nav_today">Today</a>
-      <a href="/tomorrow" data-i18n="nav_tomorrow">Tomorrow</a>
-      <a href="/future" data-i18n="nav_future">Future</a>
-      <a href="/join" data-i18n="nav_join">Join</a>
-    </nav>
+    <nav class="site-nav" aria-label="Main"><a href="/today" data-i18n="nav_today">Today</a><a href="/tomorrow" data-i18n="nav_tomorrow">Tomorrow</a><a href="/future" data-i18n="nav_future">Future</a><a href="/topics" data-i18n="nav_topics">Topics</a><a href="/status" data-i18n="nav_status">Status</a><a href="/join" data-i18n="nav_join">Join</a></nav>
   </header>
   <main id="main" class="main-content">
     <section class="hero page-hero manifesto-hero centered-hero">
@@ -113,13 +108,18 @@
       <div class="actions"><a class="button" href="#threeHorizons">Explore the three branches</a><a class="button button-secondary" href="/join">Join the work</a></div>
     </section>
     <section id="threeHorizons" class="content wide-content">
+      <section class="start-here" aria-labelledby="startHereTitle">
+        <div><p class="charter-kicker">Start here</p><h2 id="startHereTitle">Understand the mission in three minutes.</h2><p>OneTomorrow is a public framework for organizing long-term work. It is not yet a funded program. Choose the horizon closest to your experience, inspect the current status, and contribute one useful next step.</p></div>
+        <ol class="start-path" aria-label="How to use OneTomorrow"><li><span>1</span><strong>See</strong><small>Understand the three horizons.</small></li><li><span>2</span><strong>Check</strong><small>Separate proposals from active work.</small></li><li><span>3</span><strong>Choose</strong><small>Find a topic you can strengthen.</small></li><li><span>4</span><strong>Join</strong><small>Offer a concrete contribution.</small></li></ol>
+        <div class="actions"><a class="button" href="/status">Check program status</a><a class="button button-secondary" href="/topics">Find a topic</a></div>
+      </section>
       <div class="branch-grid">
         <article class="branch-card branch-today"><p class="phase-label">Today</p><h2>Global economic shift in the age of AGI</h2><p>Build fair rules for work, income, ownership, and public oversight as advanced AI changes how goods and services are produced.</p><ul><li>Security during changes to work and income</li><li>Broad ownership of wealth-producing systems</li><li>Fair competition and public oversight</li></ul><a class="button" href="/today">Enter Today</a></article>
         <article class="branch-card branch-tomorrow"><p class="phase-label">Tomorrow</p><h2>Entity consideration and the future of cybernetics</h2><p>Explore how people and increasingly independent AI might cooperate. This includes cybernetics—technology that connects human bodies and machines—without giving up consent or individual identity.</p><ul><li>Identity, choice, and responsibility for AI</li><li>Safe links between people and technology</li><li>Voluntary cooperation that benefits both sides</li></ul><a class="button" href="/tomorrow">Enter Tomorrow</a></article>
         <article class="branch-card branch-future"><p class="phase-label">Future</p><h2>Ark creation and the exploration of space</h2><p>Develop the mission plan, spacecraft, living space, protection, and recycling systems needed to keep a crew alive far from Earth.</p><ul><li>A clear mission and complete ship budgets</li><li>A safe habitat and healthy crew</li><li>Small tests that build toward flight</li></ul><a class="button" href="/future">Enter Future</a></article>
       </div>
       <section class="integrity-panel" aria-labelledby="sharedFoundation"><p class="charter-kicker">Shared foundation</p><h2 id="sharedFoundation">Different work, one standard of proof.</h2><p>Every branch publishes its evidence and assumptions, keeps participation voluntary, tests changes on a small scale, and sets clear limits. None may neglect people living now, erase the identity of future beings, or treat an untested idea as proven engineering.</p></section>
-      <section class="charter-panel" aria-labelledby="existingFramework"><p class="charter-kicker">Shared resources</p><h2 id="existingFramework">The same public-interest rules support all three branches.</h2><p>The charter, learning program, action plan, searchable topic index, and source-linked news support the full OneTomorrow mission.</p><div class="actions"><a class="button button-secondary" href="/why">Why renewal matters</a><a class="button button-secondary" href="/plan">Read the civic plan</a><a class="button button-secondary" href="/topics">Search topics</a><a class="button button-secondary" href="/learn">Open the learning plan</a><a class="button button-secondary" href="/news">View evidence and news</a></div></section>
+      <section class="charter-panel" aria-labelledby="existingFramework"><p class="charter-kicker">Shared resources</p><h2 id="existingFramework">The same public-interest rules support all three branches.</h2><p>The charter, learning program, action plan, searchable topic index, public status record, and source-linked news support the full OneTomorrow mission.</p><div class="actions"><a class="button button-secondary" href="/why">Why renewal matters</a><a class="button button-secondary" href="/plan">Read the civic plan</a><a class="button button-secondary" href="/topics">Search topics</a><a class="button button-secondary" href="/status">Check status</a><a class="button button-secondary" href="/learn">Open the learning plan</a><a class="button button-secondary" href="/news">View evidence and news</a></div></section>
     </section>
   </main>
   <footer class="site-footer" aria-label="Accessibility tools">
@@ -144,7 +144,7 @@
         <button class="toggle" data-toggle="reduced-motion" type="button" data-i18n="reduced_motion">Less motion</button>
       </div>
     </section>
-    <nav class="footer-legal" aria-label="Site policies">
+    <nav class="footer-legal" aria-label="Site policies"><a href="/governance">Governance</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
       <a href="/accessibility">Accessibility statement</a>

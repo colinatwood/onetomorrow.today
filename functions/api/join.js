@@ -15,7 +15,7 @@
  *   JOIN_TO         destination inbox, defaults to join@onetomorrow.today
  */
 
-const LIMITS = { name: 120, email: 200, region: 160, branch: 100, role: 900 };
+const LIMITS = { name: 120, email: 200, region: 160, branch: 100, contribution: 100, availability: 100, role: 900 };
 const TO_DEFAULT = "join@onetomorrow.today";
 const MAX_BODY_BYTES = 12 * 1024;
 
@@ -71,7 +71,7 @@ async function readFields(request) {
 
 function validate(fields) {
   const clean = {};
-  for (const key of ["name", "email", "region", "branch", "role"]) {
+  for (const key of ["name", "email", "region", "branch", "contribution", "availability", "role"]) {
     const value = typeof fields[key] === "string" ? fields[key].trim() : "";
     if (!value) return { error: `Please fill in the ${key} field.` };
     if (value.length > LIMITS[key]) return { error: `The ${key} field is too long.` };
@@ -81,6 +81,7 @@ function validate(fields) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(clean.email)) {
     return { error: "Please enter a valid email address." };
   }
+  if (fields.contactConsent !== "yes") return { error: "Please confirm that we may reply to you." };
   return { clean };
 }
 
@@ -120,13 +121,16 @@ export async function onRequestPost({ request, env }) {
     );
   }
 
+  const reference = `OT-${new Date().toISOString().slice(0, 10).replaceAll("-", "")}-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
   const text = [
-    "OneTomorrow join request",
+    `OneTomorrow join request ${reference}`,
     "",
     `Name: ${clean.name}`,
     `Email: ${clean.email}`,
     `Country, region, or community: ${clean.region}`,
     `Branch: ${clean.branch}`,
+    `Contribution: ${clean.contribution}`,
+    `Availability: ${clean.availability}`,
     "",
     "What I will help build:",
     clean.role
@@ -144,7 +148,7 @@ export async function onRequestPost({ request, env }) {
         from: env.JOIN_FROM,
         to: [env.JOIN_TO || TO_DEFAULT],
         reply_to: clean.email,
-        subject: `OneTomorrow join request - ${clean.name}`,
+        subject: `${reference} OneTomorrow join request - ${clean.name}`,
         text,
         html: `<pre style="font:14px/1.5 ui-monospace,monospace">${escapeHtml(text)}</pre>`
       }),
@@ -165,6 +169,6 @@ export async function onRequestPost({ request, env }) {
     );
   }
 
-  console.log(JSON.stringify({ event: "join_delivery_success" }));
-  return respond(request, 200, { ok: true }, "sent=1");
+  console.log(JSON.stringify({ event: "join_delivery_success", reference }));
+  return respond(request, 200, { ok: true, reference }, `sent=1&ref=${encodeURIComponent(reference)}`);
 }
