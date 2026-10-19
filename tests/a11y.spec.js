@@ -15,7 +15,7 @@ for (const path of pages) {
 
 test("topic lookup tolerates a typo and filters by status", async ({ page }) => {
   await page.goto("/topics");
-  await page.getByLabel("What do you want to understand?").fill("goverance");
+  await page.getByRole("searchbox").fill("goverance");
   await expect(page.getByRole("heading", { name: "Governance and corrections" })).toBeVisible();
   await page.getByLabel("Work status").selectOption("proposed");
   await expect(page.locator("[data-topic-count]")).toContainText("0 topics");
