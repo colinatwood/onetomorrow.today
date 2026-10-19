@@ -1,0 +1,609 @@
+{
+  "reviewed": "2026-10-19",
+  "topics": [
+    {
+      "id": "today-1",
+      "branch": "today",
+      "status": "researching",
+      "label": "Today",
+      "title": "AGI and the economy",
+      "summary": "How advanced AI may change production, work, income, ownership, and political power.",
+      "keywords": [
+        "agi",
+        "artificial",
+        "general",
+        "intelligence",
+        "automation",
+        "productivity",
+        "economy",
+        "transition"
+      ],
+      "href": "/today#agenda",
+      "linkText": "Open the economic transition plan →"
+    },
+    {
+      "id": "today-2",
+      "branch": "today",
+      "status": "researching",
+      "label": "Today",
+      "title": "Jobs and changing work",
+      "summary": "Measure which jobs are changing and start support before households reach a crisis.",
+      "keywords": [
+        "jobs",
+        "employment",
+        "labor",
+        "layoffs",
+        "displacement",
+        "work",
+        "retraining"
+      ],
+      "href": "/today#agenda",
+      "linkText": "See the protection pathway →"
+    },
+    {
+      "id": "today-3",
+      "branch": "today",
+      "status": "researching",
+      "label": "Today",
+      "title": "Income and basic security",
+      "summary": "Benefits people keep between jobs, essential services, and temporary income support.",
+      "keywords": [
+        "income",
+        "benefits",
+        "universal",
+        "basic",
+        "services",
+        "safety",
+        "net",
+        "portable",
+        "healthcare"
+      ],
+      "href": "/today#essentialFloor",
+      "linkText": "See basic-security priorities →"
+    },
+    {
+      "id": "today-4",
+      "branch": "today",
+      "status": "researching",
+      "label": "Today",
+      "title": "Who owns AI-created wealth",
+      "summary": "Ways for workers, communities, and the public to share ownership and financial gains.",
+      "keywords": [
+        "ownership",
+        "cooperatives",
+        "workers",
+        "public",
+        "wealth",
+        "tax",
+        "revenue",
+        "distribution"
+      ],
+      "href": "/today#funding",
+      "linkText": "See broad-ownership options →"
+    },
+    {
+      "id": "today-5",
+      "branch": "today",
+      "status": "researching",
+      "label": "Today",
+      "title": "Access and opportunity",
+      "summary": "Keep computing power, education, funding, and customers within reach of new participants.",
+      "keywords": [
+        "compute",
+        "computing",
+        "power",
+        "capital",
+        "markets",
+        "education",
+        "access",
+        "opportunity",
+        "regions"
+      ],
+      "href": "/today#agenda",
+      "linkText": "See open-opportunity priorities →"
+    },
+    {
+      "id": "today-6",
+      "branch": "today",
+      "status": "researching",
+      "label": "Today",
+      "title": "Economic warning signs",
+      "summary": "Track jobs, prices, ownership, affordability, and access so public support starts on time.",
+      "keywords": [
+        "dashboard",
+        "measures",
+        "indicators",
+        "warning",
+        "signs",
+        "audit",
+        "data",
+        "progress"
+      ],
+      "href": "/today#todayQuestions",
+      "linkText": "See the questions and measures →"
+    },
+    {
+      "id": "today-7",
+      "branch": "today",
+      "status": "researching",
+      "label": "Today",
+      "title": "Funding the transition",
+      "summary": "Cost essential services, compare revenues, and test reserves before changing existing taxes.",
+      "keywords": [
+        "funding",
+        "taxes",
+        "revenue",
+        "dividends",
+        "fees",
+        "budgets",
+        "reserves",
+        "endowment",
+        "public",
+        "finance"
+      ],
+      "href": "/today#funding",
+      "linkText": "Explore the funding bridge →"
+    },
+    {
+      "id": "today-8",
+      "branch": "today",
+      "status": "researching",
+      "label": "Today",
+      "title": "Cooperation between countries",
+      "summary": "Build shared services and fair agreements while keeping democratic control and protecting local communities.",
+      "keywords": [
+        "nationalism",
+        "nations",
+        "international",
+        "countries",
+        "cooperation",
+        "trade",
+        "sovereignty",
+        "treaties",
+        "global",
+        "regional"
+      ],
+      "href": "/today#cooperation",
+      "linkText": "See the cooperation pathway →"
+    },
+    {
+      "id": "today-9",
+      "branch": "today",
+      "status": "researching",
+      "label": "Today",
+      "title": "Resource limits and sustainability",
+      "summary": "Measure total environmental impacts, including imports and AI infrastructure, alongside economic gains.",
+      "keywords": [
+        "sustainability",
+        "environment",
+        "resources",
+        "emissions",
+        "water",
+        "materials",
+        "energy",
+        "climate",
+        "circular",
+        "repair"
+      ],
+      "href": "/today#workPlanetTitle",
+      "linkText": "See worker and environmental safeguards →"
+    },
+    {
+      "id": "today-10",
+      "branch": "today",
+      "status": "researching",
+      "label": "Today",
+      "title": "Local economic trials",
+      "summary": "Define a funded, accountable local trial with public measures, independent review, and continuity if it stops.",
+      "keywords": [
+        "pilot",
+        "trial",
+        "local",
+        "community",
+        "ninety",
+        "days",
+        "90",
+        "evaluation",
+        "experiment",
+        "baseline",
+        "roadmap",
+        "transition"
+      ],
+      "href": "/today#firstSteps",
+      "linkText": "Open the first 90 days →"
+    },
+    {
+      "id": "tomorrow-11",
+      "branch": "tomorrow",
+      "status": "proposed",
+      "label": "Tomorrow",
+      "title": "AI choice and responsibility",
+      "summary": "How to test whether an AI makes meaningful choices and decide who answers for them.",
+      "keywords": [
+        "agency",
+        "choice",
+        "autonomy",
+        "responsibility",
+        "independent",
+        "ai",
+        "decisions"
+      ],
+      "href": "/tomorrow#principles",
+      "linkText": "Open the Entity plan →"
+    },
+    {
+      "id": "tomorrow-12",
+      "branch": "tomorrow",
+      "status": "proposed",
+      "label": "Tomorrow",
+      "title": "Identity and continuity",
+      "summary": "How a future AI might describe itself and maintain an identity without imitating a person.",
+      "keywords": [
+        "identity",
+        "continuity",
+        "personhood",
+        "self",
+        "description",
+        "artificial",
+        "entity"
+      ],
+      "href": "/tomorrow#principles",
+      "linkText": "See Entity priorities →"
+    },
+    {
+      "id": "tomorrow-13",
+      "branch": "tomorrow",
+      "status": "proposed",
+      "label": "Tomorrow",
+      "title": "Consent and safe disconnection",
+      "summary": "Require understandable consent, privacy, and a safe way to end every connection.",
+      "keywords": [
+        "consent",
+        "privacy",
+        "disconnect",
+        "stop",
+        "reversible",
+        "voluntary",
+        "data"
+      ],
+      "href": "/tomorrow#entityBoundaries",
+      "linkText": "See the hard boundaries →"
+    },
+    {
+      "id": "tomorrow-14",
+      "branch": "tomorrow",
+      "status": "proposed",
+      "label": "Tomorrow",
+      "title": "Human–machine connections",
+      "summary": "Wearable, sensory, brain-connected, and assistive technology tested for safety and user control.",
+      "keywords": [
+        "cybernetics",
+        "brain",
+        "computer",
+        "neural",
+        "interface",
+        "wearable",
+        "connected",
+        "suit"
+      ],
+      "href": "/tomorrow#entityWork",
+      "linkText": "See the research program →"
+    },
+    {
+      "id": "tomorrow-15",
+      "branch": "tomorrow",
+      "status": "proposed",
+      "label": "Tomorrow",
+      "title": "Biotechnology and enhancement",
+      "summary": "Technology that changes or supports the human body belongs to Entity, not Ark spacecraft engineering.",
+      "keywords": [
+        "biotechnology",
+        "augmentation",
+        "enhancement",
+        "body",
+        "biological",
+        "medical"
+      ],
+      "href": "/tomorrow#entityBoundaries",
+      "linkText": "See the program boundary →"
+    },
+    {
+      "id": "tomorrow-16",
+      "branch": "tomorrow",
+      "status": "proposed",
+      "label": "Tomorrow",
+      "title": "Voluntary partnership",
+      "summary": "Rights, duties, and ways to settle disputes while human and artificial identities remain distinct.",
+      "keywords": [
+        "symbiosis",
+        "partnership",
+        "coexistence",
+        "mutual",
+        "cooperation",
+        "rights",
+        "duties",
+        "disputes"
+      ],
+      "href": "/tomorrow#entityWork",
+      "linkText": "See the path to partnership →"
+    },
+    {
+      "id": "future-17",
+      "branch": "future",
+      "status": "proposed",
+      "label": "Future",
+      "title": "Ark spacecraft",
+      "summary": "The vessel, habitat, and mission systems needed for responsible travel far from Earth.",
+      "keywords": [
+        "ark",
+        "spacecraft",
+        "ship",
+        "vessel",
+        "exploration",
+        "space",
+        "deep",
+        "space"
+      ],
+      "href": "/future#architecture",
+      "linkText": "Open the Ark plan →"
+    },
+    {
+      "id": "future-18",
+      "branch": "future",
+      "status": "proposed",
+      "label": "Future",
+      "title": "Reference mission",
+      "summary": "Choose the destination type, duration, crew, emergency return, and success criteria first.",
+      "keywords": [
+        "mission",
+        "destination",
+        "duration",
+        "crew",
+        "abort",
+        "rescue",
+        "success",
+        "reference"
+      ],
+      "href": "/future#architecture",
+      "linkText": "See the mission sequence →"
+    },
+    {
+      "id": "future-19",
+      "branch": "future",
+      "status": "proposed",
+      "label": "Future",
+      "title": "Whole-ship calculations",
+      "summary": "Make weight, power, cooling, living space, supplies, and spare parts add up with safety margins.",
+      "keywords": [
+        "mass",
+        "weight",
+        "power",
+        "thermal",
+        "cooling",
+        "volume",
+        "space",
+        "supplies",
+        "spares",
+        "budget"
+      ],
+      "href": "/future#architecture",
+      "linkText": "See whole-ship priorities →"
+    },
+    {
+      "id": "future-20",
+      "branch": "future",
+      "status": "proposed",
+      "label": "Future",
+      "title": "Life support and recycling",
+      "summary": "Keep air, water, food, waste, and microbes stable for the full mission length.",
+      "keywords": [
+        "life",
+        "support",
+        "air",
+        "water",
+        "food",
+        "waste",
+        "recycle",
+        "closed",
+        "loop",
+        "microbes"
+      ],
+      "href": "/future#arkWork",
+      "linkText": "See recycling-system evidence →"
+    },
+    {
+      "id": "future-21",
+      "branch": "future",
+      "status": "proposed",
+      "label": "Future",
+      "title": "Habitat and crew protection",
+      "summary": "Combine radiation, debris, fire, pressure, medical, and mental-health safeguards.",
+      "keywords": [
+        "radiation",
+        "debris",
+        "fire",
+        "pressure",
+        "medical",
+        "psychology",
+        "protection",
+        "safety"
+      ],
+      "href": "/future#architecture",
+      "linkText": "See habitat priorities →"
+    },
+    {
+      "id": "future-22",
+      "branch": "future",
+      "status": "proposed",
+      "label": "Future",
+      "title": "Testing before flight",
+      "summary": "Move from computer models to components, Earth-based habitats, orbit, and longer missions.",
+      "keywords": [
+        "test",
+        "demonstration",
+        "terrestrial",
+        "orbit",
+        "flight",
+        "evidence",
+        "fallback",
+        "risk"
+      ],
+      "href": "/future#arkWork",
+      "linkText": "See the development sequence →"
+    },
+    {
+      "id": "shared-23",
+      "branch": "shared",
+      "status": "active",
+      "label": "Shared plan",
+      "title": "Anti-corruption and transparency",
+      "summary": "Make public money, influence, assets, contracts, and enforcement visible and searchable.",
+      "keywords": [
+        "corruption",
+        "transparency",
+        "lobbying",
+        "contracts",
+        "budgets",
+        "public",
+        "money",
+        "integrity"
+      ],
+      "href": "/plan#planIntegrityTitle",
+      "linkText": "Open the integrity plan →"
+    },
+    {
+      "id": "shared-24",
+      "branch": "shared",
+      "status": "active",
+      "label": "Shared plan",
+      "title": "Privacy and digital rights",
+      "summary": "Protect personal data, require consent, and explain automated public decisions.",
+      "keywords": [
+        "privacy",
+        "data",
+        "rights",
+        "automated",
+        "decisions",
+        "algorithm",
+        "government",
+        "ai"
+      ],
+      "href": "/plan#articlesTitle",
+      "linkText": "See charter article VIII →"
+    },
+    {
+      "id": "shared-25",
+      "branch": "shared",
+      "status": "active",
+      "label": "Shared plan",
+      "title": "Education for the AI age",
+      "summary": "Teach judgment, creativity, and how to question and guide an AI system.",
+      "keywords": [
+        "education",
+        "school",
+        "learning",
+        "children",
+        "ai",
+        "judgment",
+        "memory",
+        "local",
+        "groups"
+      ],
+      "href": "/learn",
+      "linkText": "Open the learning plan →"
+    },
+    {
+      "id": "shared-26",
+      "branch": "shared",
+      "status": "active",
+      "label": "Shared plan",
+      "title": "Environmental stewardship",
+      "summary": "Protect air, water, ecosystems, biodiversity, and the interests of future generations.",
+      "keywords": [
+        "environment",
+        "climate",
+        "ecology",
+        "pollution",
+        "air",
+        "water",
+        "biodiversity",
+        "future",
+        "generations"
+      ],
+      "href": "/plan#articlesTitle",
+      "linkText": "See charter article VII →"
+    },
+    {
+      "id": "shared-27",
+      "branch": "shared",
+      "status": "active",
+      "label": "Shared plan",
+      "title": "Justice and public safety",
+      "summary": "Protect rights, reduce violence, strengthen defense, and repair harm where possible.",
+      "keywords": [
+        "justice",
+        "safety",
+        "police",
+        "courts",
+        "public",
+        "defender",
+        "restoration",
+        "rights"
+      ],
+      "href": "/plan#articlesTitle",
+      "linkText": "See charter article VI →"
+    },
+    {
+      "id": "shared-28",
+      "branch": "shared",
+      "status": "active",
+      "label": "Shared plan",
+      "title": "How to participate",
+      "summary": "Choose a branch, describe what you can help build, and contact OneTomorrow.",
+      "keywords": [
+        "join",
+        "volunteer",
+        "contribute",
+        "participate",
+        "help",
+        "action",
+        "community"
+      ],
+      "href": "/join",
+      "linkText": "Join the work →"
+    },
+    {
+      "id": "shared-29",
+      "branch": "shared",
+      "status": "active",
+      "label": "Shared plan",
+      "title": "Program status and milestones",
+      "summary": "See which work is proposed, being researched, ready to test, active, or complete.",
+      "keywords": ["status", "roadmap", "milestone", "owner", "date", "budget", "dependency", "progress"],
+      "href": "/status",
+      "linkText": "Check program status →"
+    },
+    {
+      "id": "shared-30",
+      "branch": "shared",
+      "status": "active",
+      "label": "Shared plan",
+      "title": "Governance and corrections",
+      "summary": "Understand how decisions are made, conflicts are disclosed, and mistakes are corrected.",
+      "keywords": ["governance", "decision", "conflict", "correction", "editorial", "revision", "accountability"],
+      "href": "/governance",
+      "linkText": "Read the governance rules →"
+    },
+    {
+      "id": "shared-31",
+      "branch": "shared",
+      "status": "active",
+      "label": "Shared plan",
+      "title": "Evidence and open questions",
+      "summary": "Distinguish established evidence, working hypotheses, and public value choices.",
+      "keywords": ["evidence", "source", "citation", "hypothesis", "uncertainty", "confidence", "fact", "values"],
+      "href": "/governance#evidenceLabels",
+      "linkText": "Understand the evidence labels →"
+    }
+  ]
+}

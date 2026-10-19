@@ -16,6 +16,7 @@
       nav_tomorrow: "Tomorrow",
       nav_future: "Future",
       nav_topics: "Topics",
+      nav_status: "Status",
       nav_join: "Join",
       share_page: "Share",
       share_shared: "Shared",
@@ -39,6 +40,7 @@
       nav_tomorrow: "Mañana",
       nav_future: "Futuro",
       nav_topics: "Temas",
+      nav_status: "Estado",
       nav_join: "Unirse",
       accessibility_title: "Accesibilidad",
       accessibility_text: "Traduce la interfaz, aumenta el texto, sube el contraste o reduce el movimiento. El contenido de la página permanece en inglés."
@@ -58,6 +60,7 @@
       nav_tomorrow: "Demain",
       nav_future: "Avenir",
       nav_topics: "Sujets",
+      nav_status: "État",
       nav_join: "Rejoindre",
       accessibility_title: "Accessibilité",
       accessibility_text: "Traduisez l’interface, agrandissez le texte, augmentez le contraste ou réduisez le mouvement. Le contenu de la page reste en anglais."
@@ -77,6 +80,7 @@
       nav_tomorrow: "Amanhã",
       nav_future: "Futuro",
       nav_topics: "Tópicos",
+      nav_status: "Estado",
       nav_join: "Participar",
       accessibility_title: "Acessibilidade",
       accessibility_text: "Traduza a interface, aumente o texto, eleve o contraste ou reduza o movimento. O conteúdo da página permanece em inglês."
@@ -96,6 +100,7 @@
       nav_tomorrow: "غدًا",
       nav_future: "المستقبل",
       nav_topics: "المواضيع",
+      nav_status: "الحالة",
       nav_join: "انضم",
       accessibility_title: "إتاحة الوصول",
       accessibility_text: "ترجم الواجهة، وكبّر النص، وارفع التباين، أو قلل الحركة. يبقى محتوى الصفحة باللغة الإنجليزية."
@@ -115,6 +120,7 @@
       nav_tomorrow: "कल",
       nav_future: "भविष्य",
       nav_topics: "विषय",
+      nav_status: "स्थिति",
       nav_join: "जुड़ें",
       accessibility_title: "पहुंच",
       accessibility_text: "इंटरफ़ेस का अनुवाद करें, पाठ बढ़ाएं, कंट्रास्ट बढ़ाएं या गति घटाएं। पृष्ठ की सामग्री अंग्रेज़ी में रहती है।"
@@ -134,6 +140,7 @@
       nav_tomorrow: "Kesho",
       nav_future: "Baadaye",
       nav_topics: "Mada",
+      nav_status: "Hali",
       nav_join: "Jiunge",
       accessibility_title: "Ufikiaji",
       accessibility_text: "Tafsiri kiolesura, ongeza maandishi, ongeza utofautishaji au punguza mwendo. Maudhui ya ukurasa yanabaki kwa Kiingereza."
@@ -153,6 +160,7 @@
       nav_tomorrow: "明天",
       nav_future: "未来",
       nav_topics: "主题",
+      nav_status: "状态",
       nav_join: "加入",
       accessibility_title: "无障碍",
       accessibility_text: "翻译界面、放大文字、提高对比度或减少动态。页面正文仍为英语。"
@@ -172,6 +180,7 @@
       nav_tomorrow: "Morgen",
       nav_future: "Zukunft",
       nav_topics: "Themen",
+      nav_status: "Status",
       nav_join: "Mitmachen",
       accessibility_title: "Barrierefreiheit",
       accessibility_text: "Oberfläche übersetzen, Text vergrößern, Kontrast erhöhen oder Bewegung reduzieren. Der Seiteninhalt bleibt auf Englisch."
@@ -336,17 +345,6 @@
     });
   }
 
-  function initTopicsNav(){
-    const nav = document.querySelector(".site-nav");
-    if(!nav || nav.querySelector('a[href="/topics"]')) return;
-    const link = document.createElement("a");
-    link.href = "/topics";
-    link.setAttribute("data-i18n", "nav_topics");
-    link.textContent = fallback.nav_topics;
-    const join = nav.querySelector('a[href="/join"]');
-    nav.insertBefore(link, join || null);
-  }
-
   function cleanFormValue(form, name){
     const field = form.elements[name];
     return field && typeof field.value === "string" ? field.value.trim() : "";
@@ -357,6 +355,8 @@
     const email = cleanFormValue(form, "email");
     const region = cleanFormValue(form, "region");
     const branch = cleanFormValue(form, "branch");
+    const contribution = cleanFormValue(form, "contribution");
+    const availability = cleanFormValue(form, "availability");
     const role = cleanFormValue(form, "role");
     return [
       "OneTomorrow join request",
@@ -365,6 +365,8 @@
       "Email: " + email,
       "Country, region, or community: " + region,
       "Branch: " + branch,
+      "Contribution: " + contribution,
+      "Availability: " + availability,
       "",
       "What I will help build:",
       role,
@@ -410,7 +412,10 @@
         email: cleanFormValue(form, "email"),
         region: cleanFormValue(form, "region"),
         branch: cleanFormValue(form, "branch"),
+        contribution: cleanFormValue(form, "contribution"),
+        availability: cleanFormValue(form, "availability"),
         role: cleanFormValue(form, "role"),
+        contactConsent: form.elements.contactConsent && form.elements.contactConsent.checked ? "yes" : "",
         website: cleanFormValue(form, "website")
       };
 
@@ -426,7 +431,7 @@
       }).then(result => {
         if(result.ok && result.body.ok) {
           form.reset();
-          setStatus(status, "Thank you. Your message is on its way and we will reply by email.");
+          setStatus(status, "Thank you. Your message reached the project inbox. Reference: " + (result.body.reference || "provided by email") + ". We aim to reply within seven days.");
           recordMetric({ event: "join_success", path: window.location.pathname });
           window.location.hash = "commitment-sent";
         } else if(result.body && result.body.error) {
@@ -444,7 +449,8 @@
     // Surface the no-JS redirect result.
     const params = new URLSearchParams(window.location.search);
     if(params.get("sent") === "1") {
-      setStatus(status, "Thank you. Your message is on its way and we will reply by email.");
+      const reference = params.get("ref");
+      setStatus(status, "Thank you. Your message reached the project inbox" + (reference ? ". Reference: " + reference : "") + ". We aim to reply within seven days.");
     } else if(params.get("error")) {
       setStatus(status, "We could not send that. Please try again, or email join@onetomorrow.today.");
     }
@@ -458,10 +464,13 @@
     const count = document.querySelector("[data-topic-count]");
     const empty = document.querySelector("[data-topic-empty]");
     const clear = document.querySelector("[data-topic-clear]");
+    const statusFilter = document.querySelector("[data-topic-status-filter]");
     const params = new URLSearchParams(window.location.search);
     const allowedBranches = ["all", "today", "tomorrow", "future", "shared"];
     let activeBranch = params.get("branch") || "all";
+    let activeStatus = params.get("status") || "all";
     if(!allowedBranches.includes(activeBranch)) activeBranch = "all";
+    if(!["all", "proposed", "researching", "active"].includes(activeStatus)) activeStatus = "all";
 
     function normalized(value){
       return String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -471,19 +480,59 @@
       const next = new URLSearchParams();
       if(query) next.set("q", query);
       if(activeBranch !== "all") next.set("branch", activeBranch);
+      if(activeStatus !== "all") next.set("status", activeStatus);
       const suffix = next.toString();
       window.history.replaceState({}, "", window.location.pathname + (suffix ? "?" + suffix : ""));
+    }
+
+    function editDistanceAtMostOne(a, b){
+      if(a === b) return true;
+      if(Math.abs(a.length - b.length) > 1) return false;
+      let i = 0, j = 0, edits = 0;
+      while(i < a.length && j < b.length){
+        if(a[i] === b[j]) { i += 1; j += 1; continue; }
+        edits += 1;
+        if(edits > 1) return false;
+        if(a.length > b.length) i += 1;
+        else if(b.length > a.length) j += 1;
+        else { i += 1; j += 1; }
+      }
+      return edits + (i < a.length || j < b.length ? 1 : 0) <= 1;
+    }
+
+    function matchesWord(haystack, word){
+      if(haystack.includes(word)) return true;
+      if(word.length < 4) return false;
+      return haystack.split(/[^a-z0-9]+/).some(candidate => candidate.length >= 3 && editDistanceAtMostOne(candidate, word));
+    }
+
+    function highlight(element, words){
+      if(!element) return;
+      if(!element.dataset.originalText) element.dataset.originalText = element.textContent;
+      const original = element.dataset.originalText;
+      element.textContent = "";
+      const cleanWords = words.filter(word => word.length > 1).map(word => word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+      if(!cleanWords.length) { element.textContent = original; return; }
+      const expression = new RegExp("(" + cleanWords.join("|") + ")", "ig");
+      original.split(expression).forEach(part => {
+        if(expression.test(part)) { const mark = document.createElement("mark"); mark.textContent = part; element.appendChild(mark); expression.lastIndex = 0; }
+        else element.appendChild(document.createTextNode(part));
+      });
     }
 
     function applyTopicSearch(){
       const raw = input.value.trim();
       const query = normalized(raw);
+      const words = query.split(/\s+/).filter(Boolean);
       let visible = 0;
       cards.forEach(card => {
         const haystack = normalized(card.textContent + " " + (card.dataset.keywords || ""));
         const branchMatches = activeBranch === "all" || card.dataset.branch === activeBranch;
-        const searchMatches = !query || query.split(/\s+/).every(word => haystack.includes(word));
-        card.hidden = !(branchMatches && searchMatches);
+        const statusMatches = activeStatus === "all" || card.dataset.status === activeStatus;
+        const searchMatches = !query || words.every(word => matchesWord(haystack, word));
+        card.hidden = !(branchMatches && statusMatches && searchMatches);
+        highlight(card.querySelector("h2"), card.hidden ? [] : words);
+        highlight(card.querySelector("h2 + p"), card.hidden ? [] : words);
         if(!card.hidden) visible += 1;
       });
       count.textContent = visible + (visible === 1 ? " topic shown" : " topics shown");
@@ -507,10 +556,16 @@
     });
 
     input.value = params.get("q") || "";
+    if(statusFilter) {
+      statusFilter.value = activeStatus;
+      statusFilter.addEventListener("change", () => { activeStatus = statusFilter.value; applyTopicSearch(); });
+    }
     input.addEventListener("input", applyTopicSearch);
     if(clear) clear.addEventListener("click", () => {
       input.value = "";
       activeBranch = "all";
+      activeStatus = "all";
+      if(statusFilter) statusFilter.value = "all";
       filters.forEach(button => {
         const active = button.dataset.topicFilter === "all";
         button.classList.toggle("is-active", active);
@@ -573,7 +628,6 @@
     syncToggle(name);
   });
 
-  initTopicsNav();
   initShareButton();
   initJoinForm();
   initTopicLookup();

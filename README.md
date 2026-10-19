@@ -10,6 +10,9 @@ A static site for the OneTomorrow civic movement.
 | `/today` | `today.html` | Global economic shift in the age of AGI |
 | `/tomorrow` | `tomorrow.html` | Entity consideration, agency, and cybernetics |
 | `/future` | `future.html` | Ark creation and space exploration |
+| `/topics` | `topics.html` | Searchable topic registry across all horizons |
+| `/status` | `status.html` | Public workstream status, owners, dependencies, and review dates |
+| `/governance` | `governance.html` | Editorial decisions, evidence labels, conflicts, and corrections |
 | `/why` | `why.html` | The case for renewal |
 | `/plan` | `plan.html` | The charter and implementation timetable |
 | `/learn` | `learn.html` | Cognitive sovereignty roadmap |
@@ -79,8 +82,8 @@ npm run test:a11y
 ## Deployment
 
 The site deploys to Cloudflare Pages through the GitHub integration — pushes to
-`main` publish automatically. There is no build step; Cloudflare serves the
-repository root.
+`main` publish automatically. The intended production configuration runs
+`npm run build` and serves `dist/`.
 
 ### Keeping repository files off the site
 
@@ -129,7 +132,7 @@ Set these under **Workers & Pages → onetomorrow → Settings → Variables**:
 | --- | --- | --- |
 | `RESEND_API_KEY` | yes | Resend API key. Store as a **secret**, not plaintext. |
 | `JOIN_FROM` | yes | Verified sender, e.g. `OneTomorrow <no-reply@onetomorrow.today>` |
-| `JOIN_TO` | no | Destination inbox. Defaults to `join@onetomorrow.today`. |
+| `JOIN_TO` | no | Managed project inbox. Defaults to `join@onetomorrow.today`; do not point this at a personal mailbox for production. |
 
 Until `RESEND_API_KEY` and `JOIN_FROM` are set the endpoint returns a clear
 "not configured yet" message and the form tells people to email directly, so
@@ -137,6 +140,7 @@ the page degrades honestly rather than failing silently.
 
 The form works without JavaScript: it posts natively and the function replies
 with a 303 back to `/join`. With JavaScript it posts JSON and reports inline.
+Both paths return a non-secret reference number visitors can quote in follow-up.
 If the request cannot be delivered at all, it falls back to a prefilled
 `mailto:` and copies the message to the clipboard — only on that failure.
 
@@ -145,6 +149,20 @@ bounds the mail-provider request to ten seconds, and logs delivery outcomes
 without form contents. Add a Cloudflare rate-limiting rule for `/api/join`
 before a high-traffic launch; infrastructure rate limiting is stronger than a
 per-isolate JavaScript counter.
+
+## Topic registry and search visibility
+
+`data/topics.json` is the source of truth for the topic index. `npm run build`
+renders accessible static cards into `topics.html`, so every topic remains
+available without JavaScript. Search adds branch and work-status filters,
+one-character typo tolerance, match highlighting, related topics, and URL
+parameters that can be shared.
+
+After a material information-architecture release, submit
+`https://onetomorrow.today/sitemap.xml` in Google Search Console and Bing
+Webmaster Tools and request a recrawl of `/`, `/today`, `/tomorrow`, `/future`,
+`/topics`, `/status`, and `/governance`. This requires the domain owner's
+verified webmaster account and cannot be completed by a repository deployment.
 
 ## Privacy-conscious measurement
 

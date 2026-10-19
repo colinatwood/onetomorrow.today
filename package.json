@@ -1,10 +1,10 @@
 {
   "name": "onetomorrow-site",
   "private": true,
-  "version": "4.1.0",
+  "version": "4.2.0",
   "scripts": {
     "start": "npx serve .",
-    "build": "node tools/build.js",
+    "build": "node tools/render-topics.js && node tools/build.js",
     "test": "node tools/check-site.js",
     "test:a11y": "playwright test",
     "test:live": "node tools/smoke-live.js",
