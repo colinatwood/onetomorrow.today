@@ -1,0 +1,54 @@
+name: Submit a workstream status update
+description: Provide checkable evidence that a listed workstream changed state.
+title: "Status: "
+labels: ["status"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Status changes require public evidence. A submission does not itself make a program active or funded.
+  - type: dropdown
+    id: branch
+    attributes:
+      label: Branch
+      options:
+        - Today — global economic shift
+        - Tomorrow — people, AI, and connected technology
+        - Future — Ark and space exploration
+        - Shared foundation — all three
+    validations:
+      required: true
+  - type: input
+    id: workstream
+    attributes:
+      label: Workstream
+      description: Name the row or topic that should change.
+    validations:
+      required: true
+  - type: dropdown
+    id: status
+    attributes:
+      label: Proposed public status
+      options:
+        - Proposed
+        - Researching
+        - Recruiting
+        - Active
+        - Paused
+        - Complete
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence for the change
+      description: Link a deliverable, decision, accountable owner, funding record, or other result people can verify.
+    validations:
+      required: true
+  - type: input
+    id: review
+    attributes:
+      label: Suggested next review date
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true

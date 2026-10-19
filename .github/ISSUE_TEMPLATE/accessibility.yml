@@ -1,0 +1,33 @@
+name: Report an accessibility problem
+description: Tell us what prevented or complicated access to the site.
+title: "Accessibility: "
+labels: ["accessibility"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a barrier. Do not include medical or other private information; this issue will be public.
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      placeholder: https://onetomorrow.today/...
+    validations:
+      required: true
+  - type: textarea
+    id: barrier
+    attributes:
+      label: What could you not access or complete?
+      description: Describe the task and what happened.
+    validations:
+      required: true
+  - type: input
+    id: setup
+    attributes:
+      label: Browser or assistive technology (optional)
+      description: For example, Safari with VoiceOver or Chrome with keyboard only.
+  - type: textarea
+    id: expected
+    attributes:
+      label: What would have helped?
+      description: A suggested fix is welcome but not required.

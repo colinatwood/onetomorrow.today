@@ -311,6 +311,15 @@ function checkAccountabilityLayer() {
   for (const phrase of ["Purpose and baseline", "People and authority", "Resources and dependencies", "Safeguards", "Proof", "Exit and learning"]) {
     if (!plan.includes(phrase)) fail("plan.html", `decision package missing: ${phrase}`);
   }
+
+  const governance = fs.readFileSync(path.join(ROOT, "governance.html"), "utf8");
+  const issueTemplates = ["proposal.yml", "correction.yml", "accessibility.yml", "status-update.yml"];
+  for (const template of issueTemplates) {
+    const location = path.join(ROOT, ".github", "ISSUE_TEMPLATE", template);
+    if (!fs.existsSync(location)) fail(template, "missing guided public contribution form");
+    if (!governance.includes(`template=${template}`)) fail("governance.html", `missing link to ${template}`);
+  }
+  if (!fs.existsSync(path.join(ROOT, "CONTRIBUTING.md"))) fail("CONTRIBUTING.md", "missing nontechnical contribution guide");
 }
 
 pages.forEach(checkPage);

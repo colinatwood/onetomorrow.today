@@ -31,8 +31,18 @@ test("mobile horizon diagrams provide a visible exploration cue", async ({ page 
 
 test("join form collects routing and consent details", async ({ page }) => {
   await page.goto("/join");
+  await expect(page.getByRole("heading", { name: "A private request, followed by a human reply." })).toBeVisible();
+  await expect(page.locator(".join-flow .status-steps li")).toHaveCount(4);
   await expect(page.getByLabel("Which branch interests you most?")).toBeVisible();
   await expect(page.getByLabel("How would you like to contribute?")).toBeVisible();
   await expect(page.getByLabel("What time can you realistically offer?")).toBeVisible();
   await expect(page.getByLabel(/I agree that OneTomorrow/)).toBeVisible();
+});
+
+test("governance offers guided public contribution paths", async ({ page }) => {
+  await page.goto("/governance");
+  await expect(page.getByRole("link", { name: "Open proposal form" })).toHaveAttribute("href", /template=proposal\.yml/);
+  await expect(page.getByRole("link", { name: "Open correction form" })).toHaveAttribute("href", /template=correction\.yml/);
+  await expect(page.getByRole("link", { name: "Open accessibility form" })).toHaveAttribute("href", /template=accessibility\.yml/);
+  await expect(page.getByRole("link", { name: "Open status form" })).toHaveAttribute("href", /template=status-update\.yml/);
 });

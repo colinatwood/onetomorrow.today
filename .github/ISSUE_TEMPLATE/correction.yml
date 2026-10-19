@@ -1,0 +1,48 @@
+name: Report a correction
+description: Challenge a factual claim, source, evidence label, or public status statement.
+title: "Correction: "
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Corrections are reviewed against visible evidence. Do not include private or sensitive information; this issue will be public.
+  - type: input
+    id: page
+    attributes:
+      label: Page or section
+      description: Paste the public URL or name the section.
+      placeholder: https://onetomorrow.today/...
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: What appears to be wrong or misleading?
+      description: Quote only the short phrase needed to identify the claim.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: What evidence supports the correction?
+      description: Link reliable sources and explain what they show.
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Suggested change
+      description: Explain the correction in plain language.
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Likely impact
+      options:
+        - Small wording or link fix
+        - Meaningful factual correction
+        - Safety, rights, or trust concern
+    validations:
+      required: true

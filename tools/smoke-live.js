@@ -5,7 +5,23 @@ const path = require("path");
 
 const ORIGIN = process.env.SITE_ORIGIN || "https://onetomorrow.today";
 const ROOT = path.join(__dirname, "..");
-const paths = ["/", "/today", "/tomorrow", "/future", "/why", "/plan", "/learn", "/join", "/news", "/privacy", "/terms", "/accessibility"];
+const pages = {
+  "/": /Start here/i,
+  "/today": /Global economic shift in the age of AGI/i,
+  "/tomorrow": /Entity consideration/i,
+  "/future": /Ark creation/i,
+  "/topics": /Search all topics/i,
+  "/status": /Program status/i,
+  "/governance": /Public contribution paths/i,
+  "/why": /transparent by design/i,
+  "/plan": /90-day/i,
+  "/learn": /cognitive sovereignty/i,
+  "/join": /Where the form goes/i,
+  "/news": /editorial/i,
+  "/privacy": /privacy/i,
+  "/terms": /terms/i,
+  "/accessibility": /accessibility/i
+};
 
 async function check(path) {
   const response = await fetch(`${ORIGIN}${path}`, { redirect: "follow" });
@@ -14,6 +30,7 @@ async function check(path) {
   const html = await response.text();
   if (!/<main\b[^>]*id="main"/.test(html)) throw new Error(`${path}: main landmark missing`);
   if (!/<link rel="canonical"/.test(html)) throw new Error(`${path}: canonical URL missing`);
+  if (!pages[path].test(html)) throw new Error(`${path}: expected page content missing`);
 }
 
 async function checkRevision() {
@@ -25,6 +42,8 @@ async function checkRevision() {
   const expected = fs.readFileSync(path.join(ROOT, "script.js"), "utf8");
   if (await response.text() !== expected) throw new Error("production does not match the checked-out revision yet");
 }
+
+const paths = Object.keys(pages);
 
 Promise.all([...paths.map(check), checkRevision()])
   .then(() => console.log(`Live smoke test passed for ${paths.length} pages at ${ORIGIN}.`))
