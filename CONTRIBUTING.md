@@ -21,6 +21,10 @@ Explain the problem, who is affected, the smallest useful first step, evidence, 
 
 The [governance policy](https://onetomorrow.today/governance) explains how evidence is labeled and how public decisions are reviewed. The [status page](https://onetomorrow.today/status) distinguishes ideas from active or completed work.
 
+## Proposing a Today pilot location
+
+Use the [pilot selection procedure](docs/TODAY_PILOT_SELECTION.md) to prepare a candidate record, then submit a guided proposal. Obtain permission before naming a potential partner. Share personal contact information only through the private join form. Proposing a location does not commit it to a trial.
+
 ## Sending a code or content change
 
 1. Keep the change focused on one public problem.
