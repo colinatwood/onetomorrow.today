@@ -89,11 +89,11 @@ Horizons are planning assumptions, not launch commitments. A jurisdiction can re
 
 ## Prioritized backlog
 
-All items below are proposed and unstarted. Roles are to recruit or assign; they are not claims that partners are committed. Documentation has been prepared; the economic program is not deployed.
+All delivery items below remain open. T01 preparation now includes a [draft pilot selection procedure](TODAY_PILOT_SELECTION.md), with an intake record, eligibility gates, comparison rubric, and decision process. No candidate or sponsor is selected. Roles are to recruit or assign; they are not claims that partners are committed. Documentation has been prepared; the economic program is not deployed.
 
 | ID | Priority and work package | Responsible role | Acceptance evidence and dependencies |
 | --- | --- | --- | --- |
-| T01 | P0 Select a willing location and accountable sponsor | Project coordinator | Public scope, selection criteria, sponsor, recorded community input; no external commitments without authorization. |
+| T01 | P0 Select a willing location and accountable sponsor | Project coordinator | Draft selection procedure prepared 21 October 2026; candidate intake and actual selection remain open. Closure requires public scope, selection criteria, sponsor, recorded community input; no external commitments without authorization. |
 | T02 | P0 Define rights, coverage, and authority | Community panel and qualified local reviewers | Basket, eligibility, emergency access, appeals, existing-benefit interactions, public responsibilities. Depends on T01. |
 | T03 | P0 Build baseline and capacity map | Analysts and service operators | Sources, dates, missing data, unmet needs, costs, supply constraints, safe subgroup measures. Depends on T01. |
 | T04 | P0 Cost and compare financing options | Finance lead and independent reviewer | Multi-year cash flow, commitments, incidence, reserves, capital and contingent liabilities; no assumed zero tax or dividends. Depends on T02–T03. |
