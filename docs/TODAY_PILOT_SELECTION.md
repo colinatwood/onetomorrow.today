@@ -58,7 +58,7 @@ Publish an accessible candidate summary and the proposed consultation period bef
 
 Record the outcome as **selected for planning**, **deferred pending evidence**, or **declined with reasons**. Publish the decision owner, reviewers, rubric version, gate results, criterion scores, dissent, conflicts, evidence dates, remaining gaps, and next review date. Permit factual corrections through the correction form and procedural challenges through the governance route. A reviewer who was not responsible for the disputed decision should assess challenges; if none is available, record the unresolved challenge and pause advancement.
 
-T01 closes only when a willing location and accountable sponsor are documented, selection criteria and reasons are public, community input is recorded, and the sponsor acknowledges the planning scope in writing. Selection creates no external spending or service commitment. T02–T07 require their own evidence and authorization before T08 can start.
+T01 closes only when a willing location and accountable sponsor are documented, selection criteria and reasons are public, community input is recorded, and the sponsor acknowledges the planning scope in writing. Selection creates no external spending or service commitment. Use the [coverage worksheet](TODAY_COVERAGE_WORKSHEET.md) to prepare the T02 handoff. T02–T07 require their own evidence and authorization before T08 can start.
 
 ## Immediate work remaining
 
