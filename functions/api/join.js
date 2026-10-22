@@ -62,11 +62,46 @@ function hasAllowedOrigin(request) {
 
 async function readFields(request) {
   const type = request.headers.get("content-type") || "";
-  if (type.includes("application/json")) return await request.json();
+  const mediaType = type.split(";")[0].trim().toLowerCase();
+  if (!["application/json", "application/x-www-form-urlencoded", "multipart/form-data"].includes(mediaType)) {
+    throw Object.assign(new Error("Unsupported form format."), { status: 415 });
+  }
+  // Enforce the limit on actual bytes, including streamed requests that omit
+  // Content-Length. Cancel before parsing or buffering an oversized body.
+  const chunks = [];
+  let size = 0;
+  const reader = request.body?.getReader();
+  if (reader) {
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        size += value.byteLength;
+        if (size > MAX_BODY_BYTES) {
+          await reader.cancel();
+          throw Object.assign(new Error("That submission is too large."), { status: 413 });
+        }
+        chunks.push(value);
+      }
+    } finally {
+      reader.releaseLock();
+    }
+  }
+  const body = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) {
+    body.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  const bounded = new Response(body, { headers: { "content-type": type } });
+  if (mediaType === "application/json") return await bounded.json();
 
-  const form = await request.formData();
+  const form = await bounded.formData();
   const fields = {};
-  for (const [key, value] of form.entries()) fields[key] = value;
+  for (const [key, value] of form.entries()) {
+    if (typeof value !== "string" || Object.hasOwn(fields, key)) throw new Error("Invalid form field.");
+    Object.defineProperty(fields, key, { value, enumerable: true });
+  }
   return fields;
 }
 
@@ -83,7 +118,14 @@ export async function onRequestPost({ request, env }) {
   let fields;
   try {
     fields = await readFields(request);
-  } catch {
+  } catch (error) {
+    if (error.status === 413 || error.status === 415) {
+      return respond(request, error.status, { ok: false, error: error.message }, error.status === 413 ? "error=large" : "error=badrequest");
+    }
+    return respond(request, 400, { ok: false, error: "Could not read the form." }, "error=badrequest");
+  }
+
+  if (!fields || typeof fields !== "object" || Array.isArray(fields)) {
     return respond(request, 400, { ok: false, error: "Could not read the form." }, "error=badrequest");
   }
 

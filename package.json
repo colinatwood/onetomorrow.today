@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npx serve .",
     "build": "node tools/render-topics.js && node tools/build.js",
-    "test": "node tools/check-site.js && node tools/test-join.mjs",
+    "test": "node tools/check-site.js && node tools/test-join.mjs && node tools/test-join-endpoint.mjs",
     "test:a11y": "playwright test",
     "test:live": "node tools/smoke-live.js",
     "optimize:images": "node tools/optimize-images.js"
