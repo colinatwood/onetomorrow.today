@@ -20,6 +20,10 @@ The public explanation is in [today.html](../today.html). This document defines 
 | Automated geographic valuation without human review | Use explainable assistance, independent validation, correction, and appeals. Automated assessment cannot eliminate speculation by declaration. |
 | Citizen endowment votes | Test discretionary allocations after essential obligations and reserves are funded. Protect minority rights from majority allocation decisions. |
 
+## Transnational resilience proposal
+
+The [Transnational Resilience Compact](TRANSNATIONAL_RESILIENCE_COMPACT.md) is a submitted proposal for cross-border governance, environmental action, and local resilience. Its institutional, financial, and security mechanisms require review against the phased approach and safeguards below; its claimed capabilities and partnerships are unverified. The proposal does not establish a treaty, funding, or operations.
+
 ## Institutional transition
 
 Countries differ in fiscal capacity, public trust, administrative capability, currencies, and economic structure. National institutions can support both competition and cooperation; identify specific failures rather than treating every national system as identical.
