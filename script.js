@@ -400,6 +400,7 @@
     if(!form) return;
     const status = form.querySelector("[data-form-status]");
     const submit = form.querySelector('button[type="submit"]');
+    if(status) status.setAttribute("tabindex", "-1");
 
     // Without JS the form posts natively to the same endpoint, which replies
     // with a 303 back to this page.
@@ -433,7 +434,7 @@
           form.reset();
           setStatus(status, "Thank you. Your message reached the project inbox. Reference: " + (result.body.reference || "provided by email") + ". We aim to reply within seven days.");
           recordMetric({ event: "join_success", path: window.location.pathname });
-          window.location.hash = "commitment-sent";
+
         } else if(result.body && result.body.error) {
           setStatus(status, result.body.error);
         } else {
@@ -443,6 +444,7 @@
         offerMailtoFallback(form, status);
       }).then(() => {
         if(submit) submit.disabled = false;
+        if(status) status.focus();
       });
     });
 
